@@ -74,7 +74,6 @@ html[data-theme="light"] .hero::after {
   background: linear-gradient(to top, var(--paper) 0%, rgba(255,255,255,.8) 30%, rgba(255,255,255,0) 100%);
 }
 html[data-theme="light"] .hero__lede { color: var(--text-soft); }
-html[data-theme="light"] .hero__badge { background: #fff; color: var(--ink); border-color: var(--line-strong); box-shadow: 0 8px 20px rgba(10,22,34,.06); }
 html[data-theme="light"] .hero__scroll-line { background: rgba(10, 22, 34, .18); }
 html[data-theme="light"] .hero__particles .p { box-shadow: none; opacity: .5; }
 html[data-theme="light"] .hero .btn__icon { border-color: var(--line-strong); }
@@ -82,14 +81,6 @@ html[data-theme="light"] .hero .btn__icon { border-color: var(--line-strong); }
 /* ---------- pás připojení ---------- */
 html[data-theme="light"] .marquee__logo { color: #a9b8c5; }
 html[data-theme="light"] .marquee:hover .marquee__logo { color: var(--ink); }
-
-/* ---------- Bez API ---------- */
-html[data-theme="light"] .noapi {
-  background: linear-gradient(120deg, rgba(0,119,204,.07), #f7fafd 55%);
-  border-color: var(--line-strong);
-  box-shadow: 0 24px 60px rgba(10, 22, 34, .08);
-}
-html[data-theme="light"] .noapi__apps span { background: #fff; }
 
 /* ---------- Schopnosti: světlé boxy, tmavý rub ---------- */
 html[data-theme="light"] .what__fox { background-image: url("../img/what-bg-light.png"); opacity: .5; }

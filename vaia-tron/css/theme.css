@@ -61,40 +61,10 @@
 .hero__particles .leaf { display: none; }
 .hero__particles .p { background: var(--terracotta); box-shadow: 0 0 10px var(--terracotta); }
 .hero__scroll-line { background: var(--line-strong); }
-.hero__badge {
-  display: inline-flex; align-items: center; gap: 10px; margin-top: 22px;
-  padding: 9px 16px 9px 12px; border-radius: 999px;
-  border: 1px solid var(--line-strong); background: rgba(6, 18, 32, .7);
-  font-size: 14px; font-weight: 700; color: var(--ink);
-}
-.hero__badge i { width: 9px; height: 9px; border-radius: 50%; background: var(--green); box-shadow: 0 0 10px var(--green); }
 
 /* ---------- pás připojení ---------- */
 .marquee__logo { color: #3d5a70; }
 .marquee:hover .marquee__logo { color: var(--text-soft); }
-
-/* ---------- Bez API tokenů (zvýraznění) ---------- */
-.noapi {
-  position: relative; overflow: hidden;
-  width: calc(100% - var(--frame) * 2); max-width: var(--maxw); margin: 0 auto clamp(40px, 5vw, 70px);
-  display: grid; grid-template-columns: 1fr auto; gap: clamp(20px, 3vw, 48px); align-items: center;
-  padding: clamp(26px, 3vw, 40px) clamp(24px, 3.4vw, 52px);
-  border-radius: 28px; border: 1px solid var(--line-strong);
-  background: linear-gradient(120deg, rgba(53,216,255,.14), rgba(6,18,32,.9) 45%, rgba(167,139,250,.12));
-  box-shadow: 0 30px 80px rgba(0,0,0,.35), var(--glow);
-}
-.noapi h2 { font: 700 clamp(26px, 2.8vw, 40px)/1.05 var(--font-display); margin-bottom: 10px; }
-.noapi p { color: var(--text-soft); max-width: 62ch; }
-.noapi p b { color: var(--ink); }
-.noapi__apps { display: flex; gap: 10px; flex-wrap: wrap; justify-content: flex-end; }
-.noapi__apps span {
-  padding: 10px 16px; border-radius: 999px; border: 1px solid var(--line-strong);
-  font-weight: 700; font-size: 14px; white-space: nowrap; background: rgba(3,8,16,.5);
-}
-@media (max-width: 900px) {
-  .noapi { grid-template-columns: 1fr; text-align: left; }
-  .noapi__apps { justify-content: flex-start; }
-}
 
 /* ---------- Co umí (carousel) ---------- */
 .work { color: var(--ink); background: linear-gradient(180deg, #071526, #040c17); box-shadow: inset 0 1px 0 var(--line); }
