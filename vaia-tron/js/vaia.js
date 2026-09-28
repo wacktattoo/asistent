@@ -89,9 +89,25 @@
 
 // Úvod: texty ve 4 boxech obrázku se střídají (data/content.js → heroBoxes).
 (function () {
-  const boxes = document.querySelectorAll("[data-hero-box]");
-  const lists = (window.FOXY_CONTENT || {}).heroBoxes;
-  if (!boxes.length || !Array.isArray(lists)) return;
+  const wrap = document.querySelector("[data-hero-boxes]");
+  const cfg = (window.FOXY_CONTENT || {}).heroBoxes;
+  if (!wrap || !Array.isArray(cfg)) return;
+  if (/[?&]boxy\b/.test(location.search)) wrap.classList.add("is-debug");   // …/?boxy = obrysy boxů
+  const num = (v, d) => (typeof v === "number" && isFinite(v) ? v : d);
+  // vytvoř boxy podle nastavení (poloha, velikost, natočení, zkosení, písmo)
+  const boxes = cfg.map((c, n) => {
+    const el = document.createElement("div");
+    el.className = "hero-box" + (c.glass === false ? "" : " is-glass");
+    el.dataset.n = n + 1;
+    el.style.left = num(c.x, 0) + "%";
+    el.style.top = num(c.y, 0) + "%";
+    el.style.width = num(c.w, 10) + "%";
+    el.style.height = num(c.h, 12) + "%";
+    el.style.transform = "rotate(" + num(c.rotate, 0) + "deg) skew(" + num(c.skewX, 0) + "deg, " + num(c.skewY, 0) + "deg)";
+    el.style.setProperty("--s", num(c.size, 1));
+    wrap.appendChild(el);
+    return el;
+  });
   const P = {
     web: '<rect x="3" y="4" width="18" height="14" rx="2"/><path d="M3 8h18M9 21h6M12 18v3"/>',
     doc: '<path d="M14 3H7a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h10a2 2 0 0 0 2-2V8z"/><path d="M14 3v5h5M9 13h6M9 17h4"/>',
@@ -119,8 +135,8 @@
     '</svg></span><span><b>' + esc(it.t) + '</b>' + (it.s ? "<small>" + esc(it.s) + "</small>" : "") + "</span></div>";
   const reduce = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
 
-  boxes.forEach((box) => {
-    const list = lists[+box.dataset.heroBox] || [];
+  boxes.forEach((box, n) => {
+    const list = Array.isArray(cfg[n].items) ? cfg[n].items : [];
     if (!list.length) return;
     let i = 0;
     box.innerHTML = html(list[0]);
@@ -136,6 +152,6 @@
       }, 460);
     };
     // každý box má jiný rytmus, ať se nemění všechny naráz
-    setTimeout(() => setInterval(swap, 3600), 900 + (+box.dataset.heroBox) * 900);
+    setTimeout(() => setInterval(swap, 3600), 900 + n * 900);
   });
 })();

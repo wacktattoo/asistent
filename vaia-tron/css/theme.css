@@ -5,9 +5,9 @@
    Funkce, Bez API, Ceník a Otázky.
 
    OBRÁZKY — stačí přepsat soubor se stejným názvem v img/:
-     hero.jpg         obrázek úvodu se 4 boxy (texty do boxů:  1920×1080
-                      data/content.js → heroBoxes; při jiném rozložení
-                      boxů uprav .hero-box--1…4 níže)
+     backbg.png       pozadí úvodu se 4 boxy (stojí)          1920×1080
+     postava.png      postava, hýbe se s myší (PNG)           1920×1080
+                      texty + poloha/zkosení boxů: data/content.js → heroBoxes
      work-bg.png      dekorace v „Co umí“ vpravo nahoře    1200×800
      work-bg2.png     dekorace v „Co umí“ vlevo dole       1100×750
      what-bg.png      pozadí za nadpisem „Schopnosti“      1700×900
@@ -52,7 +52,7 @@
 .mnav__cta { color: #021019; }
 
 /* ---------- hero: stejné vrstvy jako Foxyvision, jen jiné obrázky ---------- */
-/* jeden obrázek img/hero.jpg (16:9) roztažený jako „cover“; boxy s texty leží
+/* backbg.png + postava.png (16:9) ve společném plátně; boxy s texty leží
    ve stejném plátně (.hero-art), takže sedí na skleněné boxy v obrázku na každé obrazovce */
 .hero__bg { background: var(--paper); container-type: size; overflow: hidden; }
 .hero-art {
@@ -67,30 +67,46 @@
 .hero-art__img { position: absolute; inset: 0; width: 100%; height: 100%; display: block; }
 /* tmavá varianta: bílý obrázek převrácený do tmy (modré zůstanou modré) */
 .hero-art__img { filter: invert(1) hue-rotate(180deg) brightness(.9); }
+.hero-art__fg .hero-art__img { filter: none; }        /* postava má průhledné pozadí, invert nepotřebuje */
 .hero::before { background: linear-gradient(95deg, var(--paper) 0%, rgba(3,8,16,.85) 24%, rgba(3,8,16,0) 42%); }
 
-/* boxy — souřadnice v % obrázku 1920×1080 (left, top, šířka, výška, natočení) */
+.hero-art__fg { position: absolute; inset: 0; will-change: transform; }
+.hero-art__boxes { position: absolute; inset: 0; }
+
+/* boxy — poloha/velikost/zkosení přichází z data/content.js (heroBoxes) jako inline styl */
 .hero-box {
   position: absolute; display: flex; align-items: center; justify-content: center;
-  padding: 0 .9cqw; transform: rotate(var(--r, 0deg)); transform-origin: center;
+  padding: 0 .9em; transform-origin: center; font-size: calc(1cqw * var(--s, 1));
   color: var(--ink); text-align: left; pointer-events: none;
 }
-.hero-box--1 { left: 46.9%; top: 35.8%; width: 10.1%; height: 12.8%; --r: 1.5deg; }
-.hero-box--2 { left: 48.9%; top: 51.9%; width: 9.7%;  height: 13.6%; --r: 1.5deg; }
-.hero-box--3 { left: 53.1%; top: 69.6%; width: 9.9%;  height: 15.2%; --r: 4deg; }
-.hero-box--4 { left: 81.5%; top: 65.8%; width: 12%;   height: 16.2%; --r: 6deg; }
-.hero-box__in { display: flex; align-items: center; gap: .6cqw; width: 100%; }
+/* vlastní skleněná plocha — box je tak vždy před postavou (glass: false v content.js ji vypne) */
+.hero-box.is-glass {
+  border-radius: 1.1em;
+  background: linear-gradient(160deg, rgba(255,255,255,.92), rgba(226,240,255,.78));
+  border: 1px solid rgba(255,255,255,.95);
+  box-shadow: 0 1.2em 2.6em rgba(0, 60, 120, .18), inset 0 0 0 1px rgba(0,119,204,.08), 0 0 2em rgba(53,169,240,.25);
+  -webkit-backdrop-filter: blur(8px); backdrop-filter: blur(8px);
+}
+html:not([data-theme="light"]) .hero-box.is-glass {
+  background: linear-gradient(160deg, rgba(14,34,56,.9), rgba(6,18,32,.82));
+  border-color: rgba(53,216,255,.35);
+}
+.hero-art__boxes.is-debug .hero-box { outline: 2px dashed #e11; }
+.hero-art__boxes.is-debug .hero-box::before {
+  content: attr(data-n); position: absolute; top: -1.4em; left: 0; font: 700 .9em var(--font-body); color: #e11;
+}
+.hero-box__in { display: flex; align-items: center; gap: .6em; width: 100%; }
 .hero-box__ico {
-  flex: 0 0 auto; display: grid; place-items: center; width: 2.1cqw; height: 2.1cqw; border-radius: .55cqw;
-  background: var(--terracotta); color: #fff; box-shadow: 0 .3cqw .8cqw rgba(0,119,204,.35);
+  flex: 0 0 auto; display: grid; place-items: center; width: 2.1em; height: 2.1em; border-radius: .55em;
+  background: var(--terracotta); color: #fff; box-shadow: 0 .3em .8em rgba(0,119,204,.35);
 }
 .hero-box__ico svg { width: 58%; height: 58%; fill: none; stroke: currentColor; stroke-width: 2; stroke-linecap: round; stroke-linejoin: round; }
-.hero-box b { display: block; font: 700 .86cqw/1.2 var(--font-heading); }
-.hero-box small { display: block; margin-top: .15cqw; font-size: .66cqw; line-height: 1.3; color: var(--text-soft); }
+.hero-box b { display: block; font: 700 .86em/1.2 var(--font-heading); }
+.hero-box small { display: block; margin-top: .2em; font-size: .66em; line-height: 1.3; color: var(--text-soft); }
 /* animace výměny textu */
 .hero-box__in { transition: opacity .45s var(--ease), transform .55s var(--ease), filter .45s; }
-.hero-box.is-out .hero-box__in { opacity: 0; transform: translateY(-.6cqw); filter: blur(4px); }
-.hero-box.is-in .hero-box__in { opacity: 0; transform: translateY(.6cqw); filter: blur(4px); transition: none; }
+.hero-box.is-out .hero-box__in { opacity: 0; transform: translateY(-.6em); filter: blur(4px); }
+.hero-box.is-in .hero-box__in { opacity: 0; transform: translateY(.6em); filter: blur(4px); transition: none; }
 @media (prefers-reduced-motion: reduce) { .hero-box__in { transition: none; } }
 .hero__lede { color: var(--text-soft); }
 .hero .btn__icon { border-color: var(--line-strong); color: var(--terracotta); }

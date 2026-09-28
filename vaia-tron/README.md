@@ -21,7 +21,8 @@ Světlá varianta má vlastní obrázky s příponou `-light`: `contact-bg-light
 | `logo.png` | logo v navigaci na světlém pozadí (PNG s průhledností) | výška ~200 px |
 | `logo-white.png` | logo na tmavém pozadí (patička, tmavé sekce, tmavá varianta) | stejné rozměry |
 | `logo-icon.png` | jen symbol — ikonka v záložce prohlížeče | čtverec |
-| `hero.jpg` | obrázek v úvodu se 4 skleněnými boxy; texty v boxech jsou v `data/content.js` → `heroBoxes` a střídají se | 1920×1080 |
+| `backbg.png` | pozadí úvodu (stojí), PNG s průhledností | 1920×1080 |
+| `postava.png` | postava v úvodu, hýbe se s myší (jako liška u Foxyvision), PNG s průhledností | 1920×1080 |
 | `work-bg.png`, `work-bg2.png` | dekorace v sekci „Co umí“ | 1200×800 |
 | `what-bg.png` | pozadí za nadpisem „Schopnosti“ | 1700×900 |
 | `box-1.png`, `box-2.png`, `box-3.png` | obrázky ve třech otáčecích boxech | 800×640 |
@@ -34,7 +35,7 @@ Když chceš jiný formát (třeba `.webp`), změň příponu v `css/theme.css` 
 
 ## Texty
 - **Texty ve 4 boxech v úvodu, pás s napojeními a karty „Co umí“:** `data/content.js`
-- **Když vyměníš `hero.jpg` za obrázek s jinak rozmístěnými boxy,** uprav jejich polohu v `css/theme.css` (`.hero-box--1` až `--4`: left, top, width, height v % obrázku a natočení `--r`).
+- **Boxy s texty v úvodu:** poloha (`x`, `y`), velikost (`w`, `h`), natočení (`rotate`), zkosení (`skewX`, `skewY`), velikost písma (`size`) a texty (`items`) jsou v `data/content.js` → `heroBoxes`. Otevři web s `?boxy` za adresou (např. `http://localhost:8000/vaia-tron/?boxy`) a uvidíš červené obrysy s čísly boxů.
 - **Rotující slova** (hero, nadpisy): pole `phrases` a volání `setupMorph` / `setupTypewriter` v `js/main.js`
 - **Ostatní texty** (Bez API, Funkce, Ceník, Otázky): `index.html`
 
