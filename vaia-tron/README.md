@@ -35,7 +35,8 @@ Když chceš jiný formát (třeba `.webp`), změň příponu v `css/theme.css` 
 
 ## Texty
 - **Texty ve 4 boxech v úvodu, pás s napojeními a karty „Co umí“:** `data/content.js`
-- **Boxy s texty v úvodu:** poloha (`x`, `y`), velikost (`w`, `h`), natočení (`rotate`), zkosení (`skewX`, `skewY`), velikost písma (`size`) a texty (`items`) jsou v `data/content.js` → `heroBoxes`. Otevři web s `?boxy` za adresou (např. `http://localhost:8000/vaia-tron/?boxy`) a uvidíš červené obrysy s čísly boxů.
+- **Boxy s texty v úvodu — editor v prohlížeči:** spusť `php -S localhost:8000`, otevři `http://localhost:8000/vaia-tron/?upravit`, boxy chytni myší a posuň, za modrý roček změň velikost, v panelu nastav natočení, zkosení a písmo (šipky na klávesnici = jemný posun, Shift = větší). **Uložit** zapíše `data/hero-layout.js` (funguje jen na localhostu). Bez PHP dej **Stáhnout** a soubor přepiš do `data/`. Pak změny commitni a pushni přes GitHub Desktop.
+- Texty v boxech (`items`) a výchozí poloha jsou v `data/content.js` → `heroBoxes`; poloha uložená editorem má přednost.
 - **Rotující slova** (hero, nadpisy): pole `phrases` a volání `setupMorph` / `setupTypewriter` v `js/main.js`
 - **Ostatní texty** (Bez API, Funkce, Ceník, Otázky): `index.html`
 

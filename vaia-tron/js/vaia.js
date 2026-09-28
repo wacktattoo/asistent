@@ -94,20 +94,31 @@
   if (!wrap || !Array.isArray(cfg)) return;
   if (/[?&]boxy\b/.test(location.search)) wrap.classList.add("is-debug");   // …/?boxy = obrysy boxů
   const num = (v, d) => (typeof v === "number" && isFinite(v) ? v : d);
-  // vytvoř boxy podle nastavení (poloha, velikost, natočení, zkosení, písmo)
-  const boxes = cfg.map((c, n) => {
-    const el = document.createElement("div");
-    el.className = "hero-box" + (c.glass === false ? "" : " is-glass");
-    el.dataset.n = n + 1;
+  // poloha z editoru (data/hero-layout.js) má přednost před content.js
+  const saved = Array.isArray(window.VAIA_HERO_LAYOUT) ? window.VAIA_HERO_LAYOUT : [];
+  const KEYS = ["x", "y", "w", "h", "rotate", "skewX", "skewY", "size"];
+  cfg.forEach((c, n) => { const o = saved[n]; if (o) KEYS.forEach((k) => { if (typeof o[k] === "number") c[k] = o[k]; }); });
+  const apply = (el, c) => {
     el.style.left = num(c.x, 0) + "%";
     el.style.top = num(c.y, 0) + "%";
     el.style.width = num(c.w, 10) + "%";
     el.style.height = num(c.h, 12) + "%";
     el.style.transform = "rotate(" + num(c.rotate, 0) + "deg) skew(" + num(c.skewX, 0) + "deg, " + num(c.skewY, 0) + "deg)";
     el.style.setProperty("--s", num(c.size, 1));
+  };
+  // vytvoř boxy podle nastavení (poloha, velikost, natočení, zkosení, písmo)
+  const boxes = cfg.map((c, n) => {
+    const el = document.createElement("div");
+    el.className = "hero-box" + (c.glass === false ? "" : " is-glass");
+    el.dataset.n = n + 1;
+    apply(el, c);
     wrap.appendChild(el);
     return el;
   });
+  window.VAIA_HERO = { cfg, boxes, apply, wrap, KEYS };           // pro editor (js/hero-editor.js)
+  if (/[?&]upravit\b/.test(location.search)) {                  // …/?upravit = editor boxů v prohlížeči
+    const sc = document.createElement("script"); sc.src = "js/hero-editor.js?v=" + Date.now(); document.body.appendChild(sc);
+  }
   const P = {
     web: '<rect x="3" y="4" width="18" height="14" rx="2"/><path d="M3 8h18M9 21h6M12 18v3"/>',
     doc: '<path d="M14 3H7a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h10a2 2 0 0 0 2-2V8z"/><path d="M14 3v5h5M9 13h6M9 17h4"/>',
