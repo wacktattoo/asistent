@@ -2,43 +2,43 @@
    Prázdné pole = platí hodnoty z data/content.js → heroBoxes. */
 window.VAIA_HERO_LAYOUT = [
   {
-    "x": 46.4,
-    "y": 34,
+    "x": 44.5,
+    "y": 28.4,
     "w": 10.3,
     "h": 12.2,
-    "rotate": 1.5,
-    "skewX": 0,
-    "skewY": 0,
+    "rotate": 2,
+    "skewX": -1,
+    "skewY": 1,
     "size": 1
   },
   {
-    "x": 47.4,
-    "y": 49.9,
-    "w": 9.9,
-    "h": 13,
+    "x": 45.7,
+    "y": 44.3,
+    "w": 10.1,
+    "h": 11.5,
     "rotate": 1.5,
-    "skewX": 0,
-    "skewY": 0,
+    "skewX": -1.5,
+    "skewY": 2,
     "size": 1
   },
   {
-    "x": 51.4,
-    "y": 66.8,
-    "w": 9.7,
-    "h": 14.6,
+    "x": 49.2,
+    "y": 61.9,
+    "w": 10.6,
+    "h": 11.4,
     "rotate": 4,
-    "skewX": 0,
-    "skewY": 0,
+    "skewX": 2.5,
+    "skewY": 0.5,
     "size": 1
   },
   {
-    "x": 81.3,
-    "y": 63.2,
-    "w": 12.1,
-    "h": 15.4,
-    "rotate": 0.5,
-    "skewX": 0,
-    "skewY": 0,
+    "x": 77,
+    "y": 57.6,
+    "w": 12.3,
+    "h": 11.9,
+    "rotate": -1.5,
+    "skewX": -3,
+    "skewY": 9.5,
     "size": 1
   }
 ];
