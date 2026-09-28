@@ -10,6 +10,11 @@ php -S localhost:8000      # nebo: python -m http.server 8000
 ```
 Pak otevři http://localhost:8000/vaia-tron/
 
+## Barevné schéma
+Výchozí je **světlá** varianta (`css/theme-light.css`), tmavá je v `css/theme.css`. Přepínač (slunce/měsíc) je v navigaci a volba se pamatuje v prohlížeči. Výchozí variantu změníš v `index.html` (`var t = "light"` → `"dark"`).
+
+Světlá varianta má vlastní obrázky s příponou `-light`: `hero-bg-light.jpg`, `contact-bg-light.png`, `what-bg-light.png`, `box-1/2/3-light.png`. Ostatní obrázky jsou společné.
+
 ## Obrázky — stačí přepsat soubor se stejným názvem v `img/`
 | Soubor | Kde je | Doporučeno |
 |---|---|---|

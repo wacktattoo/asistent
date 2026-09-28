@@ -40,3 +40,14 @@
     if (!e.target.closest(".skill")) skills.forEach((s) => s.classList.remove("is-open"));
   });
 })();
+
+// Přepínač světlé / tmavé varianty (volba se uloží do prohlížeče).
+(function () {
+  const btn = document.querySelector("[data-theme-toggle]");
+  if (!btn) return;
+  btn.addEventListener("click", () => {
+    const next = document.documentElement.getAttribute("data-theme") === "light" ? "dark" : "light";
+    document.documentElement.setAttribute("data-theme", next);
+    try { localStorage.setItem("vaia-theme", next); } catch (e) {}
+  });
+})();
