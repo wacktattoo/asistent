@@ -21,7 +21,7 @@
     .hero-editing .hero__inner { opacity: .35; }
     .hero-editing .hero-box { pointer-events: auto; cursor: move; user-select: none; }
     .hero-editing .hero-box.is-sel { outline: 2px solid #0077cc !important; outline-offset: 2px; }
-    .he-grip { position: absolute; right: -8px; bottom: -8px; width: 16px; height: 16px; border-radius: 4px;
+    .he-grip { position: absolute; right: -11px; bottom: -11px; width: 22px; height: 22px; border-radius: 6px; z-index: 5;
       background: #0077cc; border: 2px solid #fff; cursor: nwse-resize; box-shadow: 0 2px 6px rgba(0,0,0,.3); }
     .he-panel { position: fixed; left: 16px; bottom: 16px; z-index: 2000; width: 300px; padding: 16px;
       border-radius: 16px; background: #0a1622; color: #e6f5ff; font: 13px/1.4 system-ui, sans-serif;
@@ -46,6 +46,8 @@
   const panel = document.createElement("div");
   panel.className = "he-panel";
   const sliders = [
+    ["w", "Šířka", 3, 40, 0.1, "%"],
+    ["h", "Výška", 3, 40, 0.1, "%"],
     ["rotate", "Natočení", -30, 30, 0.5, "°"],
     ["skewX", "Zkosení ↔", -30, 30, 0.5, "°"],
     ["skewY", "Zkosení ↕", -30, 30, 0.5, "°"],
@@ -53,7 +55,7 @@
   ];
   panel.innerHTML =
     '<h4>Boxy v úvodu <a href="?" style="color:#9ab8cb;font-weight:400">zavřít</a></h4>' +
-    '<p class="he-hint">Box chyť a posuň, za modrý roček změníš velikost.</p>' +
+    '<p class="he-hint">Box chyť a posuň, za modrý čtvereček vpravo dole změníš velikost (nebo posuvníky Šířka / Výška).</p>' +
     '<div class="he-tabs">' + boxes.map((_, i) => '<button data-i="' + i + '">' + (i + 1) + "</button>").join("") + "</div>" +
     sliders.map(([k, l, mn, mx, st, u]) =>
       '<label class="he-row"><span>' + l + '</span><input type="range" data-k="' + k + '" min="' + mn + '" max="' + mx + '" step="' + st + '"><output data-o="' + k + '"></output></label>').join("") +
@@ -68,7 +70,7 @@
     const c = cfg[sel];
     panel.querySelectorAll(".he-tabs button").forEach((b) => b.classList.toggle("on", +b.dataset.i === sel));
     panel.querySelectorAll("input[data-k]").forEach((inp) => {
-      const k = inp.dataset.k, v = typeof c[k] === "number" ? c[k] : (k === "size" ? 1 : 0);
+      const k = inp.dataset.k, v = typeof c[k] === "number" ? c[k] : (k === "size" ? 1 : k === "w" ? 10 : k === "h" ? 12 : 0);
       inp.value = v; panel.querySelector('[data-o="' + k + '"]').textContent = round(v) + units[k];
     });
     panel.querySelector("[data-pos]").textContent = "x " + round(c.x) + " · y " + round(c.y) + " · " + round(c.w) + "×" + round(c.h) + " %";
@@ -86,7 +88,7 @@
       e.preventDefault(); sel = i; refresh();
       const r = stage.getBoundingClientRect(), c = cfg[i];
       const sx = e.clientX, sy = e.clientY, start = { x: c.x, y: c.y, w: c.w, h: c.h };
-      const resize = e.target === grip;
+      const resize = e.target.closest(".he-grip") === grip;
       const move = (ev) => {
         const dx = (ev.clientX - sx) / r.width * 100, dy = (ev.clientY - sy) / r.height * 100;
         if (resize) { c.w = Math.max(3, round(start.w + dx)); c.h = Math.max(3, round(start.h + dy)); }
