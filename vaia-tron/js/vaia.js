@@ -51,3 +51,38 @@
     try { localStorage.setItem("vaia-theme", next); } catch (e) {}
   });
 })();
+
+// Funkce „samy ožívají“: každých pár sekund se náhodná položka zvýrazní
+// a ukáže svůj popis, jako by na ni někdo najel myší. Když na mřížku
+// najede uživatel nebo na něco klepne, animace se zastaví.
+(function () {
+  const grid = document.querySelector(".skills__grid");
+  if (!grid || window.matchMedia("(prefers-reduced-motion: reduce)").matches) return;
+  const items = [...grid.querySelectorAll(".skill")];
+  let visible = false, paused = false, last = -1, timer = null, current = null;
+
+  const hide = () => { if (current) current.classList.remove("is-auto"); current = null; };
+  const tick = () => {
+    hide();
+    if (visible && !paused && !grid.querySelector(".skill.is-open")) {
+      let i;
+      do { i = Math.floor(Math.random() * items.length); } while (i === last && items.length > 1);
+      last = i; current = items[i];
+      current.dispatchEvent(new Event("mouseenter"));     // dopočítá posun tooltipu u okraje
+      current.classList.add("is-auto");
+      setTimeout(hide, 2600);
+    }
+    timer = setTimeout(tick, 3400);
+  };
+
+  new IntersectionObserver((entries) => {
+    visible = entries[0].isIntersecting;
+    if (visible && !timer) timer = setTimeout(tick, 900);
+    if (!visible) { clearTimeout(timer); timer = null; hide(); }
+  }, { threshold: 0.35 }).observe(grid);
+
+  grid.addEventListener("mouseenter", () => { paused = true; hide(); });
+  grid.addEventListener("mouseleave", () => { paused = false; });
+  grid.addEventListener("focusin", () => { paused = true; hide(); });
+  grid.addEventListener("focusout", () => { paused = false; });
+})();

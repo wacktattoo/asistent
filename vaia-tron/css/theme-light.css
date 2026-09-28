@@ -13,7 +13,7 @@
    ========================================================= */
 
 html[data-theme="light"] {
-  --paper: #f3f7fb;
+  --paper: #ffffff;
   --ink: #0a1622;
   --terracotta: #0077cc;      /* kontrastní modrá (AA i pro malý text na bílé) */
   --terra-soft: #35a9f0;      /* modrá na tmavých kartách */
@@ -64,14 +64,14 @@ html[data-theme="light"] .modal__submit {
 }
 html[data-theme="light"] .nav__cta:hover { background: #0066b0; box-shadow: 0 14px 30px rgba(0, 119, 204, .35); }
 html[data-theme="light"] .nav__burger span { background: #fff; }
-html[data-theme="light"] .mnav { background: rgba(243, 247, 251, .98); }
+html[data-theme="light"] .mnav { background: rgba(255, 255, 255, .98); }
 html[data-theme="light"] .mnav__cta { color: #fff; }
 
 /* ---------- hero ---------- */
 html[data-theme="light"] .hero__bg { background: var(--paper) url("../img/hero-bg-light.jpg") center / cover no-repeat; }
-html[data-theme="light"] .hero::before { background: linear-gradient(95deg, var(--paper) 0%, rgba(243,247,251,.92) 26%, rgba(243,247,251,.45) 44%, rgba(243,247,251,0) 58%); }
+html[data-theme="light"] .hero::before { background: linear-gradient(95deg, var(--paper) 0%, rgba(255,255,255,.92) 26%, rgba(255,255,255,.45) 44%, rgba(255,255,255,0) 58%); }
 html[data-theme="light"] .hero::after {
-  background: linear-gradient(to top, var(--paper) 0%, rgba(243,247,251,.8) 30%, rgba(243,247,251,0) 100%);
+  background: linear-gradient(to top, var(--paper) 0%, rgba(255,255,255,.8) 30%, rgba(255,255,255,0) 100%);
 }
 html[data-theme="light"] .hero__lede { color: var(--text-soft); }
 html[data-theme="light"] .hero__badge { background: #fff; color: var(--ink); border-color: var(--line-strong); box-shadow: 0 8px 20px rgba(10,22,34,.06); }
@@ -85,11 +85,10 @@ html[data-theme="light"] .marquee:hover .marquee__logo { color: var(--ink); }
 
 /* ---------- Bez API ---------- */
 html[data-theme="light"] .noapi {
-  background: linear-gradient(120deg, rgba(0,119,204,.08), #fff 45%);
+  background: linear-gradient(120deg, rgba(0,119,204,.07), #f7fafd 55%);
   border-color: var(--line-strong);
   box-shadow: 0 24px 60px rgba(10, 22, 34, .08);
 }
-html[data-theme="light"] .noapi__big { text-shadow: none; }
 html[data-theme="light"] .noapi__apps span { background: #fff; }
 
 /* ---------- Schopnosti: světlé boxy, tmavý rub ---------- */
@@ -107,11 +106,11 @@ html[data-theme="light"] .tape__item--out { -webkit-text-stroke-color: rgba(10, 
 html[data-theme="light"] .skill { background: #fff; border-color: rgba(10, 22, 34, .08); box-shadow: 0 6px 16px rgba(10,22,34,.04); }
 html[data-theme="light"] .skill:hover,
 html[data-theme="light"] .skill:focus-visible,
-html[data-theme="light"] .skill.is-open { background: #fff; border-color: var(--line-strong); box-shadow: 0 12px 28px rgba(0,119,204,.14); }
+html[data-theme="light"] .skill.is-open, html[data-theme="light"] .skill.is-auto { background: #fff; border-color: var(--line-strong); box-shadow: 0 12px 28px rgba(0,119,204,.14); }
 html[data-theme="light"] .skill__ico { background: rgba(0,119,204,.07); }
 html[data-theme="light"] .skill:hover .skill__ico,
 html[data-theme="light"] .skill:focus-visible .skill__ico,
-html[data-theme="light"] .skill.is-open .skill__ico { color: #fff; box-shadow: 0 6px 14px rgba(0,119,204,.35); }
+html[data-theme="light"] .skill.is-open .skill__ico, html[data-theme="light"] .skill.is-auto .skill__ico { color: #fff; box-shadow: 0 6px 14px rgba(0,119,204,.35); }
 html[data-theme="light"] .skill--hi { background: linear-gradient(140deg, rgba(0,119,204,.1), #fff); border-color: var(--line-strong); }
 html[data-theme="light"] .skill__tip {
   background: #0a1622; color: #e6f5ff; border-color: rgba(10,22,34,.9);
@@ -141,9 +140,9 @@ html[data-theme="light"] .faq__list details[open] { background: #fff; border-col
 /* ---------- Kontakt ---------- */
 html[data-theme="light"] .contact__bg {
   background:
-    linear-gradient(to right, var(--paper) 0%, rgba(243,247,251,0) 20%),
-    linear-gradient(to left,  var(--paper) 0%, rgba(243,247,251,0) 20%),
-    linear-gradient(to bottom, var(--paper) 2%, rgba(243,247,251,0) 40%),
+    linear-gradient(to right, var(--paper) 0%, rgba(255,255,255,0) 20%),
+    linear-gradient(to left,  var(--paper) 0%, rgba(255,255,255,0) 20%),
+    linear-gradient(to bottom, var(--paper) 2%, rgba(255,255,255,0) 40%),
     url("../img/contact-bg-light.png") center bottom / 100% auto no-repeat;
 }
 html[data-theme="light"] .contact__intro,

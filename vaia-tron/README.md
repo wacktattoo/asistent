@@ -24,7 +24,7 @@ Světlá varianta má vlastní obrázky s příponou `-light`: `hero-bg-light.jp
 | `what-bg.png` | pozadí za nadpisem „Schopnosti“ | 1700×900 |
 | `box-1.png`, `box-2.png`, `box-3.png` | obrázky ve třech otáčecích boxech | 800×640 |
 | `approach-bg.jpg` | pozadí tmavé karty „Proč VAIA Tron“ | 1600×900 |
-| `contact-bg.png` | pozadí kontaktu (spodní pás) | 1920×700 |
+| `contact-bg.png` (+ `contact-bg-light.png`) | pás nad patičkou, jako běžící liška u Foxyvision (PNG s průhledností, kresba při spodním okraji) | 1920×700 |
 | `modal.jpg` | obrázek v okně objednávky | ~1200×1400 |
 | `aplikace-*.jpg/png` | screenshoty v carouselu „Co umí“ (cesty jsou v `data/content.js`) | 2160×1350 |
 
