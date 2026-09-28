@@ -28,7 +28,7 @@
 
   <!-- style.css = rozložení a animace z Foxyvision, theme.css = vzhled VAIA Tron + obrázky -->
   <link rel="stylesheet" href="css/style.css?v=2" />
-  <link rel="stylesheet" href="css/theme.css?v=9" />
+  <link rel="stylesheet" href="css/theme.css?v=11" />
   <link rel="stylesheet" href="css/theme-light.css?v=4" />
   <!-- barevné schéma: výchozí světlé, volba se pamatuje (přepínač v navigaci) -->
   <script>
@@ -131,18 +131,22 @@
           <span class="hero__title-flipline"><span class="hero__morph" data-flip>asistent</span></span>
         </h1>
 
-        <div class="hero__bottom">
-          <div>
-            <p class="hero__lede" data-reveal>
-              Běží přímo na vašem počítači. Postaví web, upraví soubory,
-              přečte poštu a naplánované úkoly udělá sám, i když spíte.
-            </p>
-          </div>
+        <div class="hero__bottom hero__bottom--stack">
+          <p class="hero__lede" data-reveal>
+            Běží přímo na vašem počítači. Postaví web, upraví soubory,
+            přečte poštu a naplánované úkoly udělá sám, i když spíte.
+          </p>
 
-          <a href="#work" class="btn">
-            <span class="btn__icon">→</span>
-            <span class="btn__text">Podívat se, co umí</span>
-          </a>
+          <div class="hero__actions" data-reveal>
+            <a href="#cenik" class="hero-cta" data-link>
+              <span>Začít ještě dnes</span>
+              <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"/></svg>
+            </a>
+            <a href="#work" class="btn hero-watch" data-link>
+              <span class="btn__icon"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M8 5.5v13l11-6.5z"/></svg></span>
+              <span class="btn__text">Podívat se, co umí</span>
+            </a>
+          </div>
         </div>
       </div>
 
