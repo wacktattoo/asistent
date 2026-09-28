@@ -71,9 +71,36 @@ html[data-theme="light"] .mnav__cta { color: #fff; }
 
 /* ---------- hero ---------- */
 html[data-theme="light"] .hero-art__img { filter: none; }
-html[data-theme="light"] .hero::before { background: linear-gradient(95deg, var(--paper) 0%, rgba(255,255,255,.8) 24%, rgba(255,255,255,0) 42%); }
+html[data-theme="light"] .hero::before { background: linear-gradient(95deg, rgba(255,255,255,.75) 0%, rgba(255,255,255,.4) 26%, rgba(255,255,255,0) 44%); }
+/* futuristické pozadí ve světlé verzi: stejné vrstvy v kontrastní modré, jemněji */
+/* gradient z tmavě modré vpravo do světlé vlevo (pod textem zůstává světlo) */
+html[data-theme="light"] .hero-fx {
+  background:
+    radial-gradient(ellipse 45% 60% at 78% 50%, rgba(53,169,240,.35), transparent 70%),
+    linear-gradient(100deg, #ffffff 0%, #f4f9fe 30%, #cfe6f8 50%, #3f8fd4 68%, #0d4a8c 84%, #072a55 100%);
+}
+html[data-theme="light"] .hero-fx__glow {
+  background:
+    radial-gradient(ellipse 40% 55% at 70% 52%, rgba(0,119,204,.14), transparent 70%),
+    radial-gradient(ellipse 45% 40% at 18% 28%, rgba(53,169,240,.10), transparent 70%),
+    radial-gradient(ellipse 30% 30% at 92% 12%, rgba(0,119,204,.08), transparent 70%);
+}
+html[data-theme="light"] .hero-fx__dots { background-image: radial-gradient(rgba(0,119,204,.28) 1px, transparent 1.3px); opacity: .45; }
+html[data-theme="light"] .hero-fx__floor {
+  background-image:
+    linear-gradient(rgba(0,119,204,.4) 1.5px, transparent 1.5px),
+    linear-gradient(90deg, rgba(0,119,204,.4) 1.5px, transparent 1.5px);
+  opacity: .75;
+}
+html[data-theme="light"] .hero-fx__beam {
+  background: linear-gradient(90deg, transparent 0%, rgba(0,119,204,.15) 20%, rgba(0,119,204,.45) 60%, rgba(0,119,204,.12) 90%, transparent 100%);
+  box-shadow: 0 0 16px rgba(0,119,204,.25);
+}
+html[data-theme="light"] .hero-fx__beam::after { background: linear-gradient(90deg, transparent, #35a9f0, transparent); }
+html[data-theme="light"] .hero-fx__ring { border-color: rgba(0,119,204,.16); box-shadow: 0 0 0 70px rgba(0,119,204,.025), 0 0 0 140px rgba(0,119,204,.015); }
 html[data-theme="light"] .hero::after {
-  background: linear-gradient(to top, var(--paper) 0%, rgba(255,255,255,.8) 30%, rgba(255,255,255,0) 100%);
+  height: 140px;  /* krátký přechod do bílé další sekce */
+  background: linear-gradient(to top, var(--paper) 0%, rgba(255,255,255,0) 100%);
 }
 html[data-theme="light"] .hero__lede { color: var(--text-soft); }
 html[data-theme="light"] .hero__scroll-line { background: rgba(10, 22, 34, .18); }
