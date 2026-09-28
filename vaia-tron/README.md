@@ -18,6 +18,9 @@ Světlá varianta má vlastní obrázky s příponou `-light`: `hero-bg-light.jp
 ## Obrázky — stačí přepsat soubor se stejným názvem v `img/`
 | Soubor | Kde je | Doporučeno |
 |---|---|---|
+| `logo.png` | logo v navigaci na světlém pozadí (PNG s průhledností) | výška ~200 px |
+| `logo-white.png` | logo na tmavém pozadí (patička, tmavé sekce, tmavá varianta) | stejné rozměry |
+| `logo-icon.png` | jen symbol — ikonka v záložce prohlížeče | čtverec |
 | `hero-bg.jpg` | pozadí úvodu (statické) | 1920×1080 |
 | `hero-front.png` | popředí úvodu, hýbe se s myší (PNG s průhledností) | 1920×1080 |
 | `work-bg.png`, `work-bg2.png` | dekorace v sekci „Co umí“ | 1200×800 |

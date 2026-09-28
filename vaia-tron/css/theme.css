@@ -33,15 +33,13 @@
   border-color: var(--line);
   box-shadow: 0 8px 26px rgba(0, 0, 0, .3);
 }
-.brand { display: inline-flex; align-items: center; gap: 10px; padding: 6px 4px; }
-.brand svg {
-  width: 30px; height: 30px; color: var(--terracotta); flex: 0 0 auto;
-  fill: none; stroke: currentColor; stroke-width: 1.6; stroke-linejoin: round;
-  filter: drop-shadow(0 0 8px rgba(53,216,255,.6));
-}
-.brand svg rect { fill: currentColor; stroke: none; }
-.brand b { font: 700 19px var(--font-display); letter-spacing: .14em; white-space: nowrap; }
-.brand b em { font-style: normal; color: var(--terracotta); }
+/* logo: img/logo.png (tmavý text) a img/logo-white.png (bílý text na tmavé) */
+.brand { display: inline-flex; align-items: center; }
+.brand__logo { display: block; height: 34px; width: auto; }
+.nav__brand { padding: 9px 18px; }
+.nav__brand .brand__logo--dark { display: none; }      /* tmavá varianta webu → bílé logo */
+.footer__brand .brand__logo { height: 30px; }
+@media (max-width: 760px) { .brand__logo { height: 26px; } .nav__brand { padding: 8px 14px; } }
 .nav__cta, .mnav__cta {
   background: linear-gradient(180deg, #5fe2ff, #1592dd); color: #021019;
   box-shadow: 0 0 0 1px rgba(95,226,255,.5), 0 10px 30px rgba(21,146,221,.35);

@@ -54,7 +54,10 @@ html[data-theme="light"] .nav.on-dark .nav__links {
   background: rgba(4, 12, 22, .6);
   border-color: rgba(53, 216, 255, .16);
 }
-html[data-theme="light"] .brand svg { filter: none; }
+html[data-theme="light"] .nav__brand .brand__logo--dark { display: block; }
+html[data-theme="light"] .nav__brand .brand__logo--white { display: none; }
+html[data-theme="light"] .nav.on-dark .nav__brand .brand__logo--dark { display: none; }
+html[data-theme="light"] .nav.on-dark .nav__brand .brand__logo--white { display: block; }
 html[data-theme="light"] .nav__links a:hover { color: #fff; }
 html[data-theme="light"] .nav__cta,
 html[data-theme="light"] .mnav__cta,
