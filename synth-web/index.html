@@ -1,0 +1,614 @@
+<!DOCTYPE html>
+<html lang="cs">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+  <title>Synth — osobní AI asistent na vašem počítači</title>
+  <meta name="description" content="Synth čte a třídí poštu, hlídá kalendář, staví weby, plánuje úkoly a mluví česky. Osobní AI asistent, který běží na vašem počítači a pracuje za vás." />
+  <meta name="theme-color" content="#030810" />
+
+  <meta property="og:type" content="website" />
+  <meta property="og:locale" content="cs_CZ" />
+  <meta property="og:site_name" content="Synth" />
+  <meta property="og:title" content="Synth — osobní AI asistent na vašem počítači" />
+  <meta property="og:description" content="Pošta, kalendář, weby, plánované úkoly a hlas. Česky, na Windows i Macu." />
+  <meta property="og:image" content="https://foxyvision.cz/asistent/img/aplikace-rozhovor.jpg" />
+  <meta name="twitter:card" content="summary_large_image" />
+
+  <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='8' fill='%23030810'/%3E%3Cpath d='M16 5l9.5 5.5v11L16 27l-9.5-5.5v-11z' fill='none' stroke='%2335d8ff' stroke-width='2'/%3E%3Crect x='12.5' y='12.5' width='7' height='7' fill='%2335d8ff'/%3E%3C/svg%3E" />
+
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Chakra+Petch:wght@500;600;700&family=IBM+Plex+Mono:wght@400;500&family=Manrope:wght@400;500;600;700;800&display=swap&subset=latin-ext" rel="stylesheet" />
+
+  <!-- style.css = rozložení a animace z webu Foxyvision, synth-theme.css = vzhled Synthu -->
+  <link rel="stylesheet" href="css/style.css?v=1" />
+  <link rel="stylesheet" href="css/synth-theme.css?v=1" />
+
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "SoftwareApplication",
+    "name": "Synth",
+    "description": "Osobní AI asistent pro Windows a Mac. Pošta, kalendář, weby, plánované úkoly a hlas česky.",
+    "operatingSystem": "Windows, macOS",
+    "applicationCategory": "ProductivityApplication",
+    "inLanguage": "cs",
+    "offers": [
+      { "@type": "Offer", "name": "Měsíc", "price": "390", "priceCurrency": "CZK" },
+      { "@type": "Offer", "name": "Půl roku", "price": "1990", "priceCurrency": "CZK" },
+      { "@type": "Offer", "name": "Rok", "price": "3490", "priceCurrency": "CZK" }
+    ],
+    "author": { "@type": "Organization", "name": "Foxyvision", "url": "https://foxyvision.cz/" }
+  }
+  </script>
+</head>
+<body>
+
+  <div class="bg-grid" aria-hidden="true"></div>
+
+  <!-- ===== Nav ===== -->
+  <header class="nav" data-nav>
+    <a href="#top" class="nav__brand brand" aria-label="Synth — nahoru">
+      <svg viewBox="0 0 32 32" aria-hidden="true"><path d="M16 3l11 6.3v13.4L16 29 5 22.7V9.3z"/><path d="M16 3v26M5 9.3l22 13.4M27 9.3L5 22.7" opacity=".35"/><rect x="12.5" y="12.5" width="7" height="7"/></svg>
+      <b>SYNTH</b>
+    </a>
+    <nav class="nav__links">
+      <a href="#work" data-link>Co umí</a>
+      <a href="#what" data-link>Schopnosti</a>
+      <a href="#approach" data-link>Proč Synth</a>
+      <a href="#cenik" data-link>Ceník</a>
+      <a href="#otazky" data-link>Otázky</a>
+      <span class="nav-goo" aria-hidden="true"><span class="nav-goo__pill"></span></span>
+    </nav>
+    <button class="nav__cta" data-modal-open>Vybrat&nbsp;balíček</button>
+    <button class="nav__burger" data-nav-toggle aria-label="Menu" aria-expanded="false" aria-controls="mobilni-menu">
+      <span></span><span></span><span></span>
+    </button>
+  </header>
+
+  <!-- ===== Mobilní menu ===== -->
+  <div class="mnav" id="mobilni-menu" data-mobile-menu>
+    <nav class="mnav__links" aria-label="Hlavní menu">
+      <a href="#work" data-mlink>Co umí</a>
+      <a href="#what" data-mlink>Schopnosti</a>
+      <a href="#approach" data-mlink>Proč Synth</a>
+      <a href="#cenik" data-mlink>Ceník</a>
+      <button class="mnav__cta" data-modal-open data-mlink>Vybrat balíček</button>
+    </nav>
+  </div>
+
+  <!-- gooey filtr pro bublinky v navigaci -->
+  <svg class="goo-defs" width="0" height="0" aria-hidden="true" focusable="false">
+    <defs>
+      <filter id="nav-goo-filter" x="-150%" y="-150%" width="400%" height="400%" color-interpolation-filters="sRGB">
+        <feGaussianBlur in="SourceGraphic" stdDeviation="5" result="blur" />
+        <feColorMatrix in="blur" mode="matrix" values="1 0 0 0 0  0 1 0 0 0  0 0 1 0 0  0 0 0 19 -9" result="goo" />
+        <feComposite in="SourceGraphic" in2="goo" operator="over" />
+      </filter>
+    </defs>
+  </svg>
+
+  <main id="top">
+
+    <!-- ===== HERO ===== -->
+    <section class="hero" data-hero>
+      <div class="hero__bg" data-hero-bg></div>
+      <div class="hero__fg" data-hero-fg aria-hidden="true">
+        <div class="hero-shot">
+          <img src="img/aplikace-rozhovor.jpg" alt="" width="2160" height="1350" />
+          <div class="hud hud--mail"><span>Nový e-mail</span><b>Martina: podklady k nabídce</b></div>
+          <div class="hud hud--sales"><span>Tržby · září</span><b>+18&nbsp;%</b></div>
+          <div class="hud hud--voice"><span>Hlas</span><i></i><i></i><i></i><i></i><i></i><i></i><i></i></div>
+        </div>
+      </div>
+      <div class="hero__particles" data-particles aria-hidden="true"></div>
+
+      <div class="hero__inner">
+        <p class="eyebrow" data-reveal>Synth <span class="eyebrow__type" data-type></span><span class="eyebrow__caret" aria-hidden="true"></span></p>
+
+        <h1 class="hero__title" data-split-lines>
+          <span><span class="hword">Váš</span> <span class="hword">osobní</span></span>
+          <span class="hero__title-flipline"><span class="hero__morph" data-flip>asistent</span></span>
+        </h1>
+
+        <div class="hero__bottom">
+          <p class="hero__lede" data-reveal>
+            Běží přímo na vašem počítači. Přečte poštu, připomene schůzky,
+            postaví web a naplánované úkoly udělá sám, i když spíte.
+          </p>
+
+          <a href="#work" class="btn">
+            <span class="btn__icon">→</span>
+            <span class="btn__text">Podívat se, co umí</span>
+          </a>
+        </div>
+      </div>
+
+      <a href="#work" class="hero__scroll" data-link aria-label="Posunout dolů">
+        <span class="hero__scroll-line"></span>
+      </a>
+    </section>
+
+    <!-- ===== INTRO: připojené služby ===== -->
+    <section class="intro" id="intro">
+      <p class="eyebrow" data-reveal>Napojí se na nástroje, které už používáte</p>
+      <div class="marquee" data-reveal>
+        <div class="marquee__track">
+          <span class="marquee__logo">Gmail</span>
+          <span class="marquee__logo">Kalendář</span>
+          <span class="marquee__logo">Disk</span>
+          <span class="marquee__logo">Notion</span>
+          <span class="marquee__logo">Slack</span>
+          <span class="marquee__logo">GitHub</span>
+          <span class="marquee__logo">Figma</span>
+          <span class="marquee__logo">Spotify</span>
+        </div>
+      </div>
+    </section>
+
+    <!-- ===== CO UMÍ (carousel, obsah z data/content.js) ===== -->
+    <section class="work" id="work" data-section-dark>
+      <div class="work__head">
+        <div class="work__heading">
+          <p class="eyebrow eyebrow--light" data-reveal>Co umí</p>
+          <h2 class="work__title" data-split-lines>
+            <span>Asistent, který</span>
+            <span class="work__title-flipline"><span class="work__morph" data-work-flip>opravdu pracuje</span></span>
+          </h2>
+        </div>
+        <div class="work__aside">
+          <p class="work__intro" data-reveal>
+            Není to chat v prohlížeči. Sahá do pošty, kalendáře a souborů a věci opravdu udělá.
+          </p>
+          <div class="work__nav" data-reveal>
+            <button class="work__arrow" data-prev aria-label="Předchozí">←</button>
+            <button class="work__arrow" data-next aria-label="Další">→</button>
+          </div>
+        </div>
+      </div>
+
+      <div class="work__stage" data-stage data-reveal>
+        <article class="feature" data-feature data-borderglow>
+          <div class="feature__media">
+            <img src="img/aplikace-rozhovor.jpg" alt="Rozhovor s asistentem" class="is-front" loading="lazy" decoding="async" data-card-img data-feature-img />
+            <img alt="" aria-hidden="true" loading="lazy" decoding="async" data-feature-img-b />
+          </div>
+          <span class="feature__badge" data-feature-badge>01</span>
+          <ul class="feature__tags" data-feature-tags></ul>
+          <span class="edge-light" aria-hidden="true"></span>
+        </article>
+
+        <aside class="workinfo">
+          <div class="workinfo__inner">
+            <p class="workinfo__count" data-feature-count><b>01</b> / 05</p>
+            <h3 class="workinfo__name" data-feature-name>Rozhovor</h3>
+            <p class="workinfo__type" data-feature-type>Pošta · kalendář · grafy</p>
+            <p class="workinfo__desc" data-feature-desc></p>
+            <div class="workinfo__result">
+              <span class="workinfo__result-label">Výsledek</span>
+              <span class="workinfo__result-value" data-feature-result></span>
+            </div>
+          </div>
+          <div class="workinfo__dots" data-work-dots></div>
+        </aside>
+      </div>
+    </section>
+
+    <!-- ===== SCHOPNOSTI ===== -->
+    <section class="what" id="what">
+      <div class="what__head">
+        <div class="what__heading">
+          <p class="eyebrow" data-reveal>Schopnosti</p>
+          <h2 class="what__title" data-split-lines>
+            <span>Pošta<i class="sq"></i></span>
+            <span><i class="what__flip" data-what-flip>Weby</i><i class="sq"></i></span>
+            <span>Hlas<i class="sq"></i></span>
+          </h2>
+        </div>
+      </div>
+
+      <div class="what__fox" aria-hidden="true"></div>
+      <div class="what__balls" data-metaballs aria-hidden="true"></div>
+
+      <div class="what__grid">
+        <article class="service service--web" data-reveal>
+          <div class="service__inner">
+            <div class="service__face service__face--front">
+              <div class="service__bg" aria-hidden="true">
+                <div class="service__art">
+                  <svg viewBox="0 0 200 150" fill="none" stroke-linecap="round" stroke-linejoin="round">
+                    <rect x="20" y="22" width="160" height="106" rx="12" stroke="#35d8ff" stroke-width="2.5" fill="rgba(53,216,255,.06)"/>
+                    <path d="M20 34l80 52 80-52" stroke="#35d8ff" stroke-width="2.5"/>
+                    <circle cx="170" cy="30" r="16" fill="#35d8ff"/><path d="M164 30l4 4 8-8" stroke="#021019" stroke-width="3"/>
+                    <rect x="40" y="104" width="54" height="8" rx="4" fill="rgba(53,216,255,.35)"/>
+                    <rect x="40" y="116" width="32" height="6" rx="3" fill="rgba(167,139,250,.45)"/>
+                  </svg>
+                </div>
+              </div>
+              <span class="service__hint" aria-hidden="true">
+                <svg viewBox="0 0 24 24"><path d="M5 12h13"/><path d="M12.5 5.5L19 12l-6.5 6.5"/></svg>
+              </span>
+            </div>
+            <div class="service__face service__face--back">
+              <span class="service__rule" aria-hidden="true"></span>
+              <h3>Pošta a kalendář</h3>
+              <p>„Co mi dnes přišlo důležitého?“ Přečte e-maily, shrne je, navrhne odpověď a hlídá schůzky. Gmail i Google Kalendář připojíte jedním kliknutím.</p>
+            </div>
+          </div>
+        </article>
+
+        <article class="service service--app" data-reveal>
+          <div class="service__inner">
+            <div class="service__face service__face--front">
+              <div class="service__bg" aria-hidden="true">
+                <div class="service__art">
+                  <svg viewBox="0 0 200 150" fill="none" stroke-linecap="round" stroke-linejoin="round">
+                    <rect x="16" y="18" width="168" height="114" rx="12" stroke="#35d8ff" stroke-width="2.5" fill="rgba(53,216,255,.06)"/>
+                    <path d="M16 40h168" stroke="#35d8ff" stroke-width="2"/>
+                    <circle cx="30" cy="29" r="3.5" fill="#35d8ff"/><circle cx="42" cy="29" r="3.5" fill="#6ee7ff"/><circle cx="54" cy="29" r="3.5" fill="#a78bfa"/>
+                    <path d="M44 66l-14 14 14 14M76 66l14 14-14 14M66 60l-12 40" stroke="#6ee7ff" stroke-width="3"/>
+                    <rect x="108" y="56" width="58" height="56" rx="8" stroke="#a78bfa" stroke-width="2.2" fill="rgba(167,139,250,.1)"/>
+                    <rect x="116" y="64" width="42" height="14" rx="3" fill="rgba(53,216,255,.4)"/>
+                    <rect x="116" y="84" width="28" height="5" rx="2.5" fill="rgba(230,245,255,.5)"/>
+                    <rect x="116" y="94" width="36" height="5" rx="2.5" fill="rgba(230,245,255,.3)"/>
+                  </svg>
+                </div>
+              </div>
+              <span class="service__hint" aria-hidden="true">
+                <svg viewBox="0 0 24 24"><path d="M5 12h13"/><path d="M12.5 5.5L19 12l-6.5 6.5"/></svg>
+              </span>
+            </div>
+            <div class="service__face service__face--back">
+              <span class="service__rule" aria-hidden="true"></span>
+              <h3>Weby a aplikace</h3>
+              <p>Popíšete web větou a za chvíli ho vidíte. Píše kód, spouští ho, ukazuje náhled na počítači i v mobilu a hotový web pošle na hosting.</p>
+            </div>
+          </div>
+        </article>
+
+        <article class="service service--design" data-reveal>
+          <div class="service__inner">
+            <div class="service__face service__face--front">
+              <div class="service__bg" aria-hidden="true">
+                <div class="service__art">
+                  <svg viewBox="0 0 200 150" fill="none" stroke-linecap="round">
+                    <circle cx="100" cy="75" r="56" stroke="rgba(53,216,255,.25)" stroke-width="2" stroke-dasharray="4 7"/>
+                    <circle cx="100" cy="75" r="38" stroke="#35d8ff" stroke-width="2.5" fill="rgba(53,216,255,.08)"/>
+                    <g stroke="#6ee7ff" stroke-width="5">
+                      <path d="M76 70v10M86 62v26M96 54v42M106 60v30M116 66v18M126 71v8"/>
+                    </g>
+                    <circle cx="160" cy="34" r="6" fill="#a78bfa"/><circle cx="38" cy="120" r="4" fill="#35d8ff"/>
+                  </svg>
+                </div>
+              </div>
+              <span class="service__hint" aria-hidden="true">
+                <svg viewBox="0 0 24 24"><path d="M5 12h13"/><path d="M12.5 5.5L19 12l-6.5 6.5"/></svg>
+              </span>
+            </div>
+            <div class="service__face service__face--back">
+              <span class="service__rule" aria-hidden="true"></span>
+              <h3>Mluví a poslouchá</h3>
+              <p>Česky, mužským i ženským hlasem. Pozná, kdy domluvíte, a když mu skočíte do řeči, ztichne. Pojmenujete si ho, jak chcete.</p>
+            </div>
+          </div>
+        </article>
+      </div>
+
+      <div class="tape" data-reveal>
+        <div class="tape__track">
+          <span class="tape__item">Pošta, kalendář a soubory</span>
+          <i class="tape__sep" aria-hidden="true"></i>
+          <span class="tape__item tape__item--out">Plánované úkoly 24/7</span>
+          <i class="tape__sep" aria-hidden="true"></i>
+          <span class="tape__item">Weby a aplikace na povel</span>
+          <i class="tape__sep" aria-hidden="true"></i>
+          <span class="tape__item tape__item--out">Mluví česky</span>
+          <i class="tape__sep" aria-hidden="true"></i>
+          <span class="tape__item">Vaše data zůstávají u vás</span>
+          <i class="tape__sep" aria-hidden="true"></i>
+
+          <span class="tape__item" aria-hidden="true">Pošta, kalendář a soubory</span>
+          <i class="tape__sep" aria-hidden="true"></i>
+          <span class="tape__item tape__item--out" aria-hidden="true">Plánované úkoly 24/7</span>
+          <i class="tape__sep" aria-hidden="true"></i>
+          <span class="tape__item" aria-hidden="true">Weby a aplikace na povel</span>
+          <i class="tape__sep" aria-hidden="true"></i>
+          <span class="tape__item tape__item--out" aria-hidden="true">Mluví česky</span>
+          <i class="tape__sep" aria-hidden="true"></i>
+          <span class="tape__item" aria-hidden="true">Vaše data zůstávají u vás</span>
+          <i class="tape__sep" aria-hidden="true"></i>
+        </div>
+      </div>
+    </section>
+
+    <!-- ===== PROČ SYNTH (tmavá karta) ===== -->
+    <section class="approach" id="approach" data-section-dark>
+      <div class="approach__head">
+        <div class="approach__heading">
+          <p class="eyebrow eyebrow--light" data-reveal>Proč Synth</p>
+          <h2 class="approach__title" data-split-lines>
+            <span>Dělá práci.</span>
+            <span>Ne jen</span>
+            <span><i class="approach__flip" data-approach-flip>odpovídá</i><i class="sq"></i></span>
+          </h2>
+          <div class="approach__chips" data-reveal aria-hidden="true">
+            <span>CZ</span><span>24/7</span><span>AES</span><span>AI</span>
+          </div>
+        </div>
+        <div class="vmarq" data-vmarquee data-reveal>
+          <div class="vmarq__track" data-vmarquee-track>
+            <article class="stmt">
+              <span class="stmt__ico" aria-hidden="true">
+                <svg viewBox="0 0 24 24"><path d="M12 2.5l8 3v6.2c0 5-3.4 8.6-8 9.8-4.6-1.2-8-4.8-8-9.8V5.5l8-3z"/></svg>
+              </span>
+              <h3>Vaše data zůstávají vaše.</h3>
+              <p>Synth běží na vašem počítači. Soubory, e-maily ani paměť nikam neposílá. Spojení s telefonem je šifrované klíčem, který zná jen váš počítač a mobil. Náš server zprávy jen předává a nerozumí jim.</p>
+            </article>
+
+            <article class="stmt">
+              <span class="stmt__ico" aria-hidden="true">
+                <svg viewBox="0 0 24 24"><path fill-rule="evenodd" d="M12 2a10 10 0 100 20 10 10 0 000-20zm1 5h-2v6l5 3 1-1.7-4-2.3V7z"/></svg>
+              </span>
+              <h3>Pracuje, i když spíte.</h3>
+              <p>Každé ráno v 8:00 přehled pošty, v pátek týdenní report, v noci projde projekt a opraví, co najde. Úkoly si naplánujete jednou a výsledek vám přijde i do mobilu.</p>
+            </article>
+
+            <article class="stmt">
+              <span class="stmt__ico" aria-hidden="true">
+                <svg viewBox="0 0 24 24"><ellipse cx="12" cy="6" rx="8" ry="3"/><path d="M4 8v4c0 1.7 3.6 3 8 3s8-1.3 8-3V8c-1.4 1.3-4.5 2-8 2s-6.6-.7-8-2zm0 6v4c0 1.7 3.6 3 8 3s8-1.3 8-3v-4c-1.4 1.3-4.5 2-8 2s-6.6-.7-8-2z"/></svg>
+              </span>
+              <h3>Pamatuje si vás.</h3>
+              <p>Jak se jmenuje vaše firma, kdo je účetní, kdy máte porady, jakou pijete kávu. Paměť zůstává jen u vás v počítači a nemusíte nic opakovat.</p>
+            </article>
+
+            <article class="stmt">
+              <span class="stmt__ico" aria-hidden="true">
+                <svg viewBox="0 0 24 24"><path fill-rule="evenodd" d="M8 5.5a6.5 6.5 0 100 13 6.5 6.5 0 000-13zm8 0a6.5 6.5 0 100 13 6.5 6.5 0 000-13z"/></svg>
+              </span>
+              <h3>Dva mozky v záloze.</h3>
+              <p>Umí Claude i ChatGPT. Když jednomu dojde limit, práci převezme druhý a vy nic neřešíte.</p>
+            </article>
+
+            <article class="stmt">
+              <span class="stmt__ico" aria-hidden="true">
+                <svg viewBox="0 0 24 24"><rect x="7" y="2" width="10" height="20" rx="2.5"/></svg>
+              </span>
+              <h3>Asistent v kapse.</h3>
+              <p>Spárujete telefon QR kódem a Synth máte s sebou. Mluvíte s ním, zadáváte práci na počítač doma a dostáváte upozornění, když je hotovo. I mimo domácí Wi-Fi.</p>
+            </article>
+
+            <article class="stmt">
+              <span class="stmt__ico" aria-hidden="true">
+                <svg viewBox="0 0 24 24"><path d="M5 3l14 8-6.2 1.7L9.6 19 5 3z"/></svg>
+              </span>
+              <h3>Nemusíte umět programovat.</h3>
+              <p>Všechno se nastavuje klikáním a s asistentem mluvíte normálně, česky. Za pět minut běží: stáhnete, zadáte klíč a dáte mu jméno.</p>
+            </article>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ===== ČÍSLA ===== -->
+    <section class="stats" id="stats">
+      <div class="stats__row">
+        <div class="stat" data-reveal>
+          <span class="stat__figure">
+            <span class="stat__num" data-count="27">0</span>
+            <span class="orbit orbit--a"><i></i></span>
+          </span>
+          <span class="stat__label">služeb k připojení</span>
+        </div>
+        <div class="stat" data-reveal>
+          <span class="stat__figure">
+            <span class="stat__num" data-count="24" data-suffix="/7">0</span>
+            <span class="orbit orbit--a"><i></i></span>
+            <span class="orbit orbit--b"><i></i></span>
+          </span>
+          <span class="stat__label">plánované úkoly</span>
+        </div>
+        <div class="stat" data-reveal>
+          <span class="stat__figure">
+            <span class="stat__num" data-count="5">0</span>
+            <span class="orbit orbit--c"><i></i><i></i></span>
+          </span>
+          <span class="stat__label">minut do spuštění</span>
+        </div>
+        <div class="stat stat--project" data-reveal>
+          <a class="stat__project" href="#otazky" data-link>
+            <span class="stat__project-word">Česky</span>
+            <svg class="stat__scribble" viewBox="0 0 200 12" preserveAspectRatio="none" aria-hidden="true"><path d="M4 8C40 3 70 9 100 6C130 3 165 9 196 5"/></svg>
+            <span class="stat__project-arrow" aria-hidden="true">↗</span>
+          </a>
+          <span class="stat__label">píše i mluví</span>
+        </div>
+      </div>
+    </section>
+
+    <!-- ===== CENÍK ===== -->
+    <section class="pricing" id="cenik">
+      <div class="section-head">
+        <div>
+          <p class="eyebrow" data-reveal>Ceník</p>
+          <h2 class="price__title" data-split-lines>
+            <span>Vyberte si</span>
+            <span>balíček<i class="sq"></i></span>
+          </h2>
+        </div>
+        <p data-reveal>Všechny balíčky umí úplně všechno. Liší se jen délkou, a čím delší, tím levnější.</p>
+      </div>
+
+      <div class="prices">
+        <article class="price" data-reveal>
+          <h3>Měsíc</h3>
+          <p class="price__note">Na vyzkoušení</p>
+          <p class="price__amount">390<small>Kč</small></p>
+          <p class="price__month">390 Kč měsíčně</p>
+          <ul>
+            <li>2 počítače, ke každému 2 telefony</li>
+            <li>Všechny funkce a připojení</li>
+            <li>Aktualizace zdarma</li>
+          </ul>
+          <button type="button" class="price__btn" data-modal-open data-balicek="Měsíc (390 Kč)">Chci měsíc</button>
+        </article>
+
+        <article class="price price--main" data-reveal>
+          <span class="price__badge">Nejoblíbenější</span>
+          <h3>Půl roku</h3>
+          <p class="price__note">Ušetříte 15 %</p>
+          <p class="price__amount">1 990<small>Kč</small></p>
+          <p class="price__month">vychází na 332 Kč měsíčně</p>
+          <ul>
+            <li>2 počítače, ke každému 2 telefony</li>
+            <li>Všechny funkce a připojení</li>
+            <li>Aktualizace zdarma</li>
+          </ul>
+          <button type="button" class="price__btn" data-modal-open data-balicek="Půl roku (1 990 Kč)">Chci půl roku</button>
+        </article>
+
+        <article class="price" data-reveal>
+          <span class="price__badge price__badge--green">Nejvýhodnější</span>
+          <h3>Rok</h3>
+          <p class="price__note">Ušetříte 25 %</p>
+          <p class="price__amount">3 490<small>Kč</small></p>
+          <p class="price__month">vychází na 291 Kč měsíčně</p>
+          <ul>
+            <li>2 počítače, ke každému 2 telefony</li>
+            <li>Všechny funkce a připojení</li>
+            <li>Aktualizace zdarma</li>
+          </ul>
+          <button type="button" class="price__btn" data-modal-open data-balicek="Rok (3 490 Kč)">Chci rok</button>
+        </article>
+      </div>
+      <p class="pricing__foot" data-reveal>Synth přemýšlí přes Claude nebo ChatGPT. Budete potřebovat vlastní předplatné <b>Claude</b> nebo <b>ChatGPT</b> (od 20&nbsp;$ měsíčně), případně API klíč. Průvodce vám to při instalaci pomůže nastavit.</p>
+    </section>
+
+    <!-- ===== OTÁZKY ===== -->
+    <section class="faq" id="otazky">
+      <div class="section-head">
+        <div>
+          <p class="eyebrow" data-reveal>Otázky</p>
+          <h2 class="faq__title" data-split-lines>
+            <span>Časté</span>
+            <span>otázky<i class="sq"></i></span>
+          </h2>
+        </div>
+      </div>
+      <div class="faq__list">
+        <details data-reveal><summary>Co potřebuju, aby Synth fungoval?</summary><p>Počítač s Windows 10/11 nebo macOS a předplatné Claude (Pro nebo Max) nebo ChatGPT (Plus nebo Pro). Místo předplatného jde použít i vlastní API klíč, pak ale asistent jen konverzuje a nepracuje se soubory.</p></details>
+        <details data-reveal><summary>Jsou moje data v bezpečí?</summary><p>Asistent běží na vašem počítači. E-maily, soubory i paměť čte jen váš počítač. Spojení s telefonem je šifrované klíčem ze spárování a náš server zprávy jen předává, přečíst je nemůže.</p></details>
+        <details data-reveal><summary>Na kolik zařízení licence platí?</summary><p>Na 2 počítače a ke každému můžete spárovat 2 telefony. Když počítač vyměníte, starý odhlásíte a klíč zadáte na novém.</p></details>
+        <details data-reveal><summary>Umí opravdu česky?</summary><p>Ano. Píše i mluví česky, rozumí diktování a jméno si skloňuje podle toho, jak ho pojmenujete.</p></details>
+        <details data-reveal><summary>Musím umět programovat?</summary><p>Vůbec ne. Všechno se nastavuje klikáním a s asistentem mluvíte normálně. Záložka Vývoj je pro ty, kdo si chtějí nechat postavit web nebo aplikaci.</p></details>
+        <details data-reveal><summary>Co se stane, když licence skončí?</summary><p>Asistent se zastaví, ale nic se nesmaže. Po prodloužení pokračuje tam, kde skončil, i s pamětí a nastavením.</p></details>
+        <details data-reveal><summary>Můžu ho ovládat z mobilu, když nejsem doma?</summary><p>Ano, přes aplikaci v telefonu, i mimo domácí Wi-Fi. Počítač s asistentem přitom musí běžet.</p></details>
+      </div>
+    </section>
+
+    <!-- ===== KONTAKT ===== -->
+    <section class="contact" id="contact">
+      <div class="contact__bg" data-contact-bg></div>
+
+      <div class="contact__inner">
+        <p class="eyebrow" data-reveal>Pojmenujte si svého asistenta.</p>
+
+        <div class="contact__head">
+          <h2 class="contact__title" data-split-lines>
+            <span>Máte otázku</span>
+            <span class="contact__title-flipline">na <span class="contact__word"><i class="contact__flip" data-contact-flip>Synth?</i><svg class="contact__scribble" viewBox="0 0 200 14" preserveAspectRatio="none" aria-hidden="true"><path d="M4 9.6C33 4.4 57 11.8 87 7.4c30-4.3 62 4.2 109-.4"/></svg></span></span>
+          </h2>
+          <div class="contact__intro" data-reveal>
+            <p class="contact__intro-text" data-typeout>Napište nám, rádi poradíme.
+Nebo si rovnou vyberte balíček.</p>
+            <span class="thumbs-float" data-thumbs aria-hidden="true"></span>
+            <span class="like" data-like aria-hidden="true">
+              <svg class="like__ico" viewBox="0 0 24 24"><path d="M2.5 10.5h3.6V21H2.5z"/><path d="M8.1 10.3 12.4 3a1.7 1.7 0 0 1 3.2 1.1l-.9 4.7h5.1a2 2 0 0 1 2 2.4l-1.5 7.3a2 2 0 0 1-2 1.5H8.1z"/></svg>
+              <span class="like__count">+1</span>
+            </span>
+          </div>
+        </div>
+
+        <div class="contact__links">
+          <a href="mailto:ahoj@foxyvision.cz" class="contact__link" data-modal-open data-reveal data-cursor-hide>
+            <span class="contact__link-ico">
+              <svg viewBox="0 0 24 24" aria-hidden="true"><rect x="2.8" y="5" width="18.4" height="14" rx="2.6"/><path d="M3.6 7.2l7.3 5.1a2 2 0 0 0 2.2 0l7.3-5.1"/></svg>
+            </span>
+            <span class="roll">
+              <span class="roll__a">ahoj@foxyvision.cz</span>
+              <span class="roll__b" aria-hidden="true">ahoj@foxyvision.cz</span>
+            </span>
+            <span class="contact__arrow">→</span>
+          </a>
+          <a href="tel:+420722902653" class="contact__link" data-reveal data-cursor-hide>
+            <span class="contact__link-ico">
+              <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M6.4 3.5h3.1l1.6 4-2.1 1.6a12.4 12.4 0 0 0 5.9 5.9l1.6-2.1 4 1.6v3.1a2.4 2.4 0 0 1-2.6 2.4A15.6 15.6 0 0 1 4 6.1a2.4 2.4 0 0 1 2.4-2.6z"/></svg>
+            </span>
+            <span class="roll">
+              <span class="roll__a">+420 722 902 653</span>
+              <span class="roll__b" aria-hidden="true">+420 722 902 653</span>
+            </span>
+            <span class="contact__arrow">→</span>
+          </a>
+        </div>
+      </div>
+    </section>
+
+  </main>
+
+  <!-- ===== Footer ===== -->
+  <footer class="footer">
+    <div class="footer__brand brand">
+      <svg viewBox="0 0 32 32" aria-hidden="true"><path d="M16 3l11 6.3v13.4L16 29 5 22.7V9.3z"/><rect x="12.5" y="12.5" width="7" height="7"/></svg>
+      <b>SYNTH</b>
+    </div>
+    <nav class="footer__links">
+      <a href="#work" data-link>Co umí</a>
+      <a href="#what" data-link>Schopnosti</a>
+      <a href="#cenik" data-link>Ceník</a>
+      <a href="#otazky" data-link>Otázky</a>
+    </nav>
+    <p class="footer__copy">© 2026 Synth · vyrobilo studio <a href="https://foxyvision.cz/">Foxyvision</a></p>
+  </footer>
+
+  <!-- ===== Objednávka (modal) ===== -->
+  <div class="modal" data-modal hidden>
+    <div class="modal__overlay" data-modal-close></div>
+    <div class="modal__box" role="dialog" aria-modal="true" aria-label="Objednávka">
+      <div class="modal__media" aria-hidden="true"></div>
+      <button class="modal__close" data-modal-close aria-label="Zavřít">×</button>
+      <div class="modal__content">
+        <p class="eyebrow">Objednávka</p>
+        <h2 class="modal__title">Balíček <span data-balicek-nazev>Synth</span></h2>
+        <p class="modal__intro">Nechte nám kontakt. Pošleme vám platební údaje a hned po zaplacení licenční klíč s odkazem ke stažení.</p>
+        <form class="modal__form" data-contact-form action="/send.php" method="post">
+          <div class="modal__row">
+            <input type="text" name="name" placeholder="Jméno" required />
+            <input type="email" name="email" placeholder="E-mail" required />
+          </div>
+          <textarea name="message" rows="4" required
+            placeholder="Který balíček chcete? Případně fakturační údaje nebo dotaz."></textarea>
+          <input type="text" name="website" tabindex="-1" autocomplete="off" aria-hidden="true"
+            style="position:absolute;left:-9999px;width:1px;height:1px;opacity:0;pointer-events:none;" />
+          <button type="submit" class="modal__submit">Odeslat objednávku <span>→</span></button>
+        </form>
+        <div class="modal__contact">
+          <a href="mailto:ahoj@foxyvision.cz" class="modal__contact-item"><span><svg viewBox="0 0 24 24" aria-hidden="true"><rect x="2.8" y="5" width="18.4" height="14" rx="2.6"/><path d="M3.6 7.2l7.3 5.1a2 2 0 0 0 2.2 0l7.3-5.1"/></svg></span>ahoj@foxyvision.cz</a>
+          <a href="tel:+420722902653" class="modal__contact-item"><span><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M6.4 3.5h3.1l1.6 4-2.1 1.6a12.4 12.4 0 0 0 5.9 5.9l1.6-2.1 4 1.6v3.1a2.4 2.4 0 0 1-2.6 2.4A15.6 15.6 0 0 1 4 6.1a2.4 2.4 0 0 1 2.4-2.6z"/></svg></span>+420 722 902 653</a>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ===== Scripts ===== -->
+  <script src="https://cdn.jsdelivr.net/npm/@studio-freight/lenis@1.0.42/dist/lenis.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/gsap@3.12.5/dist/gsap.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/gsap@3.12.5/dist/ScrollTrigger.min.js"></script>
+  <!-- funkce v carouselu „Co umí“ — edituj data/content.js -->
+  <script src="data/content.js?v=1"></script>
+  <script src="js/main.js?v=1"></script>
+  <script type="module" src="js/metaballs.js?v=1"></script>
+  <script src="js/synth.js?v=1"></script>
+</body>
+</html>
