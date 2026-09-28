@@ -13,7 +13,7 @@ Pak otevři http://localhost:8000/vaia-tron/
 ## Barevné schéma
 Výchozí je **světlá** varianta (`css/theme-light.css`), tmavá je v `css/theme.css`. Přepínač (slunce/měsíc) je v navigaci a volba se pamatuje v prohlížeči. Výchozí variantu změníš v `index.html` (`var t = "light"` → `"dark"`).
 
-Světlá varianta má vlastní obrázky s příponou `-light`: `hero-bg-light.jpg`, `contact-bg-light.png`, `what-bg-light.png`, `box-1/2/3-light.png`. Ostatní obrázky jsou společné.
+Světlá varianta má vlastní obrázky s příponou `-light`: `contact-bg-light.png`, `what-bg-light.png`, `box-1/2/3-light.png`. Ostatní obrázky jsou společné.
 
 ## Obrázky — stačí přepsat soubor se stejným názvem v `img/`
 | Soubor | Kde je | Doporučeno |
@@ -21,8 +21,7 @@ Světlá varianta má vlastní obrázky s příponou `-light`: `hero-bg-light.jp
 | `logo.png` | logo v navigaci na světlém pozadí (PNG s průhledností) | výška ~200 px |
 | `logo-white.png` | logo na tmavém pozadí (patička, tmavé sekce, tmavá varianta) | stejné rozměry |
 | `logo-icon.png` | jen symbol — ikonka v záložce prohlížeče | čtverec |
-| `hero-bg.jpg` | pozadí úvodu (statické) | 1920×1080 |
-| `hero-front.png` | popředí úvodu, hýbe se s myší (PNG s průhledností) | 1920×1080 |
+| `hero.jpg` | obrázek v úvodu se 4 skleněnými boxy; texty v boxech jsou v `data/content.js` → `heroBoxes` a střídají se | 1920×1080 |
 | `work-bg.png`, `work-bg2.png` | dekorace v sekci „Co umí“ | 1200×800 |
 | `what-bg.png` | pozadí za nadpisem „Schopnosti“ | 1700×900 |
 | `box-1.png`, `box-2.png`, `box-3.png` | obrázky ve třech otáčecích boxech | 800×640 |
@@ -34,7 +33,8 @@ Světlá varianta má vlastní obrázky s příponou `-light`: `hero-bg-light.jp
 Když chceš jiný formát (třeba `.webp`), změň příponu v `css/theme.css` (hlavička souboru obsahuje seznam).
 
 ## Texty
-- **Pás s napojeními a karty „Co umí“:** `data/content.js`
+- **Texty ve 4 boxech v úvodu, pás s napojeními a karty „Co umí“:** `data/content.js`
+- **Když vyměníš `hero.jpg` za obrázek s jinak rozmístěnými boxy,** uprav jejich polohu v `css/theme.css` (`.hero-box--1` až `--4`: left, top, width, height v % obrázku a natočení `--r`).
 - **Rotující slova** (hero, nadpisy): pole `phrases` a volání `setupMorph` / `setupTypewriter` v `js/main.js`
 - **Ostatní texty** (Bez API, Funkce, Ceník, Otázky): `index.html`
 

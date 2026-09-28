@@ -5,8 +5,9 @@
    Funkce, Bez API, Ceník a Otázky.
 
    OBRÁZKY — stačí přepsat soubor se stejným názvem v img/:
-     hero-bg.jpg      pozadí úvodu (statické)              1920×1080
-     hero-front.png   popředí úvodu, hýbe se s myší (PNG)  1920×1080
+     hero.jpg         obrázek úvodu se 4 boxy (texty do boxů:  1920×1080
+                      data/content.js → heroBoxes; při jiném rozložení
+                      boxů uprav .hero-box--1…4 níže)
      work-bg.png      dekorace v „Co umí“ vpravo nahoře    1200×800
      work-bg2.png     dekorace v „Co umí“ vlevo dole       1100×750
      what-bg.png      pozadí za nadpisem „Schopnosti“      1700×900
@@ -51,9 +52,46 @@
 .mnav__cta { color: #021019; }
 
 /* ---------- hero: stejné vrstvy jako Foxyvision, jen jiné obrázky ---------- */
-.hero__bg { background: #030810 url("../img/hero-bg.jpg") center / cover no-repeat; }
-.hero__fg { background: url("../img/hero-front.png") right center / cover no-repeat; }
-.hero::before { background: linear-gradient(95deg, var(--paper) 0%, rgba(3,8,16,.9) 26%, rgba(3,8,16,.4) 44%, rgba(3,8,16,0) 58%); }
+/* jeden obrázek img/hero.jpg (16:9) roztažený jako „cover“; boxy s texty leží
+   ve stejném plátně (.hero-art), takže sedí na skleněné boxy v obrázku na každé obrazovce */
+.hero__bg { background: var(--paper); container-type: size; overflow: hidden; }
+.hero-art {
+  /* šířkou podle obrazovky (okraje obrázku jsou bílé, takže nic nechybí),
+     o kousek užší a přiražené vpravo, ať boxy nelezou pod nadpis a tlačítko */
+  position: absolute; top: 50%; right: 0;
+  width: 94cqw; aspect-ratio: 16 / 9;
+  transform: translateY(-46%);
+  container-type: inline-size;
+}
+@media (max-width: 1500px) { .hero-art { width: 88cqw; } }
+.hero-art__img { position: absolute; inset: 0; width: 100%; height: 100%; display: block; }
+/* tmavá varianta: bílý obrázek převrácený do tmy (modré zůstanou modré) */
+.hero-art__img { filter: invert(1) hue-rotate(180deg) brightness(.9); }
+.hero::before { background: linear-gradient(95deg, var(--paper) 0%, rgba(3,8,16,.85) 24%, rgba(3,8,16,0) 42%); }
+
+/* boxy — souřadnice v % obrázku 1920×1080 (left, top, šířka, výška, natočení) */
+.hero-box {
+  position: absolute; display: flex; align-items: center; justify-content: center;
+  padding: 0 .9cqw; transform: rotate(var(--r, 0deg)); transform-origin: center;
+  color: var(--ink); text-align: left; pointer-events: none;
+}
+.hero-box--1 { left: 46.9%; top: 35.8%; width: 10.1%; height: 12.8%; --r: 1.5deg; }
+.hero-box--2 { left: 48.9%; top: 51.9%; width: 9.7%;  height: 13.6%; --r: 1.5deg; }
+.hero-box--3 { left: 53.1%; top: 69.6%; width: 9.9%;  height: 15.2%; --r: 4deg; }
+.hero-box--4 { left: 81.5%; top: 65.8%; width: 12%;   height: 16.2%; --r: 6deg; }
+.hero-box__in { display: flex; align-items: center; gap: .6cqw; width: 100%; }
+.hero-box__ico {
+  flex: 0 0 auto; display: grid; place-items: center; width: 2.1cqw; height: 2.1cqw; border-radius: .55cqw;
+  background: var(--terracotta); color: #fff; box-shadow: 0 .3cqw .8cqw rgba(0,119,204,.35);
+}
+.hero-box__ico svg { width: 58%; height: 58%; fill: none; stroke: currentColor; stroke-width: 2; stroke-linecap: round; stroke-linejoin: round; }
+.hero-box b { display: block; font: 700 .86cqw/1.2 var(--font-heading); }
+.hero-box small { display: block; margin-top: .15cqw; font-size: .66cqw; line-height: 1.3; color: var(--text-soft); }
+/* animace výměny textu */
+.hero-box__in { transition: opacity .45s var(--ease), transform .55s var(--ease), filter .45s; }
+.hero-box.is-out .hero-box__in { opacity: 0; transform: translateY(-.6cqw); filter: blur(4px); }
+.hero-box.is-in .hero-box__in { opacity: 0; transform: translateY(.6cqw); filter: blur(4px); transition: none; }
+@media (prefers-reduced-motion: reduce) { .hero-box__in { transition: none; } }
 .hero__lede { color: var(--text-soft); }
 .hero .btn__icon { border-color: var(--line-strong); color: var(--terracotta); }
 .hero__particles .leaf { display: none; }
@@ -253,7 +291,8 @@ main { overflow-x: clip; }
 }
 /* mobil: Foxyvision tu přepíná na jiné obrázky — tady stejné soubory */
 @media (max-width: 760px) {
-  .hero__bg { background-image: url("../img/hero-bg.jpg"); }
-  .hero__fg { background-image: url("../img/hero-front.png"); background-position: 70% bottom; background-size: 190% auto; opacity: .5; }
+  /* mobil: obrázek pod textem (hlava + panel), boxy s texty schované */
+  .hero-art { width: 185cqw; right: -6cqw; top: auto; bottom: -2cqh; transform: none; }
+  .hero-box { display: none; }
   .contact__bg { background: url("../img/contact-bg.png") center bottom / 200% auto no-repeat; }
 }
