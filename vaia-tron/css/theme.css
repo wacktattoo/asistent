@@ -95,6 +95,7 @@ html:not([data-theme="light"]) .hero-box.is-glass {
 .hero-art__boxes.is-debug .hero-box::before {
   content: attr(data-n); position: absolute; top: -1.4em; left: 0; font: 700 .9em var(--font-body); color: #e11;
 }
+.hero-box__slot { display: contents; }
 .hero-box__in { display: flex; align-items: center; gap: .6em; width: 100%; }
 .hero-box__ico {
   flex: 0 0 auto; display: grid; place-items: center; width: 2.1em; height: 2.1em; border-radius: .55em;

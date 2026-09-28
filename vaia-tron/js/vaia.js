@@ -111,6 +111,7 @@
     const el = document.createElement("div");
     el.className = "hero-box" + (c.glass === false ? "" : " is-glass");
     el.dataset.n = n + 1;
+    el.innerHTML = '<span class="hero-box__slot"></span>';   // text se mění jen tady, zbytek boxu (úchyty editoru) zůstává
     apply(el, c);
     wrap.appendChild(el);
     return el;
@@ -150,13 +151,14 @@
     const list = Array.isArray(cfg[n].items) ? cfg[n].items : [];
     if (!list.length) return;
     let i = 0;
-    box.innerHTML = html(list[0]);
+    const slot = box.querySelector(".hero-box__slot");
+    slot.innerHTML = html(list[0]);
     if (reduce || list.length < 2) return;
     const swap = () => {
       box.classList.add("is-out");
       setTimeout(() => {
         i = (i + 1) % list.length;
-        box.innerHTML = html(list[i]);
+        slot.innerHTML = html(list[i]);
         box.classList.remove("is-out"); box.classList.add("is-in");
         box.offsetWidth;                                   // start z výchozí polohy
         box.classList.remove("is-in");
