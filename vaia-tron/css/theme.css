@@ -145,7 +145,12 @@
 .hero-art__fg { position: absolute; inset: 0; will-change: transform; }
 /* postava se dole jemně rozplyne (spodní hrana ramen končí v obrázku na ~86 % výšky).
    --fade-od / --fade-do = kde fade začíná a kde je postava úplně průhledná (% výšky obrázku) */
-.hero-art__fg { --fade-od: 60%; --fade-do: 85%; }
+.hero-art__fg { --fade-od: 42%; --fade-do: 74%; }
+/* i pozadí (orbity a záře pod postavou) se dole rozplyne, ať spodek nikde „neprosvítá“ */
+.hero-art > .hero-art__img {
+  -webkit-mask-image: linear-gradient(to bottom, #000 62%, transparent 90%);
+          mask-image: linear-gradient(to bottom, #000 62%, transparent 90%);
+}
 .hero-art__fg .hero-art__img {
   -webkit-mask-image: linear-gradient(to bottom, #000 var(--fade-od), transparent var(--fade-do));
           mask-image: linear-gradient(to bottom, #000 var(--fade-od), transparent var(--fade-do));
