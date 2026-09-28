@@ -98,10 +98,12 @@ html[data-theme="light"] .hero-fx__beam {
 }
 html[data-theme="light"] .hero-fx__beam::after { background: linear-gradient(90deg, transparent, #35a9f0, transparent); }
 html[data-theme="light"] .hero-fx__ring { border-color: rgba(0,119,204,.16); box-shadow: 0 0 0 70px rgba(0,119,204,.025), 0 0 0 140px rgba(0,119,204,.015); }
-html[data-theme="light"] .hero::after {
-  height: 140px;  /* krátký přechod do bílé další sekce */
-  background: linear-gradient(to top, var(--paper) 0%, rgba(255,255,255,0) 100%);
+/* tmavý gradient se dole rozplyne do bílé dlouze a plynule (žádný tvrdý pruh vpravo dole) */
+html[data-theme="light"] .hero-fx {
+  -webkit-mask-image: linear-gradient(to bottom, #000 0%, #000 50%, rgba(0,0,0,.85) 62%, rgba(0,0,0,.55) 74%, rgba(0,0,0,.25) 86%, rgba(0,0,0,.07) 95%, transparent 100%);
+          mask-image: linear-gradient(to bottom, #000 0%, #000 50%, rgba(0,0,0,.85) 62%, rgba(0,0,0,.55) 74%, rgba(0,0,0,.25) 86%, rgba(0,0,0,.07) 95%, transparent 100%);
 }
+html[data-theme="light"] .hero::after { display: none; }
 html[data-theme="light"] .hero__lede { color: var(--text-soft); }
 html[data-theme="light"] .hero__scroll-line { background: rgba(10, 22, 34, .18); }
 html[data-theme="light"] .hero__particles .p { box-shadow: none; opacity: .5; }
