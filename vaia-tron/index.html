@@ -1,0 +1,647 @@
+<!DOCTYPE html>
+<html lang="cs">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+  <title>VAIA Tron — osobní AI asistent na vašem počítači</title>
+  <meta name="description" content="VAIA Tron staví weby a aplikace, pracuje s dokumenty a soubory, hlídá poštu a kalendář, plánuje úkoly a mluví česky. Bez API tokenů – stačí aplikace ChatGPT nebo Claude." />
+  <meta name="theme-color" content="#ffffff" />
+
+  <meta property="og:type" content="website" />
+  <meta property="og:locale" content="cs_CZ" />
+  <meta property="og:site_name" content="VAIA Tron" />
+  <meta property="og:title" content="VAIA Tron — osobní AI asistent na vašem počítači" />
+  <meta property="og:description" content="Weby, dokumenty, soubory, plánované úkoly a hlas. Bez API tokenů, česky, na Windows i Macu." />
+  <meta property="og:image" content="img/aplikace-rozhovor.jpg" />
+  <meta name="twitter:card" content="summary_large_image" />
+
+  <link rel="icon" href="img/logo-icon.png" type="image/png" />
+  <link rel="apple-touch-icon" href="img/logo-icon.png" />
+
+  <!-- stejná písma jako Foxyvision: Satoshi (text) + Archivo Black / Archivo (nadpisy) -->
+  <link rel="preconnect" href="https://api.fontshare.com" crossorigin />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://api.fontshare.com/v2/css?f[]=satoshi@400,500,700&display=swap" rel="stylesheet" />
+  <link href="https://fonts.googleapis.com/css2?family=Archivo:wght@400;500;600;700&family=Archivo+Black&display=swap" rel="stylesheet" />
+
+  <!-- style.css = rozložení a animace z Foxyvision, theme.css = vzhled VAIA Tron + obrázky -->
+  <link rel="stylesheet" href="css/style.css?v=2" />
+  <link rel="stylesheet" href="css/theme.css?v=15" />
+  <link rel="stylesheet" href="css/theme-light.css?v=8" />
+  <!-- barevné schéma: výchozí světlé, volba se pamatuje (přepínač v navigaci) -->
+  <script>
+    (function () {
+      var t = "light";
+      try { t = localStorage.getItem("vaia-theme") || t; } catch (e) {}
+      document.documentElement.setAttribute("data-theme", t);
+    })();
+  </script>
+
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "SoftwareApplication",
+    "name": "VAIA Tron",
+    "description": "Osobní AI asistent pro Windows a Mac. Weby, dokumenty, soubory, plánované úkoly a hlas česky. Bez API tokenů.",
+    "operatingSystem": "Windows, macOS",
+    "applicationCategory": "ProductivityApplication",
+    "inLanguage": "cs",
+    "offers": [
+      { "@type": "Offer", "name": "Měsíc", "price": "390", "priceCurrency": "CZK" },
+      { "@type": "Offer", "name": "Půl roku", "price": "1990", "priceCurrency": "CZK" },
+      { "@type": "Offer", "name": "Rok", "price": "3490", "priceCurrency": "CZK" }
+    ],
+    "author": { "@type": "Organization", "name": "Foxyvision", "url": "https://foxyvision.cz/" }
+  }
+  </script>
+</head>
+<body>
+
+  <!-- ===== Nav ===== -->
+  <header class="nav" data-nav>
+    <a href="#top" class="nav__brand brand" aria-label="VAIA Tron — nahoru">
+      <img src="img/logo.png" alt="VAIA Tron" class="brand__logo brand__logo--dark" width="1060" height="212" />
+      <img src="img/logo-white.png" alt="" aria-hidden="true" class="brand__logo brand__logo--white" width="1060" height="212" />
+    </a>
+    <nav class="nav__links">
+      <a href="#work" data-link>Co umí</a>
+      <a href="#funkce" data-link>Funkce</a>
+      <a href="#approach" data-link>Proč VAIA</a>
+      <a href="#cenik" data-link>Ceník</a>
+      <a href="#otazky" data-link>Otázky</a>
+      <span class="nav-goo" aria-hidden="true"><span class="nav-goo__pill"></span></span>
+    </nav>
+    <div class="nav__actions">
+      <button class="nav__cta" data-modal-open>Vybrat&nbsp;balíček</button>
+      <button class="theme-toggle" type="button" data-theme-toggle aria-label="Přepnout světlé / tmavé barvy">
+        <svg class="ico-moon" viewBox="0 0 24 24" aria-hidden="true"><path d="M20 14.5A8 8 0 0 1 9.5 4a8 8 0 1 0 10.5 10.5z"/></svg>
+        <svg class="ico-sun" viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="4"/><path d="M12 2v2M12 20v2M4.9 4.9l1.4 1.4M17.7 17.7l1.4 1.4M2 12h2M20 12h2M4.9 19.1l1.4-1.4M17.7 6.3l1.4-1.4"/></svg>
+      </button>
+    </div>
+    <button class="nav__burger" data-nav-toggle aria-label="Menu" aria-expanded="false" aria-controls="mobilni-menu">
+      <span></span><span></span><span></span>
+    </button>
+  </header>
+
+  <!-- ===== Mobilní menu ===== -->
+  <div class="mnav" id="mobilni-menu" data-mobile-menu>
+    <nav class="mnav__links" aria-label="Hlavní menu">
+      <a href="#work" data-mlink>Co umí</a>
+      <a href="#funkce" data-mlink>Funkce</a>
+      <a href="#approach" data-mlink>Proč VAIA</a>
+      <a href="#cenik" data-mlink>Ceník</a>
+      <button class="mnav__cta" data-modal-open data-mlink>Vybrat balíček</button>
+    </nav>
+  </div>
+
+  <!-- gooey filtr pro bublinky v navigaci -->
+  <svg class="goo-defs" width="0" height="0" aria-hidden="true" focusable="false">
+    <defs>
+      <filter id="nav-goo-filter" x="-150%" y="-150%" width="400%" height="400%" color-interpolation-filters="sRGB">
+        <feGaussianBlur in="SourceGraphic" stdDeviation="5" result="blur" />
+        <feColorMatrix in="blur" mode="matrix" values="1 0 0 0 0  0 1 0 0 0  0 0 1 0 0  0 0 0 19 -9" result="goo" />
+        <feComposite in="SourceGraphic" in2="goo" operator="over" />
+      </filter>
+    </defs>
+  </svg>
+
+  <main id="top">
+
+    <!-- ===== HERO (obrázky: img/backbg.png + img/postava.png) ===== -->
+    <section class="hero" data-hero>
+      <!-- úvod jako u Foxyvision: img/backbg.png stojí, img/postava.png se hýbe s myší.
+           4 boxy s texty leží na boxech z backbg — poloha, velikost a zkosení se nastavují
+           v data/content.js → heroBoxes (na webu s ?boxy za adresou uvidíš jejich obrysy) -->
+      <div class="hero__bg" data-hero-bg>
+        <!-- futuristické pozadí přes celý úvod (jen CSS): záře, mřížka do perspektivy, světelný paprsek -->
+        <div class="hero-fx" aria-hidden="true">
+          <span class="hero-fx__glow"></span>
+          <span class="hero-fx__dots"></span>
+          <span class="hero-fx__floor"></span>
+          <span class="hero-fx__beam"></span>
+          <span class="hero-fx__ring"></span>
+        </div>
+        <div class="hero-art">
+          <img src="img/backbg.png" alt="" class="hero-art__img" width="1920" height="1080" />
+          <div class="hero-art__fg" data-hero-fg><img src="img/postava.png" alt="" class="hero-art__img" width="1920" height="1080" /></div>
+          <div class="hero-art__boxes" data-hero-boxes aria-hidden="true"></div>
+        </div>
+      </div>
+      <div class="hero__particles" data-particles aria-hidden="true"></div>
+
+      <div class="hero__inner">
+        <p class="eyebrow" data-reveal>VAIA Tron <span class="eyebrow__type" data-type></span><span class="eyebrow__caret" aria-hidden="true"></span></p>
+
+        <h1 class="hero__title" data-split-lines>
+          <span><span class="hword">Váš</span> <span class="hword">osobní</span></span>
+          <span class="hero__title-flipline"><span class="hero__morph" data-flip>asistent</span></span>
+        </h1>
+
+        <div class="hero__bottom hero__bottom--stack">
+          <p class="hero__lede" data-reveal>
+            Běží přímo na vašem počítači. Postaví web, upraví soubory,
+            přečte poštu a naplánované úkoly udělá sám, i když spíte.
+          </p>
+
+          <div class="hero__actions" data-reveal>
+            <a href="#cenik" class="hero-cta" data-link>
+              <span>Začít ještě dnes</span>
+              <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"/></svg>
+            </a>
+            <a href="#work" class="btn hero-watch" data-link>
+              <span class="btn__icon"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M8 5.5v13l11-6.5z"/></svg></span>
+              <span class="btn__text">Podívat se, co umí</span>
+            </a>
+          </div>
+        </div>
+      </div>
+
+      <a href="#work" class="hero__scroll" data-link aria-label="Posunout dolů">
+        <span class="hero__scroll-line"></span>
+      </a>
+    </section>
+
+    <!-- ===== INTRO: připojení (seznam je v data/content.js → logos) ===== -->
+    <section class="intro" id="intro">
+      <p class="eyebrow" data-reveal>Napojí se na nástroje, které už používáte</p>
+      <div class="marquee" data-reveal>
+        <div class="marquee__track"></div>
+      </div>
+    </section>
+
+    <!-- ===== CO UMÍ (carousel, obsah z data/content.js) ===== -->
+    <section class="work" id="work" data-section-dark>
+      <div class="work__bg" aria-hidden="true"></div>
+      <div class="work__bg2" aria-hidden="true"></div>
+      <div class="work__head">
+        <div class="work__heading">
+          <p class="eyebrow eyebrow--light" data-reveal>Co umí</p>
+          <h2 class="work__title" data-split-lines>
+            <span>Asistent, který</span>
+            <span class="work__title-flipline"><span class="work__morph" data-work-flip>opravdu pracuje</span></span>
+          </h2>
+        </div>
+        <div class="work__aside">
+          <p class="work__intro" data-reveal>
+            Není to chat v prohlížeči. Sahá do souborů, pošty a kalendáře a věci opravdu udělá.
+          </p>
+          <div class="work__nav" data-reveal>
+            <button class="work__arrow" data-prev aria-label="Předchozí">←</button>
+            <button class="work__arrow" data-next aria-label="Další">→</button>
+          </div>
+        </div>
+      </div>
+
+      <div class="work__stage" data-stage data-reveal>
+        <article class="feature" data-feature data-borderglow>
+          <div class="feature__media">
+            <img src="img/aplikace-vyvoj.jpg" alt="Vývoj webů" class="is-front" loading="lazy" decoding="async" data-card-img data-feature-img />
+            <img alt="" aria-hidden="true" loading="lazy" decoding="async" data-feature-img-b />
+          </div>
+          <span class="feature__badge" data-feature-badge>01</span>
+          <ul class="feature__tags" data-feature-tags></ul>
+          <span class="edge-light" aria-hidden="true"></span>
+        </article>
+
+        <aside class="workinfo">
+          <div class="workinfo__inner">
+            <p class="workinfo__count" data-feature-count><b>01</b> / 05</p>
+            <h3 class="workinfo__name" data-feature-name></h3>
+            <p class="workinfo__type" data-feature-type></p>
+            <p class="workinfo__desc" data-feature-desc></p>
+            <div class="workinfo__result">
+              <span class="workinfo__result-label">Výsledek</span>
+              <span class="workinfo__result-value" data-feature-result></span>
+            </div>
+          </div>
+          <div class="workinfo__dots" data-work-dots></div>
+        </aside>
+      </div>
+    </section>
+
+    <!-- ===== SCHOPNOSTI (obrázky v boxech: img/box-1.png, box-2.png, box-3.png) ===== -->
+    <section class="what" id="what">
+      <div class="what__head">
+        <div class="what__heading">
+          <p class="eyebrow" data-reveal>Schopnosti</p>
+          <h2 class="what__title" data-split-lines>
+            <span>Weby<i class="sq"></i></span>
+            <span><i class="what__flip" data-what-flip>Soubory</i><i class="sq"></i></span>
+            <span>Hlas<i class="sq"></i></span>
+          </h2>
+        </div>
+      </div>
+
+      <div class="what__fox" aria-hidden="true"></div>
+      <div class="what__balls" data-metaballs aria-hidden="true"></div>
+
+      <div class="what__grid">
+        <article class="service service--web" data-reveal>
+          <div class="service__inner">
+            <div class="service__face service__face--front">
+              <div class="service__bg" aria-hidden="true"></div>
+              <span class="service__hint" aria-hidden="true">
+                <svg viewBox="0 0 24 24"><path d="M5 12h13"/><path d="M12.5 5.5L19 12l-6.5 6.5"/></svg>
+              </span>
+            </div>
+            <div class="service__face service__face--back">
+              <span class="service__rule" aria-hidden="true"></span>
+              <h3>Weby a aplikace</h3>
+              <p>Od jednoduchého webu po aplikaci s databází. Vidíte okamžitý náhled na počítači i v mobilu a hotovou věc nahraje rovnou na FTP.</p>
+            </div>
+          </div>
+        </article>
+
+        <article class="service service--app" data-reveal>
+          <div class="service__inner">
+            <div class="service__face service__face--front">
+              <div class="service__bg" aria-hidden="true"></div>
+              <span class="service__hint" aria-hidden="true">
+                <svg viewBox="0 0 24 24"><path d="M5 12h13"/><path d="M12.5 5.5L19 12l-6.5 6.5"/></svg>
+              </span>
+            </div>
+            <div class="service__face service__face--back">
+              <span class="service__rule" aria-hidden="true"></span>
+              <h3>Dokumenty a soubory</h3>
+              <p>Pracuje s dokumenty, zapisuje a upravuje soubory přímo ve vašem PC. Čte poštu, hlídá kalendář a z čísel udělá graf.</p>
+            </div>
+          </div>
+        </article>
+
+        <article class="service service--design" data-reveal>
+          <div class="service__inner">
+            <div class="service__face service__face--front">
+              <div class="service__bg" aria-hidden="true"></div>
+              <span class="service__hint" aria-hidden="true">
+                <svg viewBox="0 0 24 24"><path d="M5 12h13"/><path d="M12.5 5.5L19 12l-6.5 6.5"/></svg>
+              </span>
+            </div>
+            <div class="service__face service__face--back">
+              <span class="service__rule" aria-hidden="true"></span>
+              <h3>Mluví a poslouchá</h3>
+              <p>Rozumí řeči i psaní, mluví česky a výstupní hlas si nastavíte podle sebe. Pojmenujete si ho, jak chcete.</p>
+            </div>
+          </div>
+        </article>
+      </div>
+
+      <div class="tape" data-reveal>
+        <div class="tape__track">
+          <span class="tape__item">Bez API tokenů</span>
+          <i class="tape__sep" aria-hidden="true"></i>
+          <span class="tape__item tape__item--out">Weby i aplikace s databází</span>
+          <i class="tape__sep" aria-hidden="true"></i>
+          <span class="tape__item">Soubory ve vašem PC</span>
+          <i class="tape__sep" aria-hidden="true"></i>
+          <span class="tape__item tape__item--out">Plánované úkoly 24/7</span>
+          <i class="tape__sep" aria-hidden="true"></i>
+          <span class="tape__item">Mluví česky</span>
+          <i class="tape__sep" aria-hidden="true"></i>
+
+          <span class="tape__item" aria-hidden="true">Bez API tokenů</span>
+          <i class="tape__sep" aria-hidden="true"></i>
+          <span class="tape__item tape__item--out" aria-hidden="true">Weby i aplikace s databází</span>
+          <i class="tape__sep" aria-hidden="true"></i>
+          <span class="tape__item" aria-hidden="true">Soubory ve vašem PC</span>
+          <i class="tape__sep" aria-hidden="true"></i>
+          <span class="tape__item tape__item--out" aria-hidden="true">Plánované úkoly 24/7</span>
+          <i class="tape__sep" aria-hidden="true"></i>
+          <span class="tape__item" aria-hidden="true">Mluví česky</span>
+          <i class="tape__sep" aria-hidden="true"></i>
+        </div>
+      </div>
+    </section>
+
+    <!-- ===== FUNKCE: všechno, co umí ===== -->
+    <section class="skills" id="funkce">
+      <div class="section-head">
+        <div>
+          <p class="eyebrow" data-reveal>Funkce</p>
+          <h2 class="section-title" data-split-lines>
+            <span>Co všechno</span>
+            <span>zvládne<i class="sq"></i></span>
+          </h2>
+        </div>
+        <p data-reveal>Jeden asistent místo hromady nástrojů. Tohle všechno umí VAIA Tron hned po instalaci.</p>
+      </div>
+
+      <ul class="skills__grid">
+        <li class="skill skill--hi" tabindex="0" data-reveal><span class="skill__ico"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><path d="M5.6 5.6l12.8 12.8"/></svg></span><b>Bez API tokenů</b><span class="skill__tip" role="tooltip">Stačí aplikace ChatGPT nebo Claude, předplatné mít nemusíte</span></li>
+        <li class="skill" tabindex="0" data-reveal><span class="skill__ico"><svg viewBox="0 0 24 24"><rect x="3" y="4" width="18" height="14" rx="2"/><path d="M3 8h18M9 21h6M12 18v3"/></svg></span><b>Weby a aplikace</b><span class="skill__tip" role="tooltip">I složitější s databází, s okamžitým náhledem</span></li>
+        <li class="skill" tabindex="0" data-reveal><span class="skill__ico"><svg viewBox="0 0 24 24"><path d="M14 3H7a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h10a2 2 0 0 0 2-2V8z"/><path d="M14 3v5h5M9 13h6M9 17h4"/></svg></span><b>Práce s dokumenty</b><span class="skill__tip" role="tooltip">Čte, shrnuje a připravuje dokumenty</span></li>
+        <li class="skill" tabindex="0" data-reveal><span class="skill__ico"><svg viewBox="0 0 24 24"><path d="M3 7a2 2 0 0 1 2-2h4l2 2h8a2 2 0 0 1 2 2v8a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/><path d="M12 11v5M9.5 13.5h5"/></svg></span><b>Soubory ve vašem PC</b><span class="skill__tip" role="tooltip">Zapisuje nové a upravuje stávající soubory</span></li>
+        <li class="skill" tabindex="0" data-reveal><span class="skill__ico"><svg viewBox="0 0 24 24"><rect x="3" y="4" width="18" height="16" rx="2"/><circle cx="9" cy="10" r="2"/><path d="M21 16l-5-5-9 9"/></svg></span><b>Tvorba obrázků</b><span class="skill__tip" role="tooltip">Při použití aplikace ChatGPT</span></li>
+        <li class="skill" tabindex="0" data-reveal><span class="skill__ico"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 2"/></svg></span><b>Plánované úlohy</b><span class="skill__tip" role="tooltip">Neustálá kontrola naplánovaných úloh</span></li>
+        <li class="skill" tabindex="0" data-reveal><span class="skill__ico"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><path d="M3 12h18M12 3c2.5 2.7 3.8 5.7 3.8 9s-1.3 6.3-3.8 9c-2.5-2.7-3.8-5.7-3.8-9S9.5 5.7 12 3z"/></svg></span><b>Procházení webů</b><span class="skill__tip" role="tooltip">Najde a přečte, co potřebujete</span></li>
+        <li class="skill" tabindex="0" data-reveal><span class="skill__ico"><svg viewBox="0 0 24 24"><path d="M9 18V5l11-2v13"/><circle cx="6" cy="18" r="3"/><circle cx="17" cy="16" r="3"/></svg></span><b>Hudba na dashboardu</b><span class="skill__tip" role="tooltip">Ovládání přímo z dashboardu (Spotify Premium)</span></li>
+        <li class="skill" tabindex="0" data-reveal><span class="skill__ico"><svg viewBox="0 0 24 24"><rect x="2" y="5" width="12" height="10" rx="1.5"/><rect x="16" y="7" width="6" height="10" rx="1.5"/><path d="M6 19h4M8 15v4"/></svg></span><b>Dashboard podle vás</b><span class="skill__tip" role="tooltip">Uspořádání dle preferencí, i na druhou obrazovku</span></li>
+        <li class="skill" tabindex="0" data-reveal><span class="skill__ico"><svg viewBox="0 0 24 24"><rect x="7" y="2" width="10" height="20" rx="2.5"/><path d="M11 18h2"/></svg></span><b>Ovládání z mobilu</b><span class="skill__tip" role="tooltip">Včetně vývoje a náhledů</span></li>
+        <li class="skill" tabindex="0" data-reveal><span class="skill__ico"><svg viewBox="0 0 24 24"><rect x="9" y="3" width="6" height="11" rx="3"/><path d="M5 11a7 7 0 0 0 14 0M12 18v3"/></svg></span><b>Rozumí řeči</b><span class="skill__tip" role="tooltip">Hlas, mikrofon i psaní</span></li>
+        <li class="skill" tabindex="0" data-reveal><span class="skill__ico"><svg viewBox="0 0 24 24"><path d="M4 20V10M10 20V4M16 20v-7M22 20H2"/></svg></span><b>Vytváření grafů</b><span class="skill__tip" role="tooltip">Z čísel udělá přehledný graf</span></li>
+        <li class="skill" tabindex="0" data-reveal><span class="skill__ico"><svg viewBox="0 0 24 24"><path d="M12 16V4M7 9l5-5 5 5"/><path d="M4 16v3a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2v-3"/></svg></span><b>Nahrání na FTP</b><span class="skill__tip" role="tooltip">Hotový web pošle rovnou na hosting</span></li>
+        <li class="skill" tabindex="0" data-reveal><span class="skill__ico"><svg viewBox="0 0 24 24"><path d="M3 12a9 9 0 1 0 3-6.7L3 8"/><path d="M3 3v5h5M12 7v5l3 2"/></svg></span><b>Body obnovy</b><span class="skill__tip" role="tooltip">Ve vývoji si drží body obnovy a historii</span></li>
+        <li class="skill" tabindex="0" data-reveal><span class="skill__ico"><svg viewBox="0 0 24 24"><path d="M9 7V3M15 7V3M6 7h12v4a6 6 0 0 1-12 0zM12 17v4"/></svg></span><b>MCP nástroje</b><span class="skill__tip" role="tooltip">Připojení z nabídky Claude, ChatGPT nebo vlastní</span></li>
+        <li class="skill" tabindex="0" data-reveal><span class="skill__ico"><svg viewBox="0 0 24 24"><path d="M11 5L6 9H3v6h3l5 4z"/><path d="M15.5 8.5a5 5 0 0 1 0 7M18.5 5.5a9 9 0 0 1 0 13"/></svg></span><b>Vlastní hlas</b><span class="skill__tip" role="tooltip">Výstupní hlas si upravíte podle sebe</span></li>
+        <li class="skill" tabindex="0" data-reveal><span class="skill__ico"><svg viewBox="0 0 24 24"><ellipse cx="12" cy="6" rx="8" ry="3"/><path d="M4 6v6c0 1.7 3.6 3 8 3s8-1.3 8-3V6M4 12v6c0 1.7 3.6 3 8 3s8-1.3 8-3v-6"/></svg></span><b>Drží si paměť</b><span class="skill__tip" role="tooltip">Pamatuje si, co je pro vás důležité</span></li>
+        <li class="skill" tabindex="0" data-reveal><span class="skill__ico"><svg viewBox="0 0 24 24"><path d="M16 18l6-6-6-6M8 6l-6 6 6 6"/></svg></span><b>Zná vaše projekty</b><span class="skill__tip" role="tooltip">Kontext rozpracovaných projektů z Claude Code nebo ChatGPT</span></li>
+        <li class="skill" tabindex="0" data-reveal><span class="skill__ico"><svg viewBox="0 0 24 24"><path d="M20.6 13.4l-7.2 7.2a2 2 0 0 1-2.8 0L3 13V3h10l7.6 7.6a2 2 0 0 1 0 2.8z"/><circle cx="7.5" cy="7.5" r="1.5"/></svg></span><b>Vlastní jméno</b><span class="skill__tip" role="tooltip">Pojmenujete si ho podle sebe</span></li>
+        <li class="skill" tabindex="0" data-reveal><span class="skill__ico"><svg viewBox="0 0 24 24"><circle cx="8" cy="12" r="5"/><circle cx="16" cy="12" r="5"/></svg></span><b>ChatGPT + Claude</b><span class="skill__tip" role="tooltip">Jeden dělá, druhý kontroluje</span></li>
+      </ul>
+    </section>
+
+    <!-- ===== PROČ VAIA TRON (pozadí: img/approach-bg.jpg) ===== -->
+    <section class="approach" id="approach" data-section-dark>
+      <div class="approach__head">
+        <div class="approach__heading">
+          <p class="eyebrow eyebrow--light" data-reveal>Proč VAIA Tron</p>
+          <h2 class="approach__title" data-split-lines>
+            <span>Dělá práci.</span>
+            <span>Ne jen</span>
+            <span><i class="approach__flip" data-approach-flip>odpovídá</i><i class="sq"></i></span>
+          </h2>
+          <div class="approach__chips" data-reveal aria-hidden="true">
+            <span>0 API</span><span>CZ</span><span>24/7</span><span>MCP</span>
+          </div>
+        </div>
+        <div class="vmarq" data-vmarquee data-reveal>
+          <div class="vmarq__track" data-vmarquee-track>
+            <article class="stmt">
+              <span class="stmt__ico" aria-hidden="true">
+                <svg viewBox="0 0 24 24"><path fill-rule="evenodd" d="M12 2a10 10 0 100 20 10 10 0 000-20zm0 3a7 7 0 015.6 11.2L7.8 6.4A7 7 0 0112 5zm-5.6 2.8l9.8 9.8A7 7 0 016.4 7.8z"/></svg>
+              </span>
+              <h3>Žádné API tokeny.</h3>
+              <p>VAIA Tron nepoužívá API klíče a neúčtuje za slovo. Pracuje přes aplikaci ChatGPT nebo Claude, kterou máte nainstalovanou, a předplatné mít nemusíte.</p>
+            </article>
+
+            <article class="stmt">
+              <span class="stmt__ico" aria-hidden="true">
+                <svg viewBox="0 0 24 24"><path fill-rule="evenodd" d="M8 5.5a6.5 6.5 0 100 13 6.5 6.5 0 000-13zm8 0a6.5 6.5 0 100 13 6.5 6.5 0 000-13z"/></svg>
+              </span>
+              <h3>Jeden dělá, druhý kontroluje.</h3>
+              <p>Propojte ChatGPT a Claude. Jeden úkol udělá, druhý ho zkontroluje. Méně chyb a jistota, že výsledek sedí.</p>
+            </article>
+
+            <article class="stmt">
+              <span class="stmt__ico" aria-hidden="true">
+                <svg viewBox="0 0 24 24"><path fill-rule="evenodd" d="M12 2a10 10 0 100 20 10 10 0 000-20zm1 5h-2v6l5 3 1-1.7-4-2.3V7z"/></svg>
+              </span>
+              <h3>Pracuje, i když spíte.</h3>
+              <p>Naplánované úlohy neustále hlídá a dělá sám. Ranní přehled, týdenní report nebo noční kontrola projektu, a výsledek vám přijde i do mobilu.</p>
+            </article>
+
+            <article class="stmt">
+              <span class="stmt__ico" aria-hidden="true">
+                <svg viewBox="0 0 24 24"><path d="M16 18l6-6-6-6M8 6l-6 6 6 6"/></svg>
+              </span>
+              <h3>Zná vaše projekty.</h3>
+              <p>Navazuje na rozpracované projekty z Claude Code nebo ChatGPT, takže nezačínáte od nuly. Ve vývoji si drží body obnovy a historii, takže se kdykoli vrátíte zpátky.</p>
+            </article>
+
+            <article class="stmt">
+              <span class="stmt__ico" aria-hidden="true">
+                <svg viewBox="0 0 24 24"><rect x="7" y="2" width="10" height="20" rx="2.5"/></svg>
+              </span>
+              <h3>Asistent v kapse.</h3>
+              <p>Přes mobilní rozhraní ho ovládáte odkudkoli, včetně vývoje a živých náhledů webů. Mluvíte s ním, píšete mu a dostáváte upozornění, když je hotovo.</p>
+            </article>
+
+            <article class="stmt">
+              <span class="stmt__ico" aria-hidden="true">
+                <svg viewBox="0 0 24 24"><rect x="2" y="5" width="12" height="10" rx="1.5"/><rect x="16" y="7" width="6" height="10" rx="1.5"/></svg>
+              </span>
+              <h3>Dashboard podle vás.</h3>
+              <p>Uspořádáte si ho podle sebe a můžete ho roztáhnout i na druhou obrazovku. Hudbu ze Spotify ovládáte přímo z něj.</p>
+            </article>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ===== ČÍSLA ===== -->
+    <section class="stats" id="stats">
+      <div class="stats__row">
+        <div class="stat" data-reveal>
+          <span class="stat__figure">
+            <span class="stat__num" data-count="0">0</span>
+            <span class="orbit orbit--a"><i></i></span>
+          </span>
+          <span class="stat__label">API tokenů</span>
+        </div>
+        <div class="stat" data-reveal>
+          <span class="stat__figure">
+            <span class="stat__num" data-count="24" data-suffix="/7">0</span>
+            <span class="orbit orbit--a"><i></i></span>
+            <span class="orbit orbit--b"><i></i></span>
+          </span>
+          <span class="stat__label">kontrola úloh</span>
+        </div>
+        <div class="stat" data-reveal>
+          <span class="stat__figure">
+            <span class="stat__num" data-count="2">0</span>
+            <span class="orbit orbit--c"><i></i><i></i></span>
+          </span>
+          <span class="stat__label">AI mozky v jednom</span>
+        </div>
+        <div class="stat stat--project" data-reveal>
+          <a class="stat__project" href="#funkce" data-link>
+            <span class="stat__project-word">Česky</span>
+            <svg class="stat__scribble" viewBox="0 0 200 12" preserveAspectRatio="none" aria-hidden="true"><path d="M4 8C40 3 70 9 100 6C130 3 165 9 196 5"/></svg>
+            <span class="stat__project-arrow" aria-hidden="true">↗</span>
+          </a>
+          <span class="stat__label">píše i mluví</span>
+        </div>
+      </div>
+    </section>
+
+    <!-- ===== CENÍK ===== -->
+    <section class="pricing" id="cenik">
+      <div class="section-head">
+        <div>
+          <p class="eyebrow" data-reveal>Ceník</p>
+          <h2 class="section-title" data-split-lines>
+            <span>Vyberte si</span>
+            <span>balíček<i class="sq"></i></span>
+          </h2>
+        </div>
+        <p data-reveal>Všechny balíčky umí úplně všechno. Liší se jen délkou, a čím delší, tím levnější.</p>
+      </div>
+
+      <div class="prices">
+        <article class="price" data-reveal>
+          <h3>Měsíc</h3>
+          <p class="price__note">Na vyzkoušení</p>
+          <p class="price__amount">390<small>Kč</small></p>
+          <p class="price__month">390 Kč měsíčně</p>
+          <ul>
+            <li>2 počítače, ke každému 2 telefony</li>
+            <li>Všechny funkce a připojení</li>
+            <li>Bez API tokenů</li>
+            <li>Aktualizace zdarma</li>
+          </ul>
+          <button type="button" class="price__btn" data-modal-open data-balicek="Měsíc (390 Kč)">Chci měsíc</button>
+        </article>
+
+        <article class="price price--main" data-reveal>
+          <span class="price__badge">Nejoblíbenější</span>
+          <h3>Půl roku</h3>
+          <p class="price__note">Ušetříte 15 %</p>
+          <p class="price__amount">1 990<small>Kč</small></p>
+          <p class="price__month">vychází na 332 Kč měsíčně</p>
+          <ul>
+            <li>2 počítače, ke každému 2 telefony</li>
+            <li>Všechny funkce a připojení</li>
+            <li>Bez API tokenů</li>
+            <li>Aktualizace zdarma</li>
+          </ul>
+          <button type="button" class="price__btn" data-modal-open data-balicek="Půl roku (1 990 Kč)">Chci půl roku</button>
+        </article>
+
+        <article class="price" data-reveal>
+          <span class="price__badge price__badge--green">Nejvýhodnější</span>
+          <h3>Rok</h3>
+          <p class="price__note">Ušetříte 25 %</p>
+          <p class="price__amount">3 490<small>Kč</small></p>
+          <p class="price__month">vychází na 291 Kč měsíčně</p>
+          <ul>
+            <li>2 počítače, ke každému 2 telefony</li>
+            <li>Všechny funkce a připojení</li>
+            <li>Bez API tokenů</li>
+            <li>Aktualizace zdarma</li>
+          </ul>
+          <button type="button" class="price__btn" data-modal-open data-balicek="Rok (3 490 Kč)">Chci rok</button>
+        </article>
+      </div>
+      <p class="pricing__foot" data-reveal>VAIA Tron přemýšlí přes <b>ChatGPT</b> nebo <b>Claude</b>. Nepoužívá API tokeny: stačí mít nainstalovanou jejich aplikaci a předplatné mít nemusíte. Průvodce vám vše při instalaci nastaví.</p>
+    </section>
+
+    <!-- ===== OTÁZKY ===== -->
+    <section class="faq" id="otazky">
+      <div class="section-head">
+        <div>
+          <p class="eyebrow" data-reveal>Otázky</p>
+          <h2 class="section-title" data-split-lines>
+            <span>Časté</span>
+            <span>otázky<i class="sq"></i></span>
+          </h2>
+        </div>
+      </div>
+      <div class="faq__list">
+        <details data-reveal><summary>Potřebuju API klíč nebo předplatné?</summary><p>Ne. VAIA Tron nepoužívá API tokeny. Stačí mít v počítači nainstalovanou aplikaci ChatGPT nebo Claude, předplatné mít nemusíte.</p></details>
+        <details data-reveal><summary>Co potřebuju, aby VAIA Tron fungoval?</summary><p>Počítač s Windows 10/11 nebo macOS a nainstalovanou aplikaci ChatGPT nebo Claude. Zbytek nastaví průvodce při instalaci.</p></details>
+        <details data-reveal><summary>Jsou moje data v bezpečí?</summary><p>Asistent běží na vašem počítači. Dokumenty, soubory i paměť zůstávají u vás. Spojení s telefonem je šifrované klíčem ze spárování a náš server zprávy jen předává, přečíst je nemůže.</p></details>
+        <details data-reveal><summary>Umí pracovat s mými soubory?</summary><p>Ano. Zapisuje nové soubory a upravuje stávající přímo ve vašem PC. Ve vývoji si drží body obnovy a historii, takže se kdykoli vrátíte k předchozí verzi.</p></details>
+        <details data-reveal><summary>Na kolik zařízení licence platí?</summary><p>Na 2 počítače a ke každému můžete spárovat 2 telefony. Když počítač vyměníte, starý odhlásíte a klíč zadáte na novém.</p></details>
+        <details data-reveal><summary>Umí opravdu česky?</summary><p>Ano. Píše i mluví česky, rozumí diktování a výstupní hlas si nastavíte podle sebe. Jméno si skloňuje podle toho, jak ho pojmenujete.</p></details>
+        <details data-reveal><summary>Musím umět programovat?</summary><p>Vůbec ne. Všechno se nastavuje klikáním a s asistentem mluvíte normálně. Weby a aplikace mu prostě popíšete.</p></details>
+        <details data-reveal><summary>Můžu ho ovládat z mobilu, když nejsem doma?</summary><p>Ano, přes mobilní rozhraní, včetně vývoje a náhledů. Počítač s asistentem přitom musí běžet.</p></details>
+      </div>
+    </section>
+
+    <!-- ===== KONTAKT (pozadí: img/contact-bg.png) ===== -->
+    <section class="contact" id="contact">
+      <div class="contact__bg" data-contact-bg></div>
+
+      <div class="contact__inner">
+        <p class="eyebrow" data-reveal>Pojmenujte si svého asistenta.</p>
+
+        <div class="contact__head">
+          <h2 class="contact__title" data-split-lines>
+            <span>Máte otázku</span>
+            <span class="contact__title-flipline">na <span class="contact__word"><i class="contact__flip" data-contact-flip>VAIA?</i><svg class="contact__scribble" viewBox="0 0 200 14" preserveAspectRatio="none" aria-hidden="true"><path d="M4 9.6C33 4.4 57 11.8 87 7.4c30-4.3 62 4.2 109-.4"/></svg></span></span>
+          </h2>
+          <div class="contact__intro" data-reveal>
+            <p class="contact__intro-text" data-typeout>Napište nám, rádi poradíme.
+Nebo si rovnou vyberte balíček.</p>
+            <span class="thumbs-float" data-thumbs aria-hidden="true"></span>
+            <span class="like" data-like aria-hidden="true">
+              <svg class="like__ico" viewBox="0 0 24 24"><path d="M2.5 10.5h3.6V21H2.5z"/><path d="M8.1 10.3 12.4 3a1.7 1.7 0 0 1 3.2 1.1l-.9 4.7h5.1a2 2 0 0 1 2 2.4l-1.5 7.3a2 2 0 0 1-2 1.5H8.1z"/></svg>
+              <span class="like__count">+1</span>
+            </span>
+          </div>
+        </div>
+
+        <div class="contact__links">
+          <a href="mailto:ahoj@foxyvision.cz" class="contact__link" data-modal-open data-reveal data-cursor-hide>
+            <span class="contact__link-ico">
+              <svg viewBox="0 0 24 24" aria-hidden="true"><rect x="2.8" y="5" width="18.4" height="14" rx="2.6"/><path d="M3.6 7.2l7.3 5.1a2 2 0 0 0 2.2 0l7.3-5.1"/></svg>
+            </span>
+            <span class="roll">
+              <span class="roll__a">ahoj@foxyvision.cz</span>
+              <span class="roll__b" aria-hidden="true">ahoj@foxyvision.cz</span>
+            </span>
+            <span class="contact__arrow">→</span>
+          </a>
+          <a href="tel:+420722902653" class="contact__link" data-reveal data-cursor-hide>
+            <span class="contact__link-ico">
+              <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M6.4 3.5h3.1l1.6 4-2.1 1.6a12.4 12.4 0 0 0 5.9 5.9l1.6-2.1 4 1.6v3.1a2.4 2.4 0 0 1-2.6 2.4A15.6 15.6 0 0 1 4 6.1a2.4 2.4 0 0 1 2.4-2.6z"/></svg>
+            </span>
+            <span class="roll">
+              <span class="roll__a">+420 722 902 653</span>
+              <span class="roll__b" aria-hidden="true">+420 722 902 653</span>
+            </span>
+            <span class="contact__arrow">→</span>
+          </a>
+        </div>
+      </div>
+    </section>
+
+  </main>
+
+  <!-- ===== Footer ===== -->
+  <footer class="footer">
+    <div class="footer__brand brand">
+      <img src="img/logo-white.png" alt="VAIA Tron" class="brand__logo" width="1060" height="212" loading="lazy" />
+    </div>
+    <nav class="footer__links">
+      <a href="#work" data-link>Co umí</a>
+      <a href="#funkce" data-link>Funkce</a>
+      <a href="#cenik" data-link>Ceník</a>
+      <a href="#otazky" data-link>Otázky</a>
+    </nav>
+    <p class="footer__copy">© 2026 VAIA Tron · vyrobilo studio <a href="https://foxyvision.cz/">Foxyvision</a></p>
+  </footer>
+
+  <!-- ===== Objednávka (obrázek: img/modal.jpg) ===== -->
+  <div class="modal" data-modal hidden>
+    <div class="modal__overlay" data-modal-close></div>
+    <div class="modal__box" role="dialog" aria-modal="true" aria-label="Objednávka">
+      <div class="modal__media" aria-hidden="true"></div>
+      <button class="modal__close" data-modal-close aria-label="Zavřít">×</button>
+      <div class="modal__content">
+        <p class="eyebrow">Objednávka</p>
+        <h2 class="modal__title">Balíček <span data-balicek-nazev>VAIA Tron</span></h2>
+        <p class="modal__intro">Nechte nám kontakt. Pošleme vám platební údaje a hned po zaplacení licenční klíč s odkazem ke stažení.</p>
+        <form class="modal__form" data-contact-form action="/send.php" method="post">
+          <div class="modal__row">
+            <input type="text" name="name" placeholder="Jméno" required />
+            <input type="email" name="email" placeholder="E-mail" required />
+          </div>
+          <textarea name="message" rows="4" required
+            placeholder="Který balíček chcete? Případně fakturační údaje nebo dotaz."></textarea>
+          <input type="text" name="website" tabindex="-1" autocomplete="off" aria-hidden="true"
+            style="position:absolute;left:-9999px;width:1px;height:1px;opacity:0;pointer-events:none;" />
+          <button type="submit" class="modal__submit">Odeslat objednávku <span>→</span></button>
+        </form>
+        <div class="modal__contact">
+          <a href="mailto:ahoj@foxyvision.cz" class="modal__contact-item"><span><svg viewBox="0 0 24 24" aria-hidden="true"><rect x="2.8" y="5" width="18.4" height="14" rx="2.6"/><path d="M3.6 7.2l7.3 5.1a2 2 0 0 0 2.2 0l7.3-5.1"/></svg></span>ahoj@foxyvision.cz</a>
+          <a href="tel:+420722902653" class="modal__contact-item"><span><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M6.4 3.5h3.1l1.6 4-2.1 1.6a12.4 12.4 0 0 0 5.9 5.9l1.6-2.1 4 1.6v3.1a2.4 2.4 0 0 1-2.6 2.4A15.6 15.6 0 0 1 4 6.1a2.4 2.4 0 0 1 2.4-2.6z"/></svg></span>+420 722 902 653</a>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ===== Scripts ===== -->
+  <script src="https://cdn.jsdelivr.net/npm/@studio-freight/lenis@1.0.42/dist/lenis.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/gsap@3.12.5/dist/gsap.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/gsap@3.12.5/dist/ScrollTrigger.min.js"></script>
+  <!-- připojení v pásu + karty „Co umí“ — edituj data/content.js -->
+  <script src="data/content.js?v=5"></script>
+  <!-- poloha boxů v úvodu uložená editorem (…/?upravit) -->
+  <script src="data/hero-layout.js?v=3"></script>
+  <script src="js/main.js?v=2"></script>
+  <script type="module" src="js/metaballs.js?v=2"></script>
+  <script src="js/vaia.js?v=8"></script>
+</body>
+</html>

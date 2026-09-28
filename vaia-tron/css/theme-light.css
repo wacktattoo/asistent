@@ -1,0 +1,202 @@
+/* =========================================================
+   VAIA TRON — SVĚTLÁ VARIANTA
+   Zapíná se atributem <html data-theme="light"> (přepínač v navigaci).
+   Světlé pozadí, tmavý text a jedna kontrastní modrá. Karty
+   „Co umí“ a „Proč VAIA Tron“ a patička zůstávají tmavé jako
+   u Foxyvision.
+
+   OBRÁZKY navíc pro světlou verzi (ostatní jsou společné):
+     contact-bg-light.png   pozadí kontaktu  1920×700
+     what-bg-light.png      pozadí „Schopnosti“  1700×900
+     box-1/2/3-light.png    obrázky v boxech     800×640
+   ========================================================= */
+
+html[data-theme="light"] {
+  --paper: #ffffff;
+  --ink: #0a1622;
+  --terracotta: #0077cc;      /* kontrastní modrá (AA i pro malý text na bílé) */
+  --terra-soft: #35a9f0;      /* modrá na tmavých kartách */
+  --charcoal: #071526;
+  --clay: #e3ecf4;
+  --muted: #5b6f80;
+  --muted-dark: #8aa3b6;
+  --text-soft: #4a5d6e;
+  --line: rgba(0, 119, 204, .16);
+  --line-strong: rgba(0, 119, 204, .38);
+  --glow: 0 10px 30px rgba(0, 119, 204, .18);
+  color-scheme: light;
+}
+html[data-theme="light"] ::selection { background: rgba(0,119,204,.2); color: var(--ink); }
+
+/* tmavé sekce: uvnitř znovu tmavé barvy */
+html[data-theme="light"] [data-section-dark],
+html[data-theme="light"] .footer,
+html[data-theme="light"] .service__face--back {
+  --ink: #e6f5ff;
+  --paper: #030810;
+  --terracotta: #35d8ff;
+  --text-soft: #9ab8cb;
+  --line: rgba(53, 216, 255, .16);
+  --line-strong: rgba(53, 216, 255, .42);
+}
+
+/* ---------- navigace ---------- */
+html[data-theme="light"] .nav__brand,
+html[data-theme="light"] .nav__links {
+  background: rgba(255, 255, 255, .7);
+  border-color: rgba(10, 22, 34, .1);
+  box-shadow: 0 8px 26px rgba(10, 22, 34, .07);
+}
+html[data-theme="light"] .nav.on-dark { color: #e6f5ff; }
+html[data-theme="light"] .nav.on-dark .nav__brand,
+html[data-theme="light"] .nav.on-dark .nav__links {
+  background: rgba(4, 12, 22, .6);
+  border-color: rgba(53, 216, 255, .16);
+}
+html[data-theme="light"] .nav__brand .brand__logo--dark { display: block; }
+html[data-theme="light"] .nav__brand .brand__logo--white { display: none; }
+html[data-theme="light"] .nav.on-dark .nav__brand .brand__logo--dark { display: none; }
+html[data-theme="light"] .nav.on-dark .nav__brand .brand__logo--white { display: block; }
+html[data-theme="light"] .nav__links a:hover { color: #fff; }
+html[data-theme="light"] .nav__cta,
+html[data-theme="light"] .mnav__cta,
+html[data-theme="light"] .modal__submit {
+  background: var(--terracotta); color: #fff;
+  box-shadow: 0 10px 24px rgba(0, 119, 204, .28);
+}
+html[data-theme="light"] .nav__cta:hover { background: #0066b0; box-shadow: 0 14px 30px rgba(0, 119, 204, .35); }
+html[data-theme="light"] .nav__burger span { background: #fff; }
+html[data-theme="light"] .mnav { background: rgba(255, 255, 255, .98); }
+html[data-theme="light"] .mnav__cta { color: #fff; }
+
+/* ---------- hero ---------- */
+html[data-theme="light"] .hero-art__img { filter: none; }
+html[data-theme="light"] .hero::before { background: linear-gradient(95deg, rgba(255,255,255,.75) 0%, rgba(255,255,255,.4) 26%, rgba(255,255,255,0) 44%); }
+/* futuristické pozadí ve světlé verzi: stejné vrstvy v kontrastní modré, jemněji */
+/* gradient z tmavě modré vpravo do světlé vlevo (pod textem zůstává světlo) */
+html[data-theme="light"] .hero-fx {
+  background:
+    radial-gradient(ellipse 45% 60% at 78% 50%, rgba(53,169,240,.35), transparent 70%),
+    linear-gradient(100deg, #ffffff 0%, #f4f9fe 30%, #cfe6f8 50%, #3f8fd4 68%, #0d4a8c 84%, #072a55 100%);
+}
+html[data-theme="light"] .hero-fx__glow {
+  background:
+    radial-gradient(ellipse 40% 55% at 70% 52%, rgba(0,119,204,.14), transparent 70%),
+    radial-gradient(ellipse 45% 40% at 18% 28%, rgba(53,169,240,.10), transparent 70%),
+    radial-gradient(ellipse 30% 30% at 92% 12%, rgba(0,119,204,.08), transparent 70%);
+}
+html[data-theme="light"] .hero-fx__dots { background-image: radial-gradient(rgba(0,119,204,.28) 1px, transparent 1.3px); opacity: .45; }
+html[data-theme="light"] .hero-fx__floor {
+  background-image:
+    linear-gradient(rgba(0,119,204,.4) 1.5px, transparent 1.5px),
+    linear-gradient(90deg, rgba(0,119,204,.4) 1.5px, transparent 1.5px);
+  opacity: .75;
+}
+html[data-theme="light"] .hero-fx__beam {
+  background: linear-gradient(90deg, transparent 0%, rgba(0,119,204,.15) 20%, rgba(0,119,204,.45) 60%, rgba(0,119,204,.12) 90%, transparent 100%);
+  box-shadow: 0 0 16px rgba(0,119,204,.25);
+}
+html[data-theme="light"] .hero-fx__beam::after { background: linear-gradient(90deg, transparent, #35a9f0, transparent); }
+html[data-theme="light"] .hero-fx__ring { border-color: rgba(0,119,204,.16); box-shadow: 0 0 0 70px rgba(0,119,204,.025), 0 0 0 140px rgba(0,119,204,.015); }
+/* tmavý gradient se dole rozplyne do bílé dlouze a plynule (žádný tvrdý pruh vpravo dole) */
+html[data-theme="light"] .hero-fx {
+  -webkit-mask-image: linear-gradient(to bottom, #000 0%, #000 50%, rgba(0,0,0,.85) 62%, rgba(0,0,0,.55) 74%, rgba(0,0,0,.25) 86%, rgba(0,0,0,.07) 95%, transparent 100%);
+          mask-image: linear-gradient(to bottom, #000 0%, #000 50%, rgba(0,0,0,.85) 62%, rgba(0,0,0,.55) 74%, rgba(0,0,0,.25) 86%, rgba(0,0,0,.07) 95%, transparent 100%);
+}
+html[data-theme="light"] .hero::after { display: none; }
+html[data-theme="light"] .hero__lede { color: var(--text-soft); }
+html[data-theme="light"] .hero__scroll-line { background: rgba(10, 22, 34, .18); }
+html[data-theme="light"] .hero__particles .p { box-shadow: none; opacity: .5; }
+html[data-theme="light"] .hero .btn__icon { border-color: var(--line-strong); }
+
+/* ---------- pás připojení ---------- */
+html[data-theme="light"] .marquee__logo { color: #a9b8c5; }
+html[data-theme="light"] .marquee:hover .marquee__logo { color: var(--ink); }
+
+/* ---------- Schopnosti: světlé boxy, tmavý rub ---------- */
+html[data-theme="light"] .what__fox { background-image: url("../img/what-bg-light.png"); opacity: .5; }
+html[data-theme="light"] .service--web    .service__bg { background-image: url("../img/box-1-light.png"); }
+html[data-theme="light"] .service--app    .service__bg { background-image: url("../img/box-2-light.png"); }
+html[data-theme="light"] .service--design .service__bg { background-image: url("../img/box-3-light.png"); }
+html[data-theme="light"] .service__face--front { background: #fff; border-color: rgba(10, 22, 34, .07); box-shadow: 0 18px 44px rgba(10,22,34,.06); }
+html[data-theme="light"] .service__hint { color: #fff; }
+html[data-theme="light"] .service:hover .service__hint { background: #0066b0; }
+html[data-theme="light"] .tape { border-color: rgba(10, 22, 34, .1); }
+html[data-theme="light"] .tape__item--out { -webkit-text-stroke-color: rgba(10, 22, 34, .45); }
+
+/* ---------- Funkce + tooltip ---------- */
+html[data-theme="light"] .skill { background: #fff; border-color: rgba(10, 22, 34, .08); box-shadow: 0 6px 16px rgba(10,22,34,.04); }
+html[data-theme="light"] .skill:hover,
+html[data-theme="light"] .skill:focus-visible,
+html[data-theme="light"] .skill.is-open, html[data-theme="light"] .skill.is-auto { background: #fff; border-color: var(--line-strong); box-shadow: 0 12px 28px rgba(0,119,204,.14); }
+html[data-theme="light"] .skill__ico { background: rgba(0,119,204,.07); }
+html[data-theme="light"] .skill:hover .skill__ico,
+html[data-theme="light"] .skill:focus-visible .skill__ico,
+html[data-theme="light"] .skill.is-open .skill__ico, html[data-theme="light"] .skill.is-auto .skill__ico { color: #fff; box-shadow: 0 6px 14px rgba(0,119,204,.35); }
+html[data-theme="light"] .skill--hi { background: linear-gradient(140deg, rgba(0,119,204,.1), #fff); border-color: var(--line-strong); }
+html[data-theme="light"] .skill__tip {
+  background: #0a1622; color: #e6f5ff; border-color: rgba(10,22,34,.9);
+  box-shadow: 0 18px 44px rgba(10, 22, 34, .25);
+}
+html[data-theme="light"] .skill__tip::before { background: linear-gradient(90deg, transparent, #35a9f0, transparent); }
+html[data-theme="light"] .skill__tip::after { background: #0a1622; border-color: rgba(10,22,34,.9); }
+
+/* ---------- čísla ---------- */
+html[data-theme="light"] .stat__label { color: var(--muted); }
+
+/* ---------- Ceník ---------- */
+html[data-theme="light"] .price { background: #fff; border-color: rgba(10, 22, 34, .08); box-shadow: 0 16px 40px rgba(10,22,34,.05); }
+html[data-theme="light"] .price:hover { border-color: var(--line-strong); box-shadow: 0 24px 50px rgba(0,119,204,.14); }
+html[data-theme="light"] .price--main { border-color: var(--terracotta); box-shadow: 0 0 0 1px var(--terracotta), 0 26px 60px rgba(0,119,204,.18); }
+html[data-theme="light"] .price__badge { color: #fff; }
+html[data-theme="light"] .price__badge--green { background: #1e9e62; }
+html[data-theme="light"] .price li::before { box-shadow: none; }
+html[data-theme="light"] .price__btn { color: var(--ink); border-color: var(--line-strong); }
+html[data-theme="light"] .price__btn:hover,
+html[data-theme="light"] .price--main .price__btn { background: var(--terracotta); color: #fff; box-shadow: 0 10px 24px rgba(0,119,204,.28); }
+
+/* ---------- Otázky ---------- */
+html[data-theme="light"] .faq__list details { background: #fff; border-color: rgba(10, 22, 34, .08); }
+html[data-theme="light"] .faq__list details[open] { background: #fff; border-color: var(--line-strong); box-shadow: 0 14px 34px rgba(0,119,204,.1); }
+
+/* ---------- Kontakt ---------- */
+html[data-theme="light"] .contact__bg {
+  background:
+    linear-gradient(to right, var(--paper) 0%, rgba(255,255,255,0) 20%),
+    linear-gradient(to left,  var(--paper) 0%, rgba(255,255,255,0) 20%),
+    linear-gradient(to bottom, var(--paper) 2%, rgba(255,255,255,0) 40%),
+    url("../img/contact-bg-light.png") center bottom / 100% auto no-repeat;
+}
+html[data-theme="light"] .contact__intro,
+html[data-theme="light"] .contact__intro::before { background: #fff; color: var(--text-soft); border-color: rgba(10,22,34,.08); box-shadow: 0 16px 38px rgba(10,22,34,.07); }
+html[data-theme="light"] .contact__link { border-color: rgba(10, 22, 34, .14); }
+html[data-theme="light"] .contact__link-ico { color: #fff; }
+
+/* ---------- okno objednávky ---------- */
+html[data-theme="light"] .modal__box { background: #fff; border-color: rgba(10,22,34,.08); }
+html[data-theme="light"] .modal__intro, html[data-theme="light"] .modal__success p { color: var(--text-soft); }
+html[data-theme="light"] .modal__close { background: #fff; border-color: rgba(10,22,34,.15); color: var(--ink); }
+html[data-theme="light"] .modal__form input,
+html[data-theme="light"] .modal__form textarea { color: var(--ink); border-color: rgba(10, 22, 34, .2); }
+html[data-theme="light"] .modal__form input::placeholder,
+html[data-theme="light"] .modal__form textarea::placeholder { color: #8a9aa8; }
+html[data-theme="light"] .modal__contact { border-color: rgba(10, 22, 34, .1); }
+
+@media (max-width: 760px) {
+  html[data-theme="light"] .contact__bg { background: url("../img/contact-bg-light.png") center bottom / 200% auto no-repeat; }
+}
+
+/* ---------- přepínač světlá / tmavá ---------- */
+.theme-toggle {
+  display: grid; place-items: center; width: 44px; height: 44px; margin-left: 10px; flex: 0 0 auto;
+  border-radius: 50%; border: 1px solid var(--line-strong); background: rgba(4, 12, 22, .6);
+  color: var(--terracotta); cursor: pointer; transition: background .3s, transform .3s;
+}
+.theme-toggle:hover { transform: rotate(-15deg); }
+.theme-toggle svg { width: 20px; height: 20px; fill: none; stroke: currentColor; stroke-width: 1.8; stroke-linecap: round; }
+.theme-toggle .ico-sun { display: none; }
+html[data-theme="light"] .theme-toggle { background: #fff; border-color: rgba(10,22,34,.12); }
+html[data-theme="light"] .nav.on-dark .theme-toggle { background: rgba(4,12,22,.6); color: #35d8ff; }
+html[data-theme="light"] .theme-toggle .ico-sun { display: block; }
+html[data-theme="light"] .theme-toggle .ico-moon { display: none; }
+.nav__actions { display: flex; align-items: center; }

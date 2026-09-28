@@ -1,0 +1,44 @@
+# VAIA Tron — web ve stylu Foxyvision
+
+Web asistenta VAIA Tron. Rozložení, animace a písma (Archivo Black, Archivo, Satoshi) pocházejí z webu Foxyvision, barvy a obsah jsou pro VAIA Tron.
+
+Originál Foxyvision (`/index.html`, `/css`, `/js`) ani stránka `/asistent` se nemění.
+
+## Spuštění
+```
+php -S localhost:8000      # nebo: python -m http.server 8000
+```
+Pak otevři http://localhost:8000/vaia-tron/
+
+## Barevné schéma
+Výchozí je **světlá** varianta (`css/theme-light.css`), tmavá je v `css/theme.css`. Přepínač (slunce/měsíc) je v navigaci a volba se pamatuje v prohlížeči. Výchozí variantu změníš v `index.html` (`var t = "light"` → `"dark"`).
+
+Světlá varianta má vlastní obrázky s příponou `-light`: `contact-bg-light.png`, `what-bg-light.png`, `box-1/2/3-light.png`. Ostatní obrázky jsou společné.
+
+## Obrázky — stačí přepsat soubor se stejným názvem v `img/`
+| Soubor | Kde je | Doporučeno |
+|---|---|---|
+| `logo.png` | logo v navigaci na světlém pozadí (PNG s průhledností) | výška ~200 px |
+| `logo-white.png` | logo na tmavém pozadí (patička, tmavé sekce, tmavá varianta) | stejné rozměry |
+| `logo-icon.png` | jen symbol — ikonka v záložce prohlížeče | čtverec |
+| `backbg.png` | pozadí úvodu (stojí), PNG s průhledností | 1920×1080 |
+| `postava.png` | postava v úvodu, hýbe se s myší (jako liška u Foxyvision), PNG s průhledností | 1920×1080 |
+| `work-bg.png`, `work-bg2.png` | dekorace v sekci „Co umí“ | 1200×800 |
+| `what-bg.png` | pozadí za nadpisem „Schopnosti“ | 1700×900 |
+| `box-1.png`, `box-2.png`, `box-3.png` | obrázky ve třech otáčecích boxech | 800×640 |
+| `approach-bg.jpg` | pozadí tmavé karty „Proč VAIA Tron“ | 1600×900 |
+| `contact-bg.png` (+ `contact-bg-light.png`) | pás nad patičkou, jako běžící liška u Foxyvision (PNG s průhledností, kresba při spodním okraji) | 1920×700 |
+| `modal.jpg` | obrázek v okně objednávky | ~1200×1400 |
+| `aplikace-*.jpg/png` | screenshoty v carouselu „Co umí“ (cesty jsou v `data/content.js`) | 2160×1350 |
+
+Když chceš jiný formát (třeba `.webp`), změň příponu v `css/theme.css` (hlavička souboru obsahuje seznam).
+
+## Texty
+- **Texty ve 4 boxech v úvodu, pás s napojeními a karty „Co umí“:** `data/content.js`
+- **Boxy s texty v úvodu — editor v prohlížeči:** spusť `php -S localhost:8000`, otevři `http://localhost:8000/vaia-tron/?upravit`, boxy chytni myší a posuň, za modrý roček změň velikost, v panelu nastav natočení, zkosení a písmo (šipky na klávesnici = jemný posun, Shift = větší). **Uložit** zapíše `data/hero-layout.js` (funguje jen na localhostu). Bez PHP dej **Stáhnout** a soubor přepiš do `data/`. Pak změny commitni a pushni přes GitHub Desktop.
+- Texty v boxech (`items`) a výchozí poloha jsou v `data/content.js` → `heroBoxes`; poloha uložená editorem má přednost.
+- **Rotující slova** (hero, nadpisy): pole `phrases` a volání `setupMorph` / `setupTypewriter` v `js/main.js`
+- **Ostatní texty** (Bez API, Funkce, Ceník, Otázky): `index.html`
+
+## Objednávky
+Formulář posílá data na `/send.php` (stejný skript jako Foxyvision), takže funguje na stejné doméně. Vybraný balíček se doplní do zprávy (`js/vaia.js`).
