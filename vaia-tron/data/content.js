@@ -29,6 +29,9 @@ window.FOXY_CONTENT = {
        web | doc | folder | image | clock | globe | music | screen | phone | mic |
        chart | upload | restore | plug | voice | memory | code | tag | duo | noapi
      ======================================================================= */
+  /* jak dlouho (v sekundách) drží každý box svůj text, než se vymění */
+  heroBoxSeconds: 9,
+
   heroBoxes: [
     { x: 46.4, y: 34.0, w: 10.3, h: 12.2, rotate: 1.5, skewX: 0, skewY: 0, size: 1,
       items: [

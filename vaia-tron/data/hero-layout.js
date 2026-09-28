@@ -15,7 +15,7 @@ window.VAIA_HERO_LAYOUT = [
     "x": 45.7,
     "y": 44.3,
     "w": 10.1,
-    "h": 11.5,
+    "h": 11.7,
     "rotate": 1.5,
     "skewX": -1.5,
     "skewY": 2,
@@ -33,12 +33,12 @@ window.VAIA_HERO_LAYOUT = [
   },
   {
     "x": 77,
-    "y": 57.6,
-    "w": 12.3,
-    "h": 11.9,
+    "y": 57.2,
+    "w": 12.4,
+    "h": 12.9,
     "rotate": -1.5,
     "skewX": -3,
     "skewY": 9.5,
-    "size": 1
+    "size": 1.1
   }
 ];

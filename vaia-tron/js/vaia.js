@@ -162,9 +162,11 @@
         box.classList.remove("is-out"); box.classList.add("is-in");
         box.offsetWidth;                                   // start z výchozí polohy
         box.classList.remove("is-in");
-      }, 460);
+      }, 700);
     };
     // každý box má jiný rytmus, ať se nemění všechny naráz
-    setTimeout(() => setInterval(swap, 3600), 900 + n * 900);
+    // každý box drží text `heroBoxSeconds` sekund (data/content.js), boxy se střídají postupně
+    const every = Math.max(2, num((window.FOXY_CONTENT || {}).heroBoxSeconds, 9)) * 1000;
+    setTimeout(() => { swap(); setInterval(swap, every); }, every / boxes.length * (n + 1));
   });
 })();
