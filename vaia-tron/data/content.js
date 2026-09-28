@@ -12,6 +12,27 @@ window.FOXY_CONTENT = {
     "Notion", "Slack", "GitHub", "Figma", "Spotify", "FTP", "MCP"
   ],
 
+  /* Texty ve 4 boxech v úvodu (obrázek img/hero.jpg). Každý box střídá své položky.
+     ico: web | doc | folder | image | clock | globe | music | screen | phone | mic | chart | upload | restore | plug | voice | memory | code | tag | duo | noapi */
+  heroBoxes: [
+    [ { ico: "web", t: "Weby a aplikace", s: "i s databází, okamžitý náhled" },
+      { ico: "upload", t: "Nahrání na FTP", s: "hotový web rovnou na hosting" },
+      { ico: "restore", t: "Body obnovy", s: "historie každé úpravy" },
+      { ico: "code", t: "Zná vaše projekty", s: "z Claude Code i ChatGPT" } ],
+    [ { ico: "doc", t: "Práce s dokumenty", s: "čte, shrnuje, připravuje" },
+      { ico: "folder", t: "Soubory ve vašem PC", s: "zapisuje i upravuje" },
+      { ico: "chart", t: "Vytváření grafů", s: "z čísel přehledný graf" },
+      { ico: "image", t: "Tvorba obrázků", s: "s aplikací ChatGPT" } ],
+    [ { ico: "clock", t: "Plánované úlohy", s: "neustálá kontrola 24/7" },
+      { ico: "globe", t: "Procházení webů", s: "najde, co potřebujete" },
+      { ico: "plug", t: "MCP nástroje", s: "z Claude, ChatGPT i vlastní" },
+      { ico: "duo", t: "ChatGPT + Claude", s: "jeden dělá, druhý kontroluje" } ],
+    [ { ico: "mic", t: "Rozumí řeči", s: "hlas, mikrofon i psaní" },
+      { ico: "phone", t: "Ovládání z mobilu", s: "včetně vývoje a náhledů" },
+      { ico: "music", t: "Hudba na dashboardu", s: "Spotify Premium" },
+      { ico: "noapi", t: "Bez API tokenů", s: "stačí aplikace ChatGPT / Claude" } ]
+  ],
+
   projects: [
     {
       index: "01",
