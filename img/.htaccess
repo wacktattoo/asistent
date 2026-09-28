@@ -1,0 +1,15 @@
+# Do této složky se nahrávají soubory z editoru. Kdyby se sem někdy dostal
+# spustitelný skript, tohle zabrání jeho vykonání — poslední pojistka.
+php_flag engine off
+
+<IfModule mod_php.c>
+  php_flag engine off
+</IfModule>
+
+# nic jiného než obrázky se odsud neservíruje
+<FilesMatch "\.(php|php\d|phtml|phar|pl|py|cgi|sh|htaccess)$">
+  Require all denied
+</FilesMatch>
+
+Options -Indexes -ExecCGI
+AddHandler default-handler .php .phtml .phar .cgi .pl .py

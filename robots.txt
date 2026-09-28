@@ -1,0 +1,7 @@
+User-agent: *
+Allow: /
+
+# interní editor obsahu — nemá co dělat ve vyhledávání
+Disallow: /admin/
+
+Sitemap: https://foxyvision.cz/sitemap.xml

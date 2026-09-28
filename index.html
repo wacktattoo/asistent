@@ -1,0 +1,540 @@
+<!DOCTYPE html>
+<html lang="cs">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+  <title>Foxyvision — tvorba webů, aplikací a automatizací na míru</title>
+  <meta name="description" content="Digitální studio Foxyvision. Navrhujeme a vyvíjíme weby, webové aplikace a automatizace na míru — od prvního nápadu až po spuštění a dlouhodobý rozvoj." />
+  <link rel="canonical" href="https://foxyvision.cz/" />
+  <meta name="theme-color" content="#C45434" />
+
+  <!-- Open Graph / sdílení -->
+  <meta property="og:type" content="website" />
+  <meta property="og:locale" content="cs_CZ" />
+  <meta property="og:site_name" content="Foxyvision" />
+  <meta property="og:url" content="https://foxyvision.cz/" />
+  <meta property="og:title" content="Foxyvision — tvorba webů, aplikací a automatizací na míru" />
+  <meta property="og:description" content="Navrhujeme a vyvíjíme weby, webové aplikace a automatizace na míru — od prvního nápadu až po spuštění a dlouhodobý rozvoj." />
+  <meta property="og:image" content="https://foxyvision.cz/og-image.jpg" />
+  <meta property="og:image:width" content="1200" />
+  <meta property="og:image:height" content="630" />
+  <meta property="og:image:alt" content="Foxyvision — digitální studio" />
+  <meta name="twitter:card" content="summary_large_image" />
+  <meta name="twitter:title" content="Foxyvision — tvorba webů, aplikací a automatizací na míru" />
+  <meta name="twitter:description" content="Weby, webové aplikace a automatizace na míru. Od nápadu po dlouhodobý rozvoj." />
+  <meta name="twitter:image" content="https://foxyvision.cz/og-image.jpg" />
+
+  <!-- Ikony -->
+  <link rel="icon" href="/favicon-32.png" sizes="32x32" type="image/png" />
+  <link rel="icon" href="/favicon-16.png" sizes="16x16" type="image/png" />
+  <link rel="apple-touch-icon" href="/apple-touch-icon.png" />
+  <link rel="manifest" href="/site.webmanifest" />
+
+  <!-- Body: Satoshi (Fontshare) · Display/Headings: Archivo Black + Archivo (Google) -->
+  <link rel="preconnect" href="https://api.fontshare.com" crossorigin />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://api.fontshare.com/v2/css?f[]=satoshi@400,500,700&display=swap" rel="stylesheet" />
+  <link href="https://fonts.googleapis.com/css2?family=Archivo:wght@400;500;600;700&family=Archivo+Black&display=swap" rel="stylesheet" />
+
+  <link rel="stylesheet" href="css/style.css?v=175" />
+
+  <!-- Strukturovaná data pro vyhledávače -->
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "ProfessionalService",
+    "name": "Foxyvision",
+    "description": "Digitální studio. Weby, webové aplikace a automatizace na míru.",
+    "url": "https://foxyvision.cz/",
+    "logo": "https://foxyvision.cz/icon-512.png",
+    "image": "https://foxyvision.cz/og-image.jpg",
+    "email": "ahoj@foxyvision.cz",
+    "telephone": "+420722902653",
+    "areaServed": "CZ",
+    "address": { "@type": "PostalAddress", "addressCountry": "CZ" },
+    "knowsLanguage": ["cs"],
+    "makesOffer": [
+      { "@type": "Offer", "itemOffered": { "@type": "Service", "name": "Tvorba webových stránek" } },
+      { "@type": "Offer", "itemOffered": { "@type": "Service", "name": "Vývoj webových aplikací" } },
+      { "@type": "Offer", "itemOffered": { "@type": "Service", "name": "Automatizace procesů" } },
+      { "@type": "Offer", "itemOffered": { "@type": "Service", "name": "UX/UI design" } }
+    ]
+  }
+  </script>
+</head>
+<body>
+
+  <!-- ===== Loader (intro video) ===== -->
+  <div class="loader" data-loader>
+    <video class="loader__video" data-loader-video
+           data-src-desktop="img/intro.mp4" data-src-mobile="img/intromobile.mp4"
+           muted autoplay playsinline preload="auto"></video>
+    <button class="loader__skip" data-loader-skip>Přeskočit ✕</button>
+  </div>
+
+  <!-- ===== Nav ===== -->
+  <header class="nav" data-nav>
+    <a href="#top" class="nav__brand" aria-label="Foxyvision">
+      <img src="img/logo.webp" alt="Foxyvision" class="nav__logo-img" />
+    </a>
+    <nav class="nav__links">
+      <a href="#work" data-link>Naše práce</a>
+      <a href="#what" data-link>Co děláme</a>
+      <a href="#approach" data-link>Proč my</a>
+      <a href="#contact" data-link>Kontakt</a>
+      <span class="nav-goo" aria-hidden="true"><span class="nav-goo__pill"></span></span>
+    </nav>
+    <button class="nav__cta" data-modal-open>Poptat&nbsp;se</button>
+    <button class="nav__burger" data-nav-toggle aria-label="Menu" aria-expanded="false" aria-controls="mobilni-menu">
+      <span></span><span></span><span></span>
+    </button>
+  </header>
+
+  <!-- ===== Mobilní menu (jen na malých šířkách) ===== -->
+  <div class="mnav" id="mobilni-menu" data-mobile-menu>
+    <nav class="mnav__links" aria-label="Hlavní menu">
+      <a href="#work" data-mlink>Naše práce</a>
+      <a href="#what" data-mlink>Co děláme</a>
+      <a href="#approach" data-mlink>Proč my</a>
+      <a href="#contact" data-mlink>Kontakt</a>
+      <button class="mnav__cta" data-modal-open data-mlink>Poptat se</button>
+    </nav>
+  </div>
+
+  <!-- gooey metaball filter for the nav hover bubbles (GooeyNav) -->
+  <svg class="goo-defs" width="0" height="0" aria-hidden="true" focusable="false">
+    <defs>
+      <filter id="nav-goo-filter" x="-150%" y="-150%" width="400%" height="400%" color-interpolation-filters="sRGB">
+        <feGaussianBlur in="SourceGraphic" stdDeviation="5" result="blur" />
+        <feColorMatrix in="blur" mode="matrix" values="1 0 0 0 0  0 1 0 0 0  0 0 1 0 0  0 0 0 19 -9" result="goo" />
+        <feComposite in="SourceGraphic" in2="goo" operator="over" />
+      </filter>
+    </defs>
+  </svg>
+
+  <main id="top">
+
+    <!-- ===== HERO ===== -->
+    <section class="hero" data-hero>
+      <div class="hero__bg" data-hero-bg></div>
+      <div class="hero__fg" data-hero-fg></div>
+      <div class="hero__particles" data-particles aria-hidden="true"></div>
+
+      <div class="hero__inner">
+        <p class="eyebrow" data-reveal>Naše <span class="eyebrow__type" data-type></span><span class="eyebrow__caret" aria-hidden="true"></span></p>
+
+        <h1 class="hero__title" data-split-lines>
+          <span><span class="hword">Tvoříme</span> <span class="hword">digitální</span></span>
+          <span class="hero__title-flipline"><span class="hero__morph" data-flip>produkty</span></span>
+        </h1>
+
+        <div class="hero__bottom">
+          <p class="hero__lede" data-reveal>
+            Pomáháme projektům proměnit složité nápady v produkty, které lidi
+            milují. Poctivě navržené. Stavěné, aby pomohli a fungovaly.
+          </p>
+
+          <a href="#work" class="btn">
+            <span class="btn__icon">→</span>
+            <span class="btn__text">Prohlédnout hotové projekty</span>
+          </a>
+        </div>
+      </div>
+
+      <a href="#work" class="hero__scroll" data-link aria-label="Scroll down">
+        <span class="hero__scroll-line"></span>
+      </a>
+    </section>
+
+    <!-- ===== INTRO (light — bridges the hero into the portfolio) ===== -->
+    <section class="intro" id="intro">
+      <p class="eyebrow" data-reveal>Naši klienti</p>
+      <div class="marquee" data-reveal>
+        <div class="marquee__track">
+          <span class="marquee__logo">Nordvik</span>
+          <span class="marquee__logo">Aquila</span>
+          <span class="marquee__logo">Meridian</span>
+          <span class="marquee__logo">Volta</span>
+          <span class="marquee__logo">Helios</span>
+          <span class="marquee__logo">Forma</span>
+          <span class="marquee__logo">Lumio</span>
+          <span class="marquee__logo">Brink</span>
+          <span class="marquee__logo" aria-hidden="true">Nordvik</span>
+          <span class="marquee__logo" aria-hidden="true">Aquila</span>
+          <span class="marquee__logo" aria-hidden="true">Meridian</span>
+          <span class="marquee__logo" aria-hidden="true">Volta</span>
+          <span class="marquee__logo" aria-hidden="true">Helios</span>
+          <span class="marquee__logo" aria-hidden="true">Forma</span>
+          <span class="marquee__logo" aria-hidden="true">Lumio</span>
+          <span class="marquee__logo" aria-hidden="true">Brink</span>
+        </div>
+      </div>
+    </section>
+
+    <!-- ===== SELECTED WORK (dark) ===== -->
+    <section class="work" id="work" data-section-dark>
+      <div class="work__bg" aria-hidden="true"></div>
+      <div class="work__bg2" aria-hidden="true"></div>
+      <div class="work__head">
+        <div class="work__heading">
+          <p class="eyebrow eyebrow--light" data-reveal>Naše práce</p>
+          <h2 class="work__title" data-split-lines>
+            <span>Projekty, které</span>
+            <span class="work__title-flipline"><span class="work__morph" data-work-flip>dávají smysl</span></span>
+          </h2>
+        </div>
+        <div class="work__aside">
+          <p class="work__intro" data-reveal>
+            Každý projekt řeší skutečný problém<br />a přináší měřitelný výsledek.
+          </p>
+          <div class="work__nav" data-reveal>
+            <button class="work__arrow" data-prev aria-label="Previous">←</button>
+            <button class="work__arrow" data-next aria-label="Next">→</button>
+          </div>
+        </div>
+      </div>
+
+      <div class="work__stage" data-stage data-reveal>
+        <!-- Featured image (left) -->
+        <article class="feature" data-feature data-cursor-case data-borderglow>
+          <div class="feature__media">
+            <img src="img/work-deertone.webp" alt="DEERTONE" class="is-front" loading="lazy" decoding="async" data-card-img data-feature-img />
+            <img alt="" aria-hidden="true" loading="lazy" decoding="async" data-feature-img-b />
+          </div>
+          <span class="feature__badge" data-feature-badge>01</span>
+          <ul class="feature__tags" data-feature-tags></ul>
+          <span class="edge-light" aria-hidden="true"></span>
+        </article>
+
+        <!-- Project info box (right) -->
+        <aside class="workinfo">
+          <div class="workinfo__inner">
+            <p class="workinfo__count" data-feature-count><b>01</b> / 05</p>
+            <h3 class="workinfo__name" data-feature-name>DEERTONE</h3>
+            <p class="workinfo__type" data-feature-type>Ticketing &amp; Event SaaS</p>
+            <p class="workinfo__desc" data-feature-desc>
+              Multi-tenant ticketing platform for event organizers. Own subdomains,
+              0% commission, seat-map editor, PDF tickets, POS, payment gateways,
+              check-in app.
+            </p>
+            <div class="workinfo__result">
+              <span class="workinfo__result-label">Výsledek</span>
+              <span class="workinfo__result-value" data-feature-result>+62% ticket sales YoY for early adopters</span>
+            </div>
+          </div>
+          <div class="workinfo__dots" data-work-dots></div>
+        </aside>
+      </div>
+    </section>
+
+    <!-- ===== WHAT WE DO ===== -->
+    <section class="what" id="what">
+      <div class="what__head">
+        <div class="what__heading">
+          <p class="eyebrow" data-reveal>Co děláme</p>
+          <h2 class="what__title" data-split-lines>
+            <span>Weby<i class="sq"></i></span>
+            <span><i class="what__flip" data-what-flip>Aplikace</i><i class="sq"></i></span>
+            <span>Design<i class="sq"></i></span>
+          </h2>
+        </div>
+      </div>
+
+      <div class="what__fox" aria-hidden="true"></div>
+      <div class="what__balls" data-metaballs aria-hidden="true"></div>
+
+      <div class="what__grid">
+        <article class="service service--web" data-reveal>
+          <div class="service__inner">
+            <div class="service__face service__face--front">
+              <div class="service__bg" aria-hidden="true"></div>
+              <span class="service__hint" aria-hidden="true">
+                <svg viewBox="0 0 24 24"><path d="M5 12h13"/><path d="M12.5 5.5L19 12l-6.5 6.5"/></svg>
+              </span>
+            </div>
+            <div class="service__face service__face--back">
+              <span class="service__rule" aria-hidden="true"></span>
+              <h3>Webové stránky</h3>
+              <p>Rychlé, přístupné a moderní weby, které skvěle vypadají a fungují na všech zařízeních.</p>
+            </div>
+          </div>
+        </article>
+
+        <article class="service service--app" data-reveal>
+          <div class="service__inner">
+            <div class="service__face service__face--front">
+              <div class="service__bg" aria-hidden="true"></div>
+              <span class="service__hint" aria-hidden="true">
+                <svg viewBox="0 0 24 24"><path d="M5 12h13"/><path d="M12.5 5.5L19 12l-6.5 6.5"/></svg>
+              </span>
+            </div>
+            <div class="service__face service__face--back">
+              <span class="service__rule" aria-hidden="true"></span>
+              <h3>Webové aplikace</h3>
+              <p>Komplexní systémy a aplikace šité na míru vašim procesům a potřebám vašich uživatelů.</p>
+            </div>
+          </div>
+        </article>
+
+        <article class="service service--design" data-reveal>
+          <div class="service__inner">
+            <div class="service__face service__face--front">
+              <div class="service__bg" aria-hidden="true"></div>
+              <span class="service__hint" aria-hidden="true">
+                <svg viewBox="0 0 24 24"><path d="M5 12h13"/><path d="M12.5 5.5L19 12l-6.5 6.5"/></svg>
+              </span>
+            </div>
+            <div class="service__face service__face--back">
+              <span class="service__rule" aria-hidden="true"></span>
+              <h3>Design</h3>
+              <p>Promyšlené rozhraní, vizuální identita a design systémy, které dávají smysl a budují značky.</p>
+            </div>
+          </div>
+        </article>
+      </div>
+
+      <div class="tape" data-reveal>
+        <div class="tape__track">
+          <span class="tape__item">Navrhujeme a vytváříme digitální produkty</span>
+          <i class="tape__sep" aria-hidden="true"></i>
+          <span class="tape__item tape__item--out">Užitečné, funkční a profesionální</span>
+          <i class="tape__sep" aria-hidden="true"></i>
+          <span class="tape__item">Od prvního nápadu až po poslední detail</span>
+          <i class="tape__sep" aria-hidden="true"></i>
+          <span class="tape__item tape__item--out">Weby, aplikace i automatizace na míru</span>
+          <i class="tape__sep" aria-hidden="true"></i>
+          <span class="tape__item">Postavené na míru, žádné šablony</span>
+          <i class="tape__sep" aria-hidden="true"></i>
+
+          <span class="tape__item" aria-hidden="true">Navrhujeme a vytváříme digitální produkty</span>
+          <i class="tape__sep" aria-hidden="true"></i>
+          <span class="tape__item tape__item--out" aria-hidden="true">Užitečné, funkční a profesionální</span>
+          <i class="tape__sep" aria-hidden="true"></i>
+          <span class="tape__item" aria-hidden="true">Od prvního nápadu až po poslední detail</span>
+          <i class="tape__sep" aria-hidden="true"></i>
+          <span class="tape__item tape__item--out" aria-hidden="true">Weby, aplikace i automatizace na míru</span>
+          <i class="tape__sep" aria-hidden="true"></i>
+          <span class="tape__item" aria-hidden="true">Postavené na míru, žádné šablony</span>
+          <i class="tape__sep" aria-hidden="true"></i>
+        </div>
+      </div>
+    </section>
+
+    <!-- ===== APPROACH (dark) ===== -->
+    <section class="approach" id="approach" data-section-dark>
+      <div class="approach__head">
+        <div class="approach__heading">
+          <p class="eyebrow eyebrow--light" data-reveal>Náš přístup</p>
+          <h2 class="approach__title" data-split-lines>
+            <span>Tvoříme</span>
+            <span>s důrazem na</span>
+            <span><i class="approach__flip" data-approach-flip>detail</i><i class="sq"></i></span>
+          </h2>
+          <img src="img/icon.webp" alt="UX, UI, AI" class="approach__icons" loading="lazy" decoding="async" data-reveal />
+        </div>
+        <div class="vmarq" data-vmarquee data-reveal>
+          <div class="vmarq__track" data-vmarquee-track>
+            <article class="stmt">
+              <span class="stmt__ico" aria-hidden="true">
+                <svg viewBox="0 0 24 24"><path fill-rule="evenodd" d="M10.5 2a8.5 8.5 0 100 17 8.5 8.5 0 000-17zm0 3a5.5 5.5 0 110 11 5.5 5.5 0 010-11z"/><rect x="15.6" y="16.1" width="7.2" height="3.1" rx="1.55" transform="rotate(45 15.6 16.1)"/></svg>
+              </span>
+              <h3>Rozumíme vašemu podnikání.</h3>
+              <p>Než otevřeme grafický program nebo napíšeme jediný řádek kódu, chceme pochopit váš byznys. Zajímá nás, kdo jsou vaši zákazníci, co řeší a proč by si měli vybrat právě vás. Díky tomu nevzniká jen hezký web, ale produkt, který má jasný cíl a přináší výsledky.</p>
+            </article>
+
+            <article class="stmt">
+              <span class="stmt__ico" aria-hidden="true">
+                <svg viewBox="0 0 24 24"><path d="M11 2.5l2.1 6.4 6.4 2.1-6.4 2.1L11 19.5l-2.1-6.4L2.5 11l6.4-2.1L11 2.5z"/><path d="M18.4 15.6l.9 2.6 2.6.9-2.6.9-.9 2.6-.9-2.6-2.6-.9 2.6-.9.9-2.6z"/></svg>
+              </span>
+              <h3>Nejsme továrna na AI grafiku.</h3>
+              <p>AI používáme každý den, ale nikdy ji nenecháme rozhodovat za nás. Neposíláme klientům první obrázek, který vygeneruje umělá inteligence. Každý návrh upravujeme, promýšlíme a ladíme do posledního detailu. Věříme, že kvalitní design vzniká kombinací zkušeností, kreativity a moderních nástrojů.</p>
+            </article>
+
+            <article class="stmt">
+              <span class="stmt__ico" aria-hidden="true">
+                <svg viewBox="0 0 24 24"><rect x="3" y="14" width="4" height="7" rx="1.2"/><rect x="10" y="9.5" width="4" height="11.5" rx="1.2"/><rect x="17" y="5" width="4" height="16" rx="1.2"/></svg>
+              </span>
+              <h3>Tvoříme pro startupy i zavedené firmy.</h3>
+              <p>Máte jen nápad? Pomůžeme vám ho proměnit v první funkční produkt. Máte zavedenou firmu? Navrhneme řešení, které posune vaše podnikání o krok dál. Přemýšlíme dlouhodobě, takže vše stavíme tak, aby mohlo růst společně s vámi.</p>
+            </article>
+
+            <article class="stmt">
+              <span class="stmt__ico" aria-hidden="true">
+                <svg viewBox="0 0 24 24"><path d="M13 3L5 14h6l-1 7 8-11h-6l1-7z"/></svg>
+              </span>
+              <h3>Automatizace, které šetří čas.</h3>
+              <p>Rutinní práce nemá zabírat hodiny vašeho dne. Propojíme systémy, vytvoříme automatické procesy a odstraníme zbytečné kroky. Výsledkem je méně klikání, méně chyb a více času na to, co je opravdu důležité.</p>
+            </article>
+
+            <article class="stmt">
+              <span class="stmt__ico" aria-hidden="true">
+                <svg viewBox="0 0 24 24"><path fill-rule="evenodd" d="M9 5.5a6.5 6.5 0 100 13 6.5 6.5 0 000-13zm0 3a3.5 3.5 0 110 7 3.5 3.5 0 010-7z"/><path fill-rule="evenodd" d="M15 5.5a6.5 6.5 0 100 13 6.5 6.5 0 000-13zm0 3a3.5 3.5 0 110 7 3.5 3.5 0 010-7z"/></svg>
+              </span>
+              <h3>Partnerství nekončí spuštěním.</h3>
+              <p>Web nebo aplikace nejsou jednorázový projekt. Po spuštění sledujeme, co funguje, co lze zlepšit a společně produkt dále rozvíjíme. Chceme být partnerem, na kterého se můžete obrátit i za rok, ne jen dodavatelem, který po předání zmizí.</p>
+            </article>
+
+            <article class="stmt">
+              <span class="stmt__ico" aria-hidden="true">
+                <svg viewBox="0 0 24 24"><path d="M5 3l14 8-6.2 1.7L9.6 19 5 3z"/></svg>
+              </span>
+              <h3>UX, které lidé pochopí.</h3>
+              <p>Nechceme, aby se návštěvníci na vašem webu ztráceli. Navrhujeme rozhraní tak, aby bylo přirozené, rychlé a snadné na používání. Když uživatel nemusí přemýšlet, je mnohem větší šance, že udělá to, co od něj očekáváte.</p>
+            </article>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ===== STATS ===== -->
+    <section class="stats" id="stats">
+      <div class="stats__row">
+        <div class="stat" data-reveal>
+          <span class="stat__figure">
+            <span class="stat__num" data-count="13">0</span>
+            <span class="orbit orbit--a"><i></i></span>
+          </span>
+          <span class="stat__label">let zkušeností</span>
+        </div>
+        <div class="stat" data-reveal>
+          <span class="stat__figure">
+            <span class="stat__num" data-count="119">0</span>
+            <span class="orbit orbit--a"><i></i></span>
+            <span class="orbit orbit--b"><i></i></span>
+          </span>
+          <span class="stat__label">spokojených klientů</span>
+        </div>
+        <div class="stat" data-reveal>
+          <span class="stat__figure">
+            <span class="stat__num" data-count="24" data-suffix="/7">0</span>
+            <span class="orbit orbit--c"><i></i><i></i></span>
+          </span>
+          <span class="stat__label">flexibilita</span>
+        </div>
+        <div class="stat stat--project" data-reveal>
+          <a class="stat__project" href="https://www.tesitko.cz" target="_blank" rel="noopener">
+            <span class="stat__project-word">Těšítko</span>
+            <svg class="stat__scribble" viewBox="0 0 200 12" preserveAspectRatio="none" aria-hidden="true"><path d="M4 8C40 3 70 9 100 6C130 3 165 9 196 5"/></svg>
+            <span class="stat__project-arrow" aria-hidden="true">↗</span>
+          </a>
+          <span class="stat__label">poslední projekt</span>
+        </div>
+      </div>
+    </section>
+
+    <!-- ===== CONTACT ===== -->
+    <section class="contact" id="contact">
+      <div class="contact__bg" data-contact-bg></div>
+
+      <div class="contact__inner">
+        <p class="eyebrow" data-reveal>Pojďme vytvořit něco skvělého.</p>
+
+        <div class="contact__head">
+          <h2 class="contact__title" data-split-lines>
+            <span>Máte nápad na</span>
+            <span class="contact__title-flipline"><span class="contact__word"><i class="contact__flip" data-contact-flip>projekt?</i><svg class="contact__scribble" viewBox="0 0 200 14" preserveAspectRatio="none" aria-hidden="true"><path d="M4 9.6C33 4.4 57 11.8 87 7.4c30-4.3 62 4.2 109-.4"/></svg></span></span>
+          </h2>
+          <div class="contact__intro" data-reveal>
+            <p class="contact__intro-text" data-typeout>Jsme vždy otevřeni novým spolupracím.
+Pojďme vytvořit něco, na co si lidé vzpomenou.</p>
+            <span class="thumbs-float" data-thumbs aria-hidden="true"></span>
+            <span class="like" data-like aria-hidden="true">
+              <svg class="like__ico" viewBox="0 0 24 24"><path d="M2.5 10.5h3.6V21H2.5z"/><path d="M8.1 10.3 12.4 3a1.7 1.7 0 0 1 3.2 1.1l-.9 4.7h5.1a2 2 0 0 1 2 2.4l-1.5 7.3a2 2 0 0 1-2 1.5H8.1z"/></svg>
+              <span class="like__count">+1</span>
+            </span>
+          </div>
+        </div>
+
+        <div class="contact__links">
+          <a href="mailto:ahoj@foxyvision.cz" class="contact__link" data-modal-open data-reveal data-cursor-hide>
+            <span class="contact__link-ico">
+              <svg viewBox="0 0 24 24" aria-hidden="true"><rect x="2.8" y="5" width="18.4" height="14" rx="2.6"/><path d="M3.6 7.2l7.3 5.1a2 2 0 0 0 2.2 0l7.3-5.1"/></svg>
+            </span>
+            <span class="roll">
+              <span class="roll__a">ahoj@foxyvision.cz</span>
+              <span class="roll__b" aria-hidden="true">ahoj@foxyvision.cz</span>
+            </span>
+            <span class="contact__arrow">→</span>
+          </a>
+          <a href="tel:+420722902653" class="contact__link" data-reveal data-cursor-hide>
+            <span class="contact__link-ico">
+              <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M6.4 3.5h3.1l1.6 4-2.1 1.6a12.4 12.4 0 0 0 5.9 5.9l1.6-2.1 4 1.6v3.1a2.4 2.4 0 0 1-2.6 2.4A15.6 15.6 0 0 1 4 6.1a2.4 2.4 0 0 1 2.4-2.6z"/></svg>
+            </span>
+            <span class="roll">
+              <span class="roll__a">+420 722 902 653</span>
+              <span class="roll__b" aria-hidden="true">+420 722 902 653</span>
+            </span>
+            <span class="contact__arrow">→</span>
+          </a>
+        </div>
+      </div>
+    </section>
+
+  </main>
+
+  <!-- ===== Footer ===== -->
+  <footer class="footer">
+    <div class="footer__brand">
+      <img src="img/logo.webp" alt="Foxyvision" class="footer__logo-img" loading="lazy" decoding="async" />
+    </div>
+    <nav class="footer__links">
+      <a href="#work" data-link>Naše práce</a>
+      <a href="#what" data-link>Co děláme</a>
+      <a href="#approach" data-link>Proč my</a>
+      <a href="#contact" data-link>O nás</a>
+    </nav>
+    <div class="footer__social">
+      <a href="https://facebook.com/foxyvision" target="_blank" rel="noopener" aria-label="Facebook">
+        <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M14 9V7.2c0-.9.2-1.3 1.4-1.3H17V3.1c-.3 0-1.2-.1-2.2-.1-2.3 0-3.8 1.4-3.8 3.9V9H8.5v3H11v9h3v-9h2.5l.4-3H14z"/></svg>
+        <span>Facebook</span>
+      </a>
+      <a href="https://www.instagram.com/foxyvisioncz" target="_blank" rel="noopener" aria-label="Instagram">
+        <svg viewBox="0 0 24 24" aria-hidden="true"><path fill-rule="evenodd" d="M7.6 2h8.8A5.6 5.6 0 0 1 22 7.6v8.8a5.6 5.6 0 0 1-5.6 5.6H7.6A5.6 5.6 0 0 1 2 16.4V7.6A5.6 5.6 0 0 1 7.6 2zm0 2A3.6 3.6 0 0 0 4 7.6v8.8A3.6 3.6 0 0 0 7.6 20h8.8a3.6 3.6 0 0 0 3.6-3.6V7.6A3.6 3.6 0 0 0 16.4 4H7.6z"/><path fill-rule="evenodd" d="M12 7a5 5 0 1 0 0 10 5 5 0 0 0 0-10zm0 2a3 3 0 1 1 0 6 3 3 0 0 1 0-6z"/><circle cx="17.3" cy="6.7" r="1.2"/></svg>
+        <span>Instagram</span>
+      </a>
+    </div>
+    <p class="footer__copy">© 2026 Foxyvision</p>
+  </footer>
+
+  <!-- ===== Contact modal ===== -->
+  <div class="modal" data-modal hidden>
+    <div class="modal__overlay" data-modal-close></div>
+    <div class="modal__box" role="dialog" aria-modal="true" aria-label="Poptávka">
+      <div class="modal__media" aria-hidden="true"></div>
+      <button class="modal__close" data-modal-close aria-label="Zavřít">×</button>
+      <div class="modal__content">
+        <p class="eyebrow">Poptávka</p>
+        <h2 class="modal__title">Pojďme se domluvit</h2>
+        <p class="modal__intro">Napište nám pár slov a co nejdřív se vám ozveme.</p>
+        <form class="modal__form" data-contact-form action="send.php" method="post">
+          <div class="modal__row">
+            <input type="text" name="name" placeholder="Jméno" required />
+            <input type="email" name="email" placeholder="E-mail" required />
+          </div>
+          <textarea name="message" rows="4" required
+            placeholder="Jste start-up, máte zastaralý web, nebo chcete vytvořit něco nového? Napište nám."></textarea>
+          <!-- honeypot proti spamu: skryté, lidé nevyplní -->
+          <input type="text" name="website" tabindex="-1" autocomplete="off" aria-hidden="true"
+            style="position:absolute;left:-9999px;width:1px;height:1px;opacity:0;pointer-events:none;" />
+          <button type="submit" class="modal__submit">Odeslat poptávku <span>→</span></button>
+        </form>
+        <div class="modal__contact">
+          <a href="mailto:ahoj@foxyvision.cz" class="modal__contact-item"><span><svg viewBox="0 0 24 24" aria-hidden="true"><rect x="2.8" y="5" width="18.4" height="14" rx="2.6"/><path d="M3.6 7.2l7.3 5.1a2 2 0 0 0 2.2 0l7.3-5.1"/></svg></span>ahoj@foxyvision.cz</a>
+          <a href="tel:+420722902653" class="modal__contact-item"><span><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M6.4 3.5h3.1l1.6 4-2.1 1.6a12.4 12.4 0 0 0 5.9 5.9l1.6-2.1 4 1.6v3.1a2.4 2.4 0 0 1-2.6 2.4A15.6 15.6 0 0 1 4 6.1a2.4 2.4 0 0 1 2.4-2.6z"/></svg></span>+420 722 902 653</a>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ===== Scripts ===== -->
+  <script src="https://cdn.jsdelivr.net/npm/@studio-freight/lenis@1.0.42/dist/lenis.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/gsap@3.12.5/dist/gsap.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/gsap@3.12.5/dist/ScrollTrigger.min.js"></script>
+  <!-- texty projektů a loga klientů — edituj tenhle soubor (nebo editor.html) -->
+  <script src="data/content.js?v=2"></script>
+  <script src="js/main.js?v=72"></script>
+  <script type="module" src="js/metaballs.js?v=9"></script>
+</body>
+</html>

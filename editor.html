@@ -1,0 +1,323 @@
+<!DOCTYPE html>
+<html lang="cs">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<meta name="robots" content="noindex, nofollow" />
+<title>Foxyvision — editor obsahu</title>
+<style>
+  :root{
+    --paper:#F6F3ED; --ink:#0F0F10; --terracotta:#C45434; --line:rgba(15,15,16,.12);
+    --muted:#6b6459;
+  }
+  *{box-sizing:border-box}
+  body{
+    margin:0; background:var(--paper); color:var(--ink);
+    font:15px/1.6 -apple-system,Segoe UI,Roboto,Helvetica,Arial,sans-serif;
+    padding:28px clamp(16px,4vw,48px) 120px;
+  }
+  h1{font-size:clamp(24px,3vw,34px); margin:0 0 6px; letter-spacing:-.02em}
+  .lead{color:var(--muted); margin:0 0 26px; max-width:70ch}
+  .lead code{background:#fff; padding:2px 6px; border-radius:5px; border:1px solid var(--line)}
+  h2{font-size:18px; margin:34px 0 12px; letter-spacing:-.01em}
+  .card{
+    background:#fff; border:1px solid var(--line); border-radius:14px;
+    padding:18px; margin-bottom:14px;
+  }
+  .card h3{margin:0 0 12px; font-size:15px; color:var(--terracotta); letter-spacing:.02em}
+  label{display:block; font-size:12.5px; font-weight:700; margin:12px 0 5px}
+  label span{font-weight:400; color:var(--muted)}
+  input,textarea{
+    width:100%; padding:9px 11px; border:1px solid var(--line); border-radius:8px;
+    font:inherit; background:var(--paper); color:inherit;
+  }
+  input:focus,textarea:focus{outline:2px solid rgba(196,84,52,.35); outline-offset:1px}
+  textarea{min-height:78px; resize:vertical}
+  .row{display:grid; grid-template-columns:1fr 1fr; gap:14px}
+  .tags{display:flex; flex-wrap:wrap; gap:7px; margin-top:7px}
+  .tag{
+    display:inline-flex; align-items:center; gap:6px;
+    background:rgba(196,84,52,.1); border:1px solid rgba(196,84,52,.28);
+    border-radius:999px; padding:5px 6px 5px 11px; font-size:13px;
+  }
+  .tag button,.logo button{
+    border:0; background:none; cursor:pointer; color:var(--terracotta);
+    font-size:15px; line-height:1; padding:0 4px;
+  }
+  .logos{display:flex; flex-wrap:wrap; gap:7px; margin-top:8px}
+  .logo{
+    display:inline-flex; align-items:center; gap:6px; background:var(--paper);
+    border:1px solid var(--line); border-radius:999px; padding:5px 6px 5px 12px; font-size:13.5px;
+  }
+  .add{display:flex; gap:8px; margin-top:9px}
+  .add input{flex:1}
+  button.btn{
+    border:0; border-radius:8px; padding:9px 15px; font:inherit; font-weight:700;
+    background:var(--ink); color:var(--paper); cursor:pointer;
+  }
+  button.btn.ghost{background:#fff; color:var(--ink); border:1px solid var(--line)}
+  .bar{
+    position:fixed; left:0; right:0; bottom:0; background:#fff; border-top:1px solid var(--line);
+    padding:12px clamp(16px,4vw,48px); display:flex; gap:10px; align-items:center; flex-wrap:wrap;
+    box-shadow:0 -8px 24px rgba(15,15,16,.06);
+  }
+  .bar .hint{color:var(--muted); font-size:13px; margin-right:auto}
+  .ok{color:#2c7a4b; font-weight:700}
+  details{margin-top:14px}
+  summary{cursor:pointer; font-weight:700; font-size:13.5px}
+  pre{
+    background:var(--ink); color:#e9e5dd; padding:14px; border-radius:10px;
+    overflow:auto; font-size:12.5px; max-height:340px;
+  }
+  .warn{
+    background:#fff6ed; border:1px solid #f0c9a5; border-radius:10px;
+    padding:12px 14px; font-size:13.5px; margin:0 0 22px;
+  }
+</style>
+</head>
+<body>
+
+<h1>Editor obsahu</h1>
+<p class="lead">
+  Uprav texty, dole klikni na <strong>Stáhnout content.js</strong> a staženým souborem
+  přepiš <code>data/content.js</code> v projektu. Pak na webu dej Ctrl+F5.
+</p>
+
+<p class="warn">
+  Editor běží jen u tebe v prohlížeči a nic sám nikam neukládá — proto ten krok se stažením
+  souboru. Načítá aktuální obsah z <code>data/content.js</code>, takže vždycky vidíš to,
+  co je právě na webu.
+</p>
+
+<h2>Loga klientů <span style="font-weight:400;color:var(--muted);font-size:13px">— rotují pod hero sekcí</span></h2>
+<div class="card">
+  <div class="logos" id="logos"></div>
+  <div class="add">
+    <input id="logoNew" placeholder="Název klienta" />
+    <button class="btn ghost" id="logoAdd" type="button">Přidat</button>
+  </div>
+</div>
+
+<h2>Projekty <span style="font-weight:400;color:var(--muted);font-size:13px">— sekce „Naše práce“</span></h2>
+<div id="projects"></div>
+<button class="btn ghost" id="projAdd" type="button">+ Přidat projekt</button>
+
+<details>
+  <summary>Zobrazit vygenerovaný soubor</summary>
+  <pre id="preview"></pre>
+</details>
+
+<div class="bar">
+  <span class="hint" id="status">Načítám…</span>
+  <button class="btn ghost" id="copy" type="button">Zkopírovat</button>
+  <button class="btn" id="download" type="button">Stáhnout content.js</button>
+</div>
+
+<script src="data/content.js"></script>
+<script>
+(function(){
+  "use strict";
+  var src = window.FOXY_CONTENT || {};
+  var data = {
+    logos: Array.isArray(src.logos) ? src.logos.slice() : [],
+    projects: Array.isArray(src.projects) ? JSON.parse(JSON.stringify(src.projects)) : []
+  };
+
+  var $ = function(id){ return document.getElementById(id); };
+  var esc = function(s){ return String(s == null ? "" : s); };
+
+  /* ---------- loga ---------- */
+  function renderLogos(){
+    var wrap = $("logos");
+    wrap.innerHTML = "";
+    data.logos.forEach(function(name, i){
+      var el = document.createElement("span");
+      el.className = "logo";
+      el.appendChild(document.createTextNode(name));
+      var b = document.createElement("button");
+      b.type = "button"; b.textContent = "×"; b.title = "Odebrat";
+      b.onclick = function(){ data.logos.splice(i,1); renderLogos(); sync(); };
+      el.appendChild(b);
+      wrap.appendChild(el);
+    });
+  }
+  $("logoAdd").onclick = function(){
+    var v = $("logoNew").value.trim();
+    if(!v) return;
+    data.logos.push(v); $("logoNew").value = "";
+    renderLogos(); sync();
+  };
+  $("logoNew").addEventListener("keydown", function(e){
+    if(e.key === "Enter"){ e.preventDefault(); $("logoAdd").click(); }
+  });
+
+  /* ---------- projekty ---------- */
+  var FIELDS = [
+    ["index",  "Číslo v rohu obrázku",  "např. 01",                       "input"],
+    ["name",   "Nadpis v boxu vpravo",  "např. DEERTONE",                 "input"],
+    ["type",   "Popisek nad nadpisem",  "např. Ticketingová platforma",   "input"],
+    ["img",    "Cesta k obrázku",       "např. img/work-deertone.jpg",    "input"],
+    ["desc",   "Odstavec v boxu vpravo","",                               "textarea"],
+    ["result", "Řádek u „Výsledek“",    "",                               "input"]
+  ];
+
+  function renderProjects(){
+    var wrap = $("projects");
+    wrap.innerHTML = "";
+    data.projects.forEach(function(p, pi){
+      var card = document.createElement("div");
+      card.className = "card";
+
+      var h = document.createElement("h3");
+      h.textContent = "Projekt " + (pi+1) + (p.name ? " — " + p.name : "");
+      card.appendChild(h);
+
+      var row = document.createElement("div"); row.className = "row";
+      FIELDS.forEach(function(f, fi){
+        var key = f[0], lab = f[1], ph = f[2], kind = f[3];
+        var holder = document.createElement("div");
+        var l = document.createElement("label");
+        l.appendChild(document.createTextNode(lab + " "));
+        var sp = document.createElement("span"); sp.textContent = "(" + key + ")";
+        l.appendChild(sp);
+        var inp = document.createElement(kind);
+        inp.value = esc(p[key]);
+        if(ph) inp.placeholder = ph;
+        inp.oninput = function(){ p[key] = inp.value; sync(); };
+        holder.appendChild(l); holder.appendChild(inp);
+        // desc spans both columns
+        if(key === "desc") holder.style.gridColumn = "1 / -1";
+        row.appendChild(holder);
+      });
+      card.appendChild(row);
+
+      // tagy
+      var tl = document.createElement("label");
+      tl.appendChild(document.createTextNode("Čipy v obrázku "));
+      var tsp = document.createElement("span"); tsp.textContent = "(tags — ideálně 3–4)";
+      tl.appendChild(tsp);
+      card.appendChild(tl);
+
+      var tags = document.createElement("div"); tags.className = "tags";
+      (p.tags || []).forEach(function(t, ti){
+        var el = document.createElement("span"); el.className = "tag";
+        el.appendChild(document.createTextNode(t));
+        var b = document.createElement("button");
+        b.type = "button"; b.textContent = "×"; b.title = "Odebrat";
+        b.onclick = function(){ p.tags.splice(ti,1); renderProjects(); sync(); };
+        el.appendChild(b);
+        tags.appendChild(el);
+      });
+      card.appendChild(tags);
+
+      var add = document.createElement("div"); add.className = "add";
+      var ti2 = document.createElement("input"); ti2.placeholder = "Nový čip";
+      var ba = document.createElement("button");
+      ba.type = "button"; ba.className = "btn ghost"; ba.textContent = "Přidat čip";
+      ba.onclick = function(){
+        var v = ti2.value.trim(); if(!v) return;
+        if(!p.tags) p.tags = [];
+        p.tags.push(v); renderProjects(); sync();
+      };
+      ti2.addEventListener("keydown", function(e){
+        if(e.key === "Enter"){ e.preventDefault(); ba.click(); }
+      });
+      add.appendChild(ti2); add.appendChild(ba);
+      card.appendChild(add);
+
+      var del = document.createElement("button");
+      del.type = "button"; del.className = "btn ghost";
+      del.style.marginTop = "14px";
+      del.textContent = "Odebrat projekt";
+      del.onclick = function(){
+        if(confirm("Opravdu odebrat projekt „" + (p.name || (pi+1)) + "“?")){
+          data.projects.splice(pi,1); renderProjects(); sync();
+        }
+      };
+      card.appendChild(del);
+
+      wrap.appendChild(card);
+    });
+  }
+
+  $("projAdd").onclick = function(){
+    data.projects.push({
+      index: String(data.projects.length + 1).padStart(2,"0"),
+      name:"", type:"", desc:"", result:"", img:"img/", tags:[]
+    });
+    renderProjects(); sync();
+  };
+
+  /* ---------- generování souboru ---------- */
+  function q(s){                                  // bezpečný JS string literál
+    // JSON.stringify pohlídá uvozovky, lomítka i konce řádků; navíc rozbijeme
+    // uzavírací script tag, aby soubor nešlo zneškodnit ani vložením do HTML
+    return JSON.stringify(String(s == null ? "" : s)).replace(/<\//g, "<\\/");
+  }
+  function build(){
+    var out = [];
+    out.push("/* =========================================================================");
+    out.push("   OBSAH WEBU — vygenerováno editorem (editor.html).");
+    out.push("   Tímto souborem přepiš data/content.js a na webu dej Ctrl+F5.");
+    out.push("   ========================================================================= */");
+    out.push("window.FOXY_CONTENT = {");
+    out.push("");
+    out.push("  /* Loga klientů pod hero sekcí — každé jméno jen jednou. */");
+    out.push("  logos: [");
+    out.push(data.logos.map(function(l){ return "    " + q(l); }).join(",\n"));
+    out.push("  ],");
+    out.push("");
+    out.push("  /* Projekty v sekci „Naše práce“. */");
+    out.push("  projects: [");
+    out.push(data.projects.map(function(p){
+      var t = (p.tags || []).map(q).join(", ");
+      return [
+        "    {",
+        "      index: "  + q(p.index)  + ",",
+        "      name: "   + q(p.name)   + ",",
+        "      type: "   + q(p.type)   + ",",
+        "      desc: "   + q(p.desc)   + ",",
+        "      result: " + q(p.result) + ",",
+        "      img: "    + q(p.img)    + ",",
+        "      tags: [" + t + "]",
+        "    }"
+      ].join("\n");
+    }).join(",\n"));
+    out.push("  ]");
+    out.push("};");
+    return out.join("\n") + "\n";
+  }
+
+  function sync(){
+    var text = build();
+    $("preview").textContent = text;
+    $("status").innerHTML = data.projects.length + " projektů · " +
+      data.logos.length + " log — <span class='ok'>připraveno ke stažení</span>";
+    return text;
+  }
+
+  $("download").onclick = function(){
+    var blob = new Blob([build()], {type:"text/javascript;charset=utf-8"});
+    var a = document.createElement("a");
+    a.href = URL.createObjectURL(blob);
+    a.download = "content.js";
+    document.body.appendChild(a); a.click();
+    setTimeout(function(){ URL.revokeObjectURL(a.href); a.remove(); }, 500);
+  };
+  $("copy").onclick = function(){
+    var t = build();
+    if(navigator.clipboard){
+      navigator.clipboard.writeText(t).then(function(){
+        $("status").innerHTML = "<span class='ok'>Zkopírováno do schránky</span>";
+      });
+    }
+  };
+
+  if(!window.FOXY_CONTENT){
+    $("status").textContent = "Nepodařilo se načíst data/content.js — otevři editor přes server (localhost), ne dvojklikem.";
+  }
+  renderLogos(); renderProjects(); sync();
+})();
+</script>
+</body>
+</html>

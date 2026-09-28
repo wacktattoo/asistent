@@ -1,0 +1,6 @@
+# config.php obsahuje otisk hesla — nikdy se nesmí servírovat jako text
+<FilesMatch "^(config|_boot)\.php$">
+  Require all denied
+</FilesMatch>
+
+Options -Indexes

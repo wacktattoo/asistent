@@ -1,0 +1,363 @@
+<!doctype html>
+<html lang="cs">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Synth — osobní AI asistent na vašem počítači</title>
+<meta name="description" content="Synth čte a třídí poštu, hlídá kalendář, staví weby, plánuje úkoly a mluví česky. Osobní AI asistent, který běží na vašem počítači a pracuje za vás.">
+<meta name="theme-color" content="#030810">
+<meta property="og:title" content="Synth — osobní AI asistent na vašem počítači">
+<meta property="og:description" content="Pošta, kalendář, weby, plánované úkoly a hlas. Česky, na Windows i Macu.">
+<meta property="og:image" content="https://foxyvision.cz/asistent/img/aplikace-rozhovor.jpg">
+<meta property="og:type" content="website">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='8' fill='%23030810'/%3E%3Cpath d='M16 5l9.5 5.5v11L16 27l-9.5-5.5v-11z' fill='none' stroke='%2335d8ff' stroke-width='2'/%3E%3Crect x='12.5' y='12.5' width='7' height='7' fill='%2335d8ff'/%3E%3C/svg%3E">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Chakra+Petch:wght@500;600;700&family=IBM+Plex+Mono:wght@400;500&family=Manrope:wght@400;500;600;700;800&display=swap&subset=latin-ext" rel="stylesheet">
+<link rel="stylesheet" href="css/synth.css?v=1">
+</head>
+<body>
+
+<div class="pozadi" aria-hidden="true"><div class="pozadi-mrizka"></div><div class="pozadi-zare"></div></div>
+
+<!-- ============ navigace ============ -->
+<header class="nav" id="nav">
+  <a href="#" class="nav-znacka" aria-label="Synth — nahoru">
+    <svg viewBox="0 0 32 32" aria-hidden="true"><path d="M16 3l11 6.3v13.4L16 29 5 22.7V9.3z"/><path d="M16 3v26M5 9.3l22 13.4M27 9.3L5 22.7" opacity=".35"/><rect x="12.5" y="12.5" width="7" height="7"/></svg>
+    <b>SYNTH</b>
+  </a>
+  <nav class="nav-odkazy" aria-label="Hlavní">
+    <a href="#co-umi">Co umí</a>
+    <a href="#pripojeni">Připojení</a>
+    <a href="#vyvoj">Weby</a>
+    <a href="#mobil">Mobil</a>
+    <a href="#cenik">Ceník</a>
+    <a href="#otazky">Otázky</a>
+  </nav>
+  <a href="#cenik" class="tl tl-hlavni tl-maly">Vybrat balíček</a>
+</header>
+
+<main>
+
+<!-- ============ hero ============ -->
+<section class="hero" id="hero">
+  <div class="hero-scena" aria-hidden="true">
+    <canvas id="postava3d"></canvas>
+    <div class="hero-nahrada"><i></i><i></i><i></i></div>
+    <div class="hud hud-1" data-hloubka="18"><i class="tecka"></i><span>SYSTÉM</span><b>Připraven</b></div>
+    <div class="hud hud-2" data-hloubka="30"><span>NOVÝ E-MAIL</span><b>Martina: podklady k nabídce</b></div>
+    <div class="hud hud-3" data-hloubka="24"><span>TRŽBY · ZÁŘÍ</span><b>+18&nbsp;%</b><svg viewBox="0 0 80 24"><path d="M0 20 L13 16 L26 17 L40 12 L53 13 L66 7 L80 3"/></svg></div>
+    <div class="hud hud-4" data-hloubka="14"><span>HLAS</span><div class="vlnka"><i></i><i></i><i></i><i></i><i></i><i></i><i></i></div></div>
+  </div>
+
+  <div class="hero-text">
+    <p class="stitek odhal"><i></i>Osobní AI asistent · česky · Windows i Mac</p>
+    <h1 class="odhal">Váš osobní<br>asistent, který<br><span class="duraz" data-stridej="opravdu pracuje|napíše e-maily|postaví web|hlídá kalendář|mluví česky">opravdu pracuje</span></h1>
+    <p class="hero-pod odhal">Synth běží přímo na vašem počítači. Přečte a roztřídí poštu, připomene schůzky, postaví web, vyrobí graf a naplánované úkoly udělá sám, i když spíte. Pojmenujete si ho, jak chcete, a mluvíte s ním jako s člověkem.</p>
+    <div class="hero-akce odhal">
+      <a href="#cenik" class="tl tl-hlavni">Vybrat balíček <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"/></svg></a>
+      <a href="#co-umi" class="tl tl-obrys">Co všechno umí</a>
+    </div>
+    <ul class="hero-cisla odhal">
+      <li><b data-pocitej="27">27</b><span>služeb k připojení</span></li>
+      <li><b>24/7</b><span>plánované úkoly</span></li>
+      <li><b>2 + 2</b><span>počítače a telefony</span></li>
+    </ul>
+  </div>
+  <a href="#co-umi" class="hero-dolu" aria-label="Posunout níž"><span></span></a>
+</section>
+
+<!-- ============ pas schopnosti ============ -->
+<div class="pas" aria-hidden="true">
+  <div class="pas-kolej">
+    <span>Pošta</span><i></i><span>Kalendář</span><i></i><span>Weby a aplikace</span><i></i><span>Plánované úkoly</span><i></i><span>Hlas česky</span><i></i><span>Grafy</span><i></i><span>Obrázky</span><i></i><span>Paměť</span><i></i><span>Spotify</span><i></i><span>Mobil</span><i></i>
+    <span>Pošta</span><i></i><span>Kalendář</span><i></i><span>Weby a aplikace</span><i></i><span>Plánované úkoly</span><i></i><span>Hlas česky</span><i></i><span>Grafy</span><i></i><span>Obrázky</span><i></i><span>Paměť</span><i></i><span>Spotify</span><i></i><span>Mobil</span><i></i>
+  </div>
+</div>
+
+<!-- ============ co umi: interaktivni screen ============ -->
+<section class="sekce" id="co-umi">
+  <div class="sekce-hlava odhal">
+    <p class="nadnadpis"><span>01</span>Co umí</p>
+    <h2>Jeden asistent.<br>Celý váš digitální den.</h2>
+    <p>Najeďte na svítící body a podívejte se, co všechno Synth zvládne z jednoho okna.</p>
+  </div>
+
+  <div class="obrazovka3d odhal" id="obrazovka3d">
+    <div class="obrazovka-ram">
+      <img src="img/aplikace-rozhovor.jpg" alt="Hlavní okno asistenta Synth: postava, přehled počítače, náhled webu, rozhovor s grafem tržeb" width="2160" height="1350" loading="lazy">
+      <div class="body" id="body"></div>
+    </div>
+    <div class="obrazovka-odlesk" aria-hidden="true"></div>
+  </div>
+  <ol class="body-seznam" id="bodySeznam"></ol>
+</section>
+
+<!-- ============ karty funkci ============ -->
+<section class="sekce" id="funkce">
+  <div class="sekce-hlava odhal">
+    <p class="nadnadpis"><span>02</span>Schopnosti</p>
+    <h2>Dělá práci. Ne jen odpovídá.</h2>
+    <p>Synth není chat v prohlížeči. Má ruce: sahá do pošty, kalendáře a souborů a věci opravdu udělá.</p>
+  </div>
+
+  <div class="bento">
+    <article class="karta karta-velka odhal" data-naklon>
+      <div class="karta-ikona"><svg viewBox="0 0 24 24"><path d="M3 6h18v12H3z"/><path d="M3 7l9 6 9-6"/></svg></div>
+      <h3>Pošta a kalendář</h3>
+      <p>„Co mi dnes přišlo důležitého?“ Přečte e-maily, shrne je, navrhne odpověď a hlídá schůzky. Gmail a Google Kalendář připojíte jedním kliknutím.</p>
+      <div class="mini-posta" aria-hidden="true">
+        <div><i style="--b:#ea4335"></i><b>Faktura č. 2026-118</b><span>splatná v pátek</span><em>důležité</em></div>
+        <div><i style="--b:#35d8ff"></i><b>Martina · podklady k nabídce</b><span>3 přílohy</span></div>
+        <div><i style="--b:#3ecf8e"></i><b>13:00 oběd, Café Lounge</b><span>za 2 h</span></div>
+      </div>
+    </article>
+
+    <article class="karta odhal" data-naklon>
+      <div class="karta-ikona"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 2"/></svg></div>
+      <h3>Plánované úkoly</h3>
+      <p>Každé ráno v 8:00 přehled pošty, v pátek týdenní report. Udělá to sám a výsledek pošle i do mobilu.</p>
+      <div class="mini-cas" aria-hidden="true"><b>08:00</b><span>Ranní přehled</span><i>hotovo</i></div>
+    </article>
+
+    <article class="karta odhal" data-naklon>
+      <div class="karta-ikona"><svg viewBox="0 0 24 24"><path d="M4 10v4M8 7v10M12 4v16M16 7v10M20 10v4"/></svg></div>
+      <h3>Mluví a poslouchá</h3>
+      <p>Česky, mužským i ženským hlasem. Pozná, kdy domluvíte, a když skočíte do řeči, ztichne.</p>
+      <div class="mini-vlna" aria-hidden="true"><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i></div>
+    </article>
+
+    <article class="karta odhal" data-naklon>
+      <div class="karta-ikona"><svg viewBox="0 0 24 24"><ellipse cx="12" cy="6" rx="8" ry="3"/><path d="M4 6v6c0 1.7 3.6 3 8 3s8-1.3 8-3V6M4 12v6c0 1.7 3.6 3 8 3s8-1.3 8-3v-6"/></svg></div>
+      <h3>Pamatuje si vás</h3>
+      <p>Jak se jmenuje vaše firma, kdo je účetní, jakou pijete kávu. Paměť zůstává jen u vás v počítači.</p>
+      <div class="mini-pamet" aria-hidden="true"><span>Novák Design s.r.o.</span><span>porady v pondělí 9:30</span><span>káva bez cukru</span></div>
+    </article>
+
+    <article class="karta odhal" data-naklon>
+      <div class="karta-ikona"><svg viewBox="0 0 24 24"><path d="M4 20V10M10 20V4M16 20v-7M22 20H2"/></svg></div>
+      <h3>Grafy a obrázky</h3>
+      <p>Z čísel udělá graf, z popisu obrázek. Obojí si otevřete na celou obrazovku nebo pošlete dál.</p>
+      <div class="mini-graf" aria-hidden="true"><i style="--v:45%"></i><i style="--v:58%"></i><i style="--v:52%"></i><i style="--v:66%"></i><i style="--v:72%"></i><i style="--v:92%"></i></div>
+    </article>
+
+    <article class="karta karta-siroka odhal" data-naklon>
+      <div class="karta-ikona"><svg viewBox="0 0 24 24"><path d="M12 3l8 3v6c0 5-3.5 8-8 9-4.5-1-8-4-8-9V6z"/><path d="M9 12l2 2 4-4"/></svg></div>
+      <h3>Vaše data zůstávají vaše</h3>
+      <p>Synth běží na vašem počítači. Soubory, e-maily ani paměť nikam neposílá. Spojení s telefonem je šifrované klíčem, který zná jen váš počítač a mobil. Náš server zprávy jen předává a nerozumí jim.</p>
+      <div class="mini-zamek" aria-hidden="true"><span>PC</span><i></i><b>AES-256</b><i></i><span>Mobil</span></div>
+    </article>
+
+    <article class="karta odhal" data-naklon>
+      <div class="karta-ikona"><svg viewBox="0 0 24 24"><path d="M9 18V5l11-2v13"/><circle cx="6" cy="18" r="3"/><circle cx="17" cy="16" r="3"/></svg></div>
+      <h3>Hudba na povel</h3>
+      <p>„Pusť něco na soustředění.“ Ovládá Spotify a ví, co zrovna hraje.</p>
+    </article>
+
+    <article class="karta odhal" data-naklon>
+      <div class="karta-ikona"><svg viewBox="0 0 24 24"><circle cx="8" cy="12" r="5"/><circle cx="16" cy="12" r="5"/></svg></div>
+      <h3>Dva mozky v záloze</h3>
+      <p>Umí Claude i ChatGPT. Když jednomu dojde limit, práci převezme druhý a vy nic neřešíte.</p>
+    </article>
+  </div>
+</section>
+
+<!-- ============ pripojeni: obezna draha ============ -->
+<section class="sekce sekce-pripojeni" id="pripojeni">
+  <div class="pripojeni-text odhal">
+    <p class="nadnadpis"><span>03</span>Připojení</p>
+    <h2>Napojí se na nástroje,<br>které už používáte.</h2>
+    <p>Gmail, Kalendář, Disk, Notion, Jira, Slack, GitHub, Figma, Stripe a další. Připojíte je jedním kliknutím a asistent s nimi rovnou pracuje. Čím víc připojení, tím chytřejší Synth je.</p>
+    <ul class="odrazky">
+      <li>27 služeb v katalogu, další přes vlastní připojení</li>
+      <li>Vidí i to, co máte připojené v Claude Code nebo Codexu</li>
+      <li>Každé připojení jde kdykoli vypnout</li>
+    </ul>
+  </div>
+  <div class="orbita odhal" id="orbita" aria-hidden="true">
+    <div class="orbita-jadro"><svg viewBox="0 0 32 32"><path d="M16 3l11 6.3v13.4L16 29 5 22.7V9.3z"/><rect x="12.5" y="12.5" width="7" height="7"/></svg></div>
+    <div class="orbita-drahy"></div>
+  </div>
+</section>
+
+<!-- ============ vyvoj ============ -->
+<section class="sekce sekce-vyvoj" id="vyvoj">
+  <div class="sekce-hlava odhal">
+    <p class="nadnadpis"><span>04</span>Weby a aplikace</p>
+    <h2>Popíšete web větou.<br>Za chvíli ho vidíte.</h2>
+    <p>Záložka Vývoj je jako mít programátora vedle sebe. Řeknete, co chcete, a vidíte, jak píše kód, spouští ho a ukazuje výsledek na počítači i v mobilu.</p>
+  </div>
+
+  <div class="vyvoj-scena">
+    <div class="zadani odhal" aria-hidden="true">
+      <div class="zadani-hlava"><i></i><i></i><i></i><span>ZADÁNÍ</span></div>
+      <p class="zadani-text"><span id="psaci" data-text="Udělej web pro kavárnu Zrnko: hero s fotkou šálku, menu a rezervaci stolu. Teplé barvy, moderně."></span><b class="kurzor"></b></p>
+      <ol class="zadani-kroky">
+        <li><i></i>Zakládám index.html a styl.css</li>
+        <li><i></i>Píšu menu a rezervaci</li>
+        <li><i></i>Kontrola po úpravě prošla</li>
+        <li><i></i>Náhled je připravený</li>
+      </ol>
+    </div>
+    <div class="obrazovka3d obrazovka-vyvoj odhal">
+      <div class="obrazovka-ram"><img src="img/aplikace-vyvoj.jpg" alt="Záložka Vývoj: kód webu kavárny, zadání a živý náhled hotového webu" width="2160" height="1350" loading="lazy"></div>
+    </div>
+  </div>
+
+  <div class="vyvoj-vlastnosti">
+    <div class="odhal"><b>Body obnovy</b><span>Před každou úpravou záloha. Nelíbí se? Jedním klikem zpátky.</span></div>
+    <div class="odhal"><b>Kontrola po úpravě</b><span>Sám pozná rozbitý kód a nabídne opravu.</span></div>
+    <div class="odhal"><b>Úkol na noc</b><span>Projde projekt, opraví, co najde, a ráno ukáže souhrn.</span></div>
+    <div class="odhal"><b>Zveřejnit</b><span>Hotový web pošle na hosting, kam ho chcete mít.</span></div>
+  </div>
+</section>
+
+<!-- ============ mobil ============ -->
+<section class="sekce sekce-mobil" id="mobil">
+  <div class="telefon-scena odhal" aria-hidden="true">
+    <div class="telefon" id="telefon">
+      <div class="telefon-displej"><img src="img/aplikace-telefon.png" alt="" width="780" height="1688" loading="lazy"></div>
+      <div class="telefon-vyrez"></div>
+    </div>
+    <div class="telefon-stin"></div>
+    <div class="bublina bublina-1">Přišlo něco důležitého?</div>
+    <div class="bublina bublina-2 on">Dvě věci: faktura a podklady od Martiny.</div>
+  </div>
+  <div class="mobil-text odhal">
+    <p class="nadnadpis"><span>05</span>V mobilu</p>
+    <h2>Váš asistent<br>v kapse.</h2>
+    <p>Spárujete telefon QR kódem a Synth máte s sebou. Mluvíte s ním, zadáváte práci na počítač doma a dostáváte upozornění, když je hotovo.</p>
+    <ul class="odrazky">
+      <li>Šifrované spojení, i mimo domácí Wi-Fi</li>
+      <li>Diktování, fotka jako dotaz, grafy i obrázky</li>
+      <li>Živý náhled webů, které asistent staví</li>
+      <li>Upozornění, když je úkol hotový</li>
+    </ul>
+  </div>
+</section>
+
+<!-- ============ jak zacit ============ -->
+<section class="sekce" id="jak">
+  <div class="sekce-hlava odhal">
+    <p class="nadnadpis"><span>06</span>Jak začít</p>
+    <h2>Za pět minut běží.</h2>
+  </div>
+  <ol class="kroky" id="kroky">
+    <li class="odhal"><b>1</b><h3>Stáhnout</h3><p>Po zaplacení dostanete e-mailem licenční klíč a odkaz ke stažení pro Windows nebo Mac.</p></li>
+    <li class="odhal"><b>2</b><h3>Zadat klíč</h3><p>Průvodce se zeptá na klíč a sám najde, na co se napojit: Claude nebo ChatGPT.</p></li>
+    <li class="odhal"><b>3</b><h3>Pojmenovat</h3><p>Dáte mu jméno a hlas. Od té chvíle je to váš asistent, třeba Viktorka nebo Alfréd.</p></li>
+  </ol>
+</section>
+
+<!-- ============ cenik ============ -->
+<section class="sekce" id="cenik">
+  <div class="sekce-hlava odhal">
+    <p class="nadnadpis"><span>07</span>Ceník</p>
+    <h2>Vyberte si balíček.</h2>
+    <p>Všechny balíčky umí úplně všechno. Liší se jen délkou, a čím delší, tím levnější.</p>
+  </div>
+
+  <div class="ceny">
+    <article class="cena odhal" data-naklon>
+      <h3>Měsíc</h3>
+      <p class="cena-popis">Na vyzkoušení</p>
+      <div class="cena-castka"><b>390</b><span>Kč</span></div>
+      <p class="cena-mesic">390 Kč měsíčně</p>
+      <ul>
+        <li>2 počítače, ke každému 2 telefony</li>
+        <li>Všechny funkce a připojení</li>
+        <li>Aktualizace zdarma</li>
+      </ul>
+      <button type="button" class="tl tl-obrys" data-balicek="Měsíc (390 Kč)">Chci měsíc</button>
+    </article>
+
+    <article class="cena cena-hlavni odhal" data-naklon>
+      <span class="cena-odznak">Nejoblíbenější</span>
+      <h3>Půl roku</h3>
+      <p class="cena-popis">Ušetříte 15 %</p>
+      <div class="cena-castka"><b>1 990</b><span>Kč</span></div>
+      <p class="cena-mesic">vychází na 332 Kč měsíčně</p>
+      <ul>
+        <li>2 počítače, ke každému 2 telefony</li>
+        <li>Všechny funkce a připojení</li>
+        <li>Aktualizace zdarma</li>
+      </ul>
+      <button type="button" class="tl tl-hlavni" data-balicek="Půl roku (1 990 Kč)">Chci půl roku</button>
+    </article>
+
+    <article class="cena odhal" data-naklon>
+      <span class="cena-odznak cena-odznak-zeleny">Nejvýhodnější</span>
+      <h3>Rok</h3>
+      <p class="cena-popis">Ušetříte 25 %</p>
+      <div class="cena-castka"><b>3 490</b><span>Kč</span></div>
+      <p class="cena-mesic">vychází na 291 Kč měsíčně</p>
+      <ul>
+        <li>2 počítače, ke každému 2 telefony</li>
+        <li>Všechny funkce a připojení</li>
+        <li>Aktualizace zdarma</li>
+      </ul>
+      <button type="button" class="tl tl-obrys" data-balicek="Rok (3 490 Kč)">Chci rok</button>
+    </article>
+  </div>
+  <p class="cena-pozn odhal"><svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="9"/><path d="M12 11v5M12 8h.01"/></svg>Synth přemýšlí přes Claude nebo ChatGPT. Budete potřebovat vlastní předplatné <b>Claude</b> nebo <b>ChatGPT</b> (od 20&nbsp;$ měsíčně), případně API klíč. Průvodce vám to při instalaci pomůže nastavit.</p>
+</section>
+
+<!-- ============ otazky ============ -->
+<section class="sekce" id="otazky">
+  <div class="sekce-hlava odhal">
+    <p class="nadnadpis"><span>08</span>Otázky</p>
+    <h2>Časté otázky</h2>
+  </div>
+  <div class="faq">
+    <details class="odhal"><summary>Co potřebuju, aby Synth fungoval?</summary><p>Počítač s Windows 10/11 nebo macOS a předplatné Claude (Pro nebo Max) nebo ChatGPT (Plus nebo Pro). Místo předplatného jde použít i vlastní API klíč, pak ale asistent jen konverzuje a nepracuje se soubory.</p></details>
+    <details class="odhal"><summary>Jsou moje data v bezpečí?</summary><p>Asistent běží na vašem počítači. E-maily, soubory i paměť čte jen váš počítač. Spojení s telefonem je šifrované klíčem ze spárování a náš server zprávy jen předává, přečíst je nemůže.</p></details>
+    <details class="odhal"><summary>Na kolik zařízení licence platí?</summary><p>Na 2 počítače a ke každému můžete spárovat 2 telefony. Když počítač vyměníte, starý odhlásíte a klíč zadáte na novém.</p></details>
+    <details class="odhal"><summary>Umí opravdu česky?</summary><p>Ano. Píše i mluví česky, rozumí diktování a jméno si skloňuje podle toho, jak ho pojmenujete.</p></details>
+    <details class="odhal"><summary>Musím umět programovat?</summary><p>Vůbec ne. Všechno se nastavuje klikáním a s asistentem mluvíte normálně. Záložka Vývoj je pro ty, kdo si chtějí nechat postavit web nebo aplikaci.</p></details>
+    <details class="odhal"><summary>Co se stane, když licence skončí?</summary><p>Asistent se zastaví, ale nic se nesmaže. Po prodloužení pokračuje tam, kde skončil, i s pamětí a nastavením.</p></details>
+    <details class="odhal"><summary>Můžu ho ovládat z mobilu, když nejsem doma?</summary><p>Ano, přes aplikaci v telefonu, i mimo domácí Wi-Fi. Počítač s asistentem přitom musí běžet.</p></details>
+  </div>
+</section>
+
+<!-- ============ zaver ============ -->
+<section class="zaver odhal">
+  <h2>Pojmenujte si svého asistenta.</h2>
+  <p>A nechte ho pracovat za vás.</p>
+  <a href="#cenik" class="tl tl-hlavni">Vybrat balíček <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"/></svg></a>
+</section>
+
+</main>
+
+<footer class="pata">
+  <span>© 2026 Synth · vyrobilo studio <a href="/">Foxyvision</a></span>
+  <span><a href="mailto:ahoj@foxyvision.cz">ahoj@foxyvision.cz</a></span>
+</footer>
+
+<!-- ============ poptavka ============ -->
+<dialog class="poptavka" id="poptavka" aria-labelledby="poptavkaNadpis">
+  <form id="poptavkaFormular" novalidate>
+    <button type="button" class="poptavka-zavrit" data-zavrit aria-label="Zavřít">×</button>
+    <p class="nadnadpis"><span>●</span>Objednávka</p>
+    <h3 id="poptavkaNadpis">Balíček <span id="poptavkaBalicek"></span></h3>
+    <p class="poptavka-pod">Nechte nám kontakt. Pošleme vám platební údaje a hned po zaplacení licenční klíč s odkazem ke stažení.</p>
+    <label>Jméno<input name="name" required maxlength="120" autocomplete="name"></label>
+    <label>E-mail<input name="email" type="email" required maxlength="160" autocomplete="email"></label>
+    <label>Poznámka <small>(nepovinné)</small><textarea name="poznamka" rows="3" maxlength="2000" placeholder="Třeba fakturační údaje nebo dotaz"></textarea></label>
+    <input name="website" tabindex="-1" autocomplete="off" class="medovnik" aria-hidden="true">
+    <p class="poptavka-chyba" id="poptavkaChyba" hidden></p>
+    <button type="submit" class="tl tl-hlavni">Odeslat objednávku</button>
+  </form>
+  <div class="poptavka-hotovo" id="poptavkaHotovo" hidden>
+    <div class="hotovo-ikona"><svg viewBox="0 0 24 24"><path d="M5 12.5l4.5 4.5L19 7"/></svg></div>
+    <h3>Děkujeme!</h3>
+    <p>Objednávka dorazila. Ozveme se vám e-mailem, obvykle do několika hodin.</p>
+    <button type="button" class="tl tl-obrys" data-zavrit>Zavřít</button>
+  </div>
+</dialog>
+
+<script src="https://cdn.jsdelivr.net/npm/gsap@3.12.5/dist/gsap.min.js" defer></script>
+<script src="https://cdn.jsdelivr.net/npm/gsap@3.12.5/dist/ScrollTrigger.min.js" defer></script>
+<script src="https://cdn.jsdelivr.net/npm/lenis@1.1.13/dist/lenis.min.js" defer></script>
+<script type="module" src="js/synth.js?v=1"></script>
+</body>
+</html>
