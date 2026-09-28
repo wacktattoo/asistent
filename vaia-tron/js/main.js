@@ -918,10 +918,10 @@
   const typeEl = document.querySelector("[data-type]");
   if (typeEl) {
     const phrases = [
-      "čte a třídí poštu",
-      "hlídá kalendář",
       "staví weby a aplikace",
-      "mluví česky",
+      "upravuje vaše soubory",
+      "hlídá naplánované úlohy",
+      "běží bez API tokenů",
     ];
     if (reduceMotion) {
       typeEl.textContent = phrases[0];
@@ -1014,10 +1014,10 @@
   }
   const workFlipEl = document.querySelector("[data-work-flip]");
   whenInView(workFlipEl, () =>
-    setupTypewriter(workFlipEl, ["opravdu pracuje", "napíše e-maily", "postaví web"], "work__caret"));
+    setupTypewriter(workFlipEl, ["opravdu pracuje", "postaví web", "upraví soubory"], "work__caret"));
   // "Co děláme" headline: the middle line cycles Aplikace ↔ Automatizace (no caret — the square is the full stop)
   const whatFlipEl = document.querySelector("[data-what-flip]");
-  whenInView(whatFlipEl, () => setupTypewriter(whatFlipEl, ["Weby", "Úkoly"], null));
+  whenInView(whatFlipEl, () => setupTypewriter(whatFlipEl, ["Soubory", "Dokumenty", "Grafy"], null));
   // "Náš přístup" headline: the last word cycles through what we sweat over
   const approachFlipEl = document.querySelector("[data-approach-flip]");
   whenInView(approachFlipEl, () =>
@@ -1058,7 +1058,7 @@
   }
   const contactFlipEl = document.querySelector("[data-contact-flip]");
   whenInView(contactFlipEl, () => setupWordWipe(contactFlipEl,
-    ["Synth?", "licenci?", "instalaci?", "ceník?"], { hold: 2600 }));
+    ["VAIA?", "licenci?", "instalaci?", "ceník?"], { hold: 2600 }));
 
   /* ----------------------------------------------------
      Contact modal — "Popta se"
