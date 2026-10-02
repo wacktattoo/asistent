@@ -7,6 +7,8 @@ Cesty jsou přepsané na relativní, takže složka funguje na libovolné adrese
 - `assets/` – zkompilovaný JS bundle + CSS
 - `humanoid/` – obrázky postavy (idle / listening / thinking / speaking / assembly) a pozadí
 
+Nejjednodušší: otevři `apex-standalone.html` dvojklikem – vše (JS, CSS, obrázky) je v jednom souboru, funguje i bez serveru.
+
 Spuštění lokálně: `python3 -m http.server` v kořeni repa → http://localhost:8000/apex/
 (kamera a mikrofon pro gesta vyžadují HTTPS nebo localhost).
 
